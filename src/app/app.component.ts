@@ -6,7 +6,7 @@ import { LoginService } from './login/login.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent{
 
   title = 'sys-doc';
 
@@ -14,15 +14,7 @@ export class AppComponent implements OnInit{
 
   constructor(
   private loginService:LoginService) {
-    this.loginService.isExpired();
-
     this.isLogged = this.loginService.isLoggedIn();
-  }
-
-  updateAuth(){
-    this.isLogged = this.loginService.isLoggedIn();
-  }
-
-  ngOnInit() {
+    this.loginService.getIsAuthenticated().subscribe(data => this.isLogged = data);
   }
 }

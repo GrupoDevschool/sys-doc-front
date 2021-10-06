@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 
@@ -7,7 +7,10 @@ import { LoginService } from './login.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
+
+  email: string = "";
+  password: string = "";
 
   constructor(private loginService: LoginService, private router: Router) {
     if(this.loginService.isLoggedIn()) {
@@ -15,10 +18,21 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  @Output() _loggedIn = new EventEmitter<boolean>();
+  login() {
+    const login = {
+      email: this.email,
+      password: this.password
+    }
 
-  ngOnInit(): void {
-
+    this.loginService.login(login)
+      .subscribe(
+        data => {
+          this.loginService.setToken(data.token);
+          this.router.navigate(['/']);
+        },
+        error => {
+          console.log(error);
+        }
+      )
   }
-
 }
