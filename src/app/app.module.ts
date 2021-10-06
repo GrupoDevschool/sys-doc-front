@@ -25,7 +25,7 @@ import { AuthGuardService } from './login/auth-guard.service';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
 import { MenuComponent } from './menu/menu.component';
-import { MaterialCommonModule, MODULES } from './shared/components/material.module';
+import { MaterialCommonModule, MODULES } from './shared/module/material.module';
 
 @NgModule({
   declarations: [
