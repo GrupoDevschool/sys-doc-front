@@ -1,5 +1,5 @@
 import { Component, ErrorHandler, OnInit } from '@angular/core';
-import { GlobalErrorHandler } from '../core/error/global-error-handler';
+import { GlobalErrorHandler } from 'src/app/core/error/global-error-handler';
 
 @Component({
   selector: 'app-menu',

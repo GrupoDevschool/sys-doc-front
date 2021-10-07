@@ -15,7 +15,6 @@ export class GlobalErrorHandler implements ErrorHandler {
     this.ngZone.run(() => {
       if(error.status == 401 && error instanceof HttpErrorResponse) {
         this.loginService.logout();
-        this.router.navigate(['/login']);
       }
     });
 

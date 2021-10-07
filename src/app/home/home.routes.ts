@@ -1,21 +1,23 @@
 
-import { AuthGuardService } from '../login/auth-guard.service';
-import { EventRequestPropertyComponent } from './event-request-property/event-request-property.component';
-import { PropertyFormComponent } from './event-request-property/property-form/property-form.component';
-import { EventRequestComponent } from './event-request/event-request.component';
-import { RequestFormComponent } from './event-request/request-form/request-form.component';
-import { EventTypeFormComponent } from './event-type/event-type-form/event-type-form.component';
-import { EventTypeComponent } from './event-type/event-type.component';
-import { EventFormComponent } from './event/event-form/event-form.component';
-import { EventComponent } from './event/event.component';
-import { ProjectFormComponent } from './project/project-form/project-form.component';
-import { ProjectComponent } from './project/project.component';
-import { ScreenFormComponent } from './screen/screen-form/screen-form.component';
-import { ScreenComponent } from './screen/screen.component';
-import { VersionFormComponent } from './version/version-form/version-form.component';
-import { VersionComponent } from './version/version.component';
+import { Routes } from '@angular/router';
+import { AuthGuardService } from 'src/app/login/auth-guard.service';
+import { EventRequestPropertyComponent } from './components/event-request-property/event-request-property.component';
+import { PropertyFormComponent } from './components/event-request-property/property-form/property-form.component';
+import { EventRequestComponent } from './components/event-request/event-request.component';
+import { RequestFormComponent } from './components/event-request/request-form/request-form.component';
+import { EventTypeFormComponent } from './components/event-type/event-type-form/event-type-form.component';
+import { EventTypeComponent } from './components/event-type/event-type.component';
+import { EventFormComponent } from './components/event/event-form/event-form.component';
+import { EventComponent } from './components/event/event.component';
+import { ProjectFormComponent } from './components/project/project-form/project-form.component';
+import { ProjectComponent } from './components/project/project.component';
+import { ScreenFormComponent } from './components/screen/screen-form/screen-form.component';
+import { ScreenComponent } from './components/screen/screen.component';
+import { VersionFormComponent } from './components/version/version-form/version-form.component';
+import { VersionComponent } from './components/version/version.component';
 
-export const LIST_ROUTES = [
+
+export const LIST_ROUTES: Routes = [
   {
     path: 'project',
     component: ProjectComponent,
@@ -53,7 +55,7 @@ export const LIST_ROUTES = [
   },
 ];
 
-export const FORM_ROUTES = [
+export const FORM_ROUTES: Routes = [
   {
     path: 'project/add',
     component: ProjectFormComponent,
