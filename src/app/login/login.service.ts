@@ -48,6 +48,10 @@ export class LoginService {
     this.jwtService.setToken(token);
   }
 
+  getToken(): string {
+    return this.jwtService.jwtToken;
+  }
+
   // Função que deve deslogar o usuário
   logout() {
     this.jwtService.removeToken();
