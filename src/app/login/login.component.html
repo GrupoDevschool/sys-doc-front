@@ -13,14 +13,14 @@
             <form class="form">
               <div class="inputs slide-top">
                 <span class="material-icons">email</span>
-                <input class="input" type="email" name="email" placeholder="Email">
+                <input class="input" type="email" name="email" placeholder="Email" [(ngModel)]="email">
               </div>
               <div class="inputs slide-top">
                 <span class="material-icons">lock</span>
-                <input class="input" type="password" name="senha" placeholder="Senha">
+                <input class="input" type="password" name="senha" placeholder="Senha" [(ngModel)]="password">
               </div>
               <div class="btn slide-top">
-                <button mat-raised-button color="primary" type="button" (click)="login()">Login</button>
+                <button mat-raised-button color="primary" type="submit" (click)="login()">Login</button>
               </div>
             </form>
         </div>
