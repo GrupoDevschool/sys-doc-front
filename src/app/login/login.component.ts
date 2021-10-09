@@ -13,7 +13,7 @@ export class LoginComponent {
   email: string = "";
   password: string = "";
 
-  constructor(private loginService: LoginService, private router: Router) {
+  constructor(private loginService: LoginService, private router: Router, private toastr: ToastrService) {
     if(this.loginService.isLoggedIn()) {
       this.router.navigate(['/dashboard'])
     }
@@ -32,8 +32,13 @@ export class LoginComponent {
           this.router.navigate(['/']);
         },
         error => {
+          this.showError(error.message);
           console.log(error);
         }
       )
+  }
+
+  showError(message: string){
+    this.toastr.error(message, "Usuário inválido")
   }
 }

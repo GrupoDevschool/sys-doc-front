@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -24,7 +25,11 @@ import { MaterialCommonModule, MODULES } from './shared/module/material.module';
     HomeModule,
     BrowserAnimationsModule,
     MaterialCommonModule,
-    FormsModule
+    FormsModule,
+    ToastrModule.forRoot({
+      timeOut: 4000,
+      progressBar: true,
+    })
   ],
   exports: [
     ...MODULES
