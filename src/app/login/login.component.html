@@ -28,7 +28,7 @@
                 <app-mensagem *ngIf="campoSenha.invalid && campoSenha.touched" mensagem="Senha obrigatória"></app-mensagem>
               </div>
               <div class="btn slide-top">
-                <button mat-raised-button color="primary" type="submit" (click)="login()" [disabled]="loginForm.invalid">Login</button>
+                <button mat-raised-button color="primary" type="button" (click)="login()">Login</button>
               </div>
             </form>
         </div>
