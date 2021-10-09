@@ -12,11 +12,13 @@ import { AuthGuardService } from './login/auth-guard.service';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
 import { MaterialCommonModule, MODULES } from './shared/module/material.module';
+import { MensagemComponent } from './shared/components/mensagem/mensagem.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    MensagemComponent,
   ],
   imports: [
     BrowserModule,
