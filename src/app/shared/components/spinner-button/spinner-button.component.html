@@ -1,0 +1,23 @@
+<div [matTooltip]="tooltipMessage" [matTooltipDisabled]="!disabled">
+  <button mat-raised-button
+    [type]="type"
+    [color]="color"
+    [style.borderRadius]="borderRadius"
+    class="mat-raised-button {{class}}"
+    [class.loading]="loading"
+    [class.fullWidth]="fullWidth"
+    [disabled]="loading || disabled"
+    (click)="action.emit()"
+
+    >
+
+    <span class="button-text">
+      {{text}}
+    </span>
+
+    <mat-spinner class="local-spinner"
+      [diameter]="diameter"
+      [color]="spinnerColor">
+    </mat-spinner>
+  </button>
+</div>
