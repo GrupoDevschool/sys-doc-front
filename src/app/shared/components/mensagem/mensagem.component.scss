@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
 .mensagem-erro {
   color: red;
   font-family: "Poppins", "sans-serif";
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-self: center;
 }

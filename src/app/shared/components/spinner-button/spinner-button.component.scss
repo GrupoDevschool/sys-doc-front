@@ -1,0 +1,45 @@
+::ng-deep .mat-spinner-button {
+  display: inline-block;
+}
+button ::ng-deep .mat-button-wrapper {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+button {
+  outline: none;
+
+  .local-spinner {
+    // position: absolute;
+    // top: 25%;
+    display: none;
+  }
+
+  .button-text {
+    display: inline;
+  }
+
+  &.loading {
+    cursor: not-allowed;
+
+    .local-spinner {
+      display: inline;
+      margin: 8px auto;
+    }
+    .button-text {
+      display: none;
+    }
+  }
+}
+.fullWidth {
+  width: 100%;
+}
+
+.borderRadius {
+  border-radius: 25px;
+}
+
+.mat-raised-button {
+  text-transform: uppercase;
+  height: 40px;
+}

@@ -12,6 +12,7 @@ export class LoginComponent {
 
   email: string = "";
   password: string = "";
+  loading: boolean = false;
 
   constructor(private loginService: LoginService, private router: Router, private toastr: ToastrService) {
     if(this.loginService.isLoggedIn()) {
@@ -25,6 +26,8 @@ export class LoginComponent {
       password: this.password
     }
 
+    this.loading = true;
+
     this.loginService.login(login)
       .subscribe(
         data => {
@@ -32,9 +35,11 @@ export class LoginComponent {
           this.router.navigate(['/']);
         },
         error => {
-          console.log(error);
+          this.showError(error.message);
         }
-      )
+      ).add(() => {
+        this.loading = false;
+      });
   }
 
   showError(message: string){
