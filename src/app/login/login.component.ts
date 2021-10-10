@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { LoginService } from './login.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class LoginComponent {
   email: string = "";
   password: string = "";
 
-  constructor(private loginService: LoginService, private router: Router) {
+  constructor(private loginService: LoginService, private router: Router, private toastr: ToastrService) {
     if(this.loginService.isLoggedIn()) {
       this.router.navigate(['/dashboard'])
     }
@@ -34,5 +35,9 @@ export class LoginComponent {
           console.log(error);
         }
       )
+  }
+
+  showError(message: string){
+    this.toastr.error(message, "Usuário inválido")
   }
 }

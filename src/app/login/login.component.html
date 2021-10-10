@@ -9,19 +9,26 @@
           </div>
         </div>
         <div class="box-form">
-            <mat-card-title>Login</mat-card-title>
-            <form class="form">
-              <div class="inputs">
+            <mat-card-title class="slide-top">Login</mat-card-title>
+            <form class="form" #loginForm="ngForm">
+              <div class="inputs slide-top">
                 <span class="material-icons">email</span>
-                <input class="input" type="email" name="email" placeholder="Email">
-
+                <input
+                  class="input"
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  [(ngModel)]="email"
+                  #campoEmail="ngModel" required>
+                <app-mensagem *ngIf="campoEmail.invalid && campoEmail.touched" mensagem="Email obrigatório"></app-mensagem>
               </div>
-              <div class="inputs">
+              <div class="inputs slide-top">
                 <span class="material-icons">lock</span>
-                <input class="input" type="password" name="senha" placeholder="Senha">
+                <input class="input" type="password" name="senha" placeholder="Senha" [(ngModel)]="password" #campoSenha="ngModel" required>
+                <app-mensagem *ngIf="campoSenha.invalid && campoSenha.touched" mensagem="Senha obrigatória"></app-mensagem>
               </div>
-              <div class="btn">
-                <button mat-raised-button color="primary" type="button" (click)="login()">Login</button>
+              <div class="btn slide-top">
+                <button mat-raised-button color="primary" type="submit" (click)="login()" [disabled]="loginForm.invalid">Login</button>
               </div>
             </form>
         </div>

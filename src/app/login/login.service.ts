@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { JwtService } from '../core/jwt/jwt.service';
+import {tap} from 'rxjs/operators';
 
 interface LoginData {
   email: string;
@@ -11,6 +12,7 @@ interface LoginData {
 }
 
 interface LoginResponse {
+  headers: any;
   token: string;
 }
 
@@ -41,7 +43,12 @@ export class LoginService {
     loginData.password = this.encriptPassword(loginData.password);
 
     return this.http.get<any>(URL_API + '/login');
-    // return this.http.post<any>(URL_API + '/login', loginData);
+    /*return this.http.post<any>(URL_API + '/login', loginData).pipe(
+      tap((res) => {
+        const authToken = res.headers.get('x-access-token') ?? '';
+        this.setToken(authToken)
+      })
+    )*/
   }
 
   setToken(token: string) {
