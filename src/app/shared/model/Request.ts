@@ -1,8 +1,8 @@
 export interface Request {
-  id: number;
+  id?: number;
   uri_homolog : string;
   eventId: number;
-  requestFatherId: number;
+  requestFatherId?: number;
   uri_prod: string;
   description: string;
   layer: string;
