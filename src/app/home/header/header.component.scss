@@ -9,17 +9,19 @@ header {
   justify-content: space-between;
   font-family: "Poppins", "sans-serif";
   background: rgb(252, 131, 87);
-  height: 13vh;
+  height: 11vh;
   padding: 0 1rem;
 }
 
 .logo {
   width: 250px;
+  display: flex;
 }
 
 .logo img{
   max-width: 100%;
   background-size:cover;
+  margin-left: 70px;
 }
 
 .material-icons{
@@ -32,6 +34,34 @@ header {
   background: none;
   border: none;
   margin-left: 25px;
+}
+
+#check {
+  display: none;
+}
+
+label #btn, label #cancel {
+  position: absolute;
+  cursor: pointer;
+  transition: all .5s ease;
+}
+
+#check:checked ~ .menu {
+  left: 0;
+}
+
+label #cancel {
+  opacity: 0;
+}
+
+
+#check:checked ~ label #btn {
+  margin-left: 20%;
+  opacity:0;
+  visibility: hidden;
+  label #cancel {
+    opacity: 100;
+  }
 }
 
 
