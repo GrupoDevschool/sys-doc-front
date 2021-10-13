@@ -1,10 +1,25 @@
 <div class="menu">
   <nav class="navigation">
       <ul class="menu-list">
-          <li class="item-menu">link Dashboard</li>
+          <li class="item-menu">
+            <a routerLink="dashboard" class="nav-link arrow">
+              <i class="material-icons">home</i>
+              <span class="align">Home</span>
+            </a>
+          </li>
           <ul class="menu-list2">
-              <li class="item-menu2"><a routerLink="project">Projeto</a></li>
-              <li class="item-menu2"><a routerLink="version">Versão</a></li>
+              <li class="item-menu2">
+                <a routerLink="project" class="nav-link">
+                  <span class="material-icons">folder</span>
+                  <span class="align">Projeto</span>
+                </a>
+              </li>
+              <li class="item-menu2">
+                <a routerLink="version" class="nav-link">
+                  <span class="material-icons">description</span>
+                  <span class="align">version</span>
+                </a>
+              </li>
           </ul>
       </ul>
   </nav>

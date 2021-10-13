@@ -1,14 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+* {
+  margin: 0;
+  padding: 0
+}
 
 .menu {
-  width: 65%;
+  width: 25%;
   height: 100%;
   font-family: "Poppins", "sans-serif";
   background-color: cornflowerblue;
   color: #fbfbfb;
   position: absolute;
+  border-radius: 10px;
 }
 
-.item-menu {
+.menu-list {
+  padding-top: 20px;
+}
+
+.align {
+  padding-left: 100px;
+}
+
+.nav-link{
+  color: #fbfbfb;
+  display: list-item;
+  padding: 5px;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  background-color: #fbfbfb;
+  color: cornflowerblue;
+  .material-icons{
+     color: cornflowerblue;
+  }
+
+}
+
+.material-icons {
   color: #fbfbfb;
 }
