@@ -5,21 +5,20 @@
 }
 
 .menu {
-  width: 25%;
-  height: 100%;
+  width: 20%;
+  height: 50%;
   font-family: "Poppins", "sans-serif";
-  background-color: cornflowerblue;
+  background-color: rgb(133, 173, 247);
   color: #fbfbfb;
-  position: absolute;
+  position: fixed;
   border-radius: 10px;
+  transition: all .5s ease;
 }
 
 .menu-list {
   padding-top: 20px;
-}
-
-.align {
-  padding-left: 100px;
+  list-style: none;
+  letter-spacing: 3px;
 }
 
 .nav-link{
@@ -35,9 +34,23 @@
   .material-icons{
      color: cornflowerblue;
   }
+}
 
+.align {
+  padding-left: 10px;
 }
 
 .material-icons {
   color: #fbfbfb;
 }
+
+a {
+  display: block;
+  line-height: 30px;
+  transition: all .5s ease;
+}
+
+
+
+
+
