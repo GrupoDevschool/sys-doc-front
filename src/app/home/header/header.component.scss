@@ -3,3 +3,29 @@
   padding: 0;
 }
 
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Poppins", "sans-serif";
+  background: coral;
+  height: 13vh;
+  padding: 0 1rem;
+}
+
+.logo {
+  width: 300px;
+}
+
+.logo img{
+  max-width: 100%;
+}
+
+.material-icons{
+  color: #fbfbfb;
+  font-size: 50px;
+}
+
+
+
+

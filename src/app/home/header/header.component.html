@@ -1,9 +1,9 @@
-<p>header works!</p>
-
-
-<nav>
-  <ul>
-    <li><img src="user.png" class="user"></li>
-    <li><button mat-raised-button color="primary" (click)="logout()">logout</button></li>
-  </ul>
-</nav>
+<header>
+  <div class="logo">
+      <a routerLink ="dashboard"><img src="./assets/images/mobicare-white.png" class="" alt="Logo Mobicare"></a>
+  </div>
+  <div class="user">
+      <span class="material-icons">person</span>
+      <button class="material icons" (click)="logout()">logout</button>
+  </div>
+</header>
