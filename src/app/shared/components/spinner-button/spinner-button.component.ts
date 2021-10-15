@@ -8,15 +8,17 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class SpinnerButtonComponent {
 
   @Input() type: string = 'button';
-  @Input() text: string = 'Cadastrar';
   @Input() loading?: boolean = false;
+  @Input() disabled?: boolean | null  = false;
+
   @Input() color?: string = 'primary';
-  @Input() class?: string;
   @Input() spinnerColor?: string = 'primary';
-  @Input() diameter?: number = 20;
   @Input() fullWidth?: boolean = false;
   @Input() borderRadius?: string = '0px';
-  @Input() disabled?: boolean | null  = false;
+  @Input() diameter?: number = 20;
+
+  @Input() class?: string;
+
   @Input() tooltipMessage: string = 'Existem campos não preenchidos corretamente';
 
   @Output() public action:EventEmitter<any> = new EventEmitter();

@@ -6,10 +6,6 @@ import { Component,Input, OnInit } from '@angular/core';
   styleUrls: ['./mensagem.component.scss']
 })
 export class MensagemComponent implements OnInit {
-
-  @Input()
-  mensagem = '';
-
   constructor() { }
 
   ngOnInit(): void {

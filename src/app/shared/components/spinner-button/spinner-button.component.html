@@ -11,9 +11,9 @@
 
     >
 
-    <span class="button-text">
-      {{text}}
-    </span>
+    <div class="button-text">
+      <ng-content></ng-content>
+    </div>
 
     <mat-spinner class="local-spinner"
       [diameter]="diameter"

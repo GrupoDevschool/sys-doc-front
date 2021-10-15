@@ -22,13 +22,13 @@
                   #campoEmail="ngModel"
                   required
                   email>
-                <app-mensagem *ngIf="(campoEmail.touched || campoEmail.dirty) && !email.length" mensagem="Email obrigatório"></app-mensagem>
-                <app-mensagem *ngIf="campoEmail.touched && campoEmail.errors?.email" mensagem="Email inválido"></app-mensagem>
+                <app-mensagem *ngIf="(campoEmail.touched || campoEmail.dirty) && !email.length">Email obrigatório</app-mensagem>
+                <app-mensagem *ngIf="campoEmail.touched && campoEmail.errors?.email">Email inválido</app-mensagem>
               </div>
               <div class="inputs slide-top">
                 <span class="material-icons">lock</span>
                 <input class="input" type="password" name="senha" placeholder="Senha" [(ngModel)]="password" #campoSenha="ngModel" required>
-                <app-mensagem *ngIf="campoSenha.invalid && campoSenha.touched" mensagem="Senha obrigatória"></app-mensagem>
+                <app-mensagem *ngIf="campoSenha.invalid && campoSenha.touched">Senha obrigatória</app-mensagem>
               </div>
 
               <div class="btn slide-top">
@@ -36,11 +36,10 @@
                 [type]="'submit'"
                 (action)="login()"
                 color="primary"
-                text="login"
                 [borderRadius]="'25px'"
                 [fullWidth]="true"
                 [loading]="loading"
-                 ></app-spinner-button>
+                 >LOGIN</app-spinner-button>
               </div>
             </form>
         </div>
