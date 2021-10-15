@@ -8,6 +8,8 @@ import { LoginService } from 'src/app/login/login.service';
 })
 export class HeaderComponent implements OnInit {
 
+  public isMenuOpen: boolean = false;
+
   constructor(private loginService: LoginService) { }
 
   ngOnInit(): void {

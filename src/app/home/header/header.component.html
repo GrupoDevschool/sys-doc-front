@@ -1,14 +1,26 @@
 <header>
   <div class="logo">
-      <input type="checkbox" id="check">
-      <label for="check">
-        <span class="material-icons" id="btn">menu</span>
-        <span class="material-icons" id="cancel">close</span>
-      </label>
+        <button mat-button class="btn" (click)="sidenav.toggle()">
+          <mat-icon>{{ isMenuOpen ? 'close' : 'menu'}}</mat-icon>
+        </button>
       <a routerLink ="dashboard"><img src="./assets/images/mobicare-white.png" class="" alt="Logo Mobicare"></a>
   </div>
   <div class="user">
-      <span class="material-icons">person</span>
-      <button class="material-icons btn" (click)="logout()">logout</button>
+      <mat-icon>person</mat-icon>
+      <mat-icon class="material-icons btn" (click)="logout()">logout</mat-icon>
   </div>
 </header>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav autoFocus="false" mode="over" [(opened)]="isMenuOpen" class="sidenav">
+    <a mat-button routerLink="dashboard"><mat-icon>screen_lock_landscape</mat-icon>Dashboard</a>
+    <a mat-button routerLink="project"><mat-icon>folder</mat-icon>Project</a>
+    <a mat-button routerLink="version"><mat-icon>description</mat-icon>Version</a>
+    <a mat-button routerLink="screen"><mat-icon>desktop_windows</mat-icon>Screen</a>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
