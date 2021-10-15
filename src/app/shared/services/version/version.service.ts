@@ -11,6 +11,10 @@ export class VersionService {
 
   constructor(private api: ApiService) { }
 
+  getById(id: number): Observable<Version> {
+    return this.api.get(URL + '/' + id);
+  }
+
   create(version: CreateVersion): Observable<CreateVersion> {
     return this.api.post(URL, version);
   }
