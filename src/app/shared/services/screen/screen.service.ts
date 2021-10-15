@@ -20,12 +20,12 @@ export class ScreenService {
     return this.api.get(URL + '/' + id);
   }
 
-  create(version: createScreen): Observable<createScreen> {
-    return this.api.post(URL, version);
+  create(screen: createScreen): Observable<createScreen> {
+    return this.api.post(URL, screen);
   }
 
-  update(version: createScreen): Observable<createScreen> {
-    return this.api.put(URL + '/' + version.id, version);
+  update(screen: createScreen): Observable<createScreen> {
+    return this.api.put(URL + '/' + screen.id, screen);
   }
 
   delete(id: number): Observable<any> {
