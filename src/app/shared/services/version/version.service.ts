@@ -19,7 +19,7 @@ export class VersionService {
     return this.api.post(URL, version);
   }
 
-  update(version: Version): Observable<Version> {
+  update(version: CreateVersion): Observable<CreateVersion> {
     return this.api.put(URL + '/' + version.id, version);
   }
 
