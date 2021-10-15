@@ -1,3 +1,4 @@
+import { MaterialCommonModule } from './../shared/module/material.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -43,7 +44,8 @@ import { MenuComponent } from './menu/menu.component';
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    MaterialCommonModule
   ],
   exports: [HomeComponent]
 })
