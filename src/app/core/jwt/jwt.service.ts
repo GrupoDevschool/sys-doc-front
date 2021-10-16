@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import jwtDecode from 'jwt-decode';
-
+import { UserData } from 'src/app/shared/model/UserData';
 @Injectable({
   providedIn: 'root'
 })
@@ -8,6 +8,7 @@ export class JwtService {
 
   jwtToken: string = '';
   decodedToken: { [key: string]: string } = {};
+  loginDate: string = '';
 
   constructor() { }
 
@@ -19,15 +20,20 @@ export class JwtService {
     if (token) {
       this.jwtToken = token;
       this.decodeToken();
+      this.loginDate = new Date().toISOString();
       this.setInStorage('sysdocjwt', token);
+      this.setInStorage('sysdocdate', this.loginDate);
     }
   }
 
   getToken() {
     if (!this.hasToken()) {
       const token = this.getInStorage('sysdocjwt');
+      const date = this.getInStorage('sysdocdate');
+      this.loginDate = date ? date : '';
       this.jwtToken = token ? token : '';
       this.decodeToken();
+
     }
   }
 
@@ -61,6 +67,10 @@ export class JwtService {
     return this.decodedToken ? this.decodedToken.exp : null;
   }
 
+  getLoginDate(): string {
+    return this.loginDate;
+  }
+
   isTokenExpired(): boolean {
     const time = this.getExpiryTime();
     const expiryTime = time ? new Date(time) : null;
@@ -71,6 +81,13 @@ export class JwtService {
       this.removeToken();
       return true;
     }
+  }
+
+  getUserData(): UserData {
+    return {
+      name: this.getUserName(),
+      loginDate: this.getLoginDate(),
+    };
   }
 
   // Set item in LocalStorage

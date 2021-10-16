@@ -1,10 +1,10 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { JwtService } from '../core/jwt/jwt.service';
-import {tap} from 'rxjs/operators';
+import { UserData } from '../shared/model/UserData';
 
 interface LoginData {
   email: string;
@@ -76,5 +76,9 @@ export class LoginService {
 
   setIsAuthenticated(isAuthenticated: boolean) {
     this.isLogged.next(isAuthenticated);
+  }
+
+  getUserData(): UserData {
+    return this.jwtService.getUserData();
   }
 }

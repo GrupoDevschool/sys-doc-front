@@ -1,0 +1,16 @@
+.mat-list-item {
+  .icon {
+    margin-right: 5px;
+  }
+
+  &.active {
+    background-color: #5da6e9;
+    color:#ffffff;
+  }
+}
+.mat-nav-list {
+  padding-top: 0;
+   &.opened {
+    border-bottom: 4px solid rgba(0, 0, 0, 0.06);
+  }
+}

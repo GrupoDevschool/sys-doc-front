@@ -16,6 +16,11 @@ import { ScreenComponent } from './components/screen/screen.component';
 import { VersionFormComponent } from './components/version/version-form/version-form.component';
 import { VersionComponent } from './components/version/version.component';
 
+interface IMenuItem {
+  name: string;
+  path: string;
+  icon?: string;
+}
 
 export const LIST_ROUTES: Routes = [
   {
@@ -53,6 +58,50 @@ export const LIST_ROUTES: Routes = [
     component: EventRequestPropertyComponent,
     canActivate: [AuthGuardService],
   },
+];
+
+export const MENU_ITEMS: IMenuItem[] = [
+  {
+    icon: 'description',
+    name: 'Dashboard',
+    path: 'dashboard',
+  },
+  {
+    icon: 'settings',
+    name: 'Projeto',
+    path: 'project',
+  },
+  {
+    icon: 'description',
+    name: 'Versão',
+    path: 'version',
+  },
+  {
+    icon: 'description',
+    name: 'Tela',
+    path: 'screen',
+  },
+  {
+    icon: 'description',
+    name: 'Tipo de Evento',
+    path: 'event-type',
+  },
+  {
+    icon: 'description',
+    name: 'Evento',
+    path: 'event',
+  },
+  {
+    icon: 'description',
+    name: 'Requisição de Evento',
+    path: 'event-request',
+  },
+  {
+    icon: 'description',
+    name: 'Propriedade de requisição',
+    path: 'request-property',
+  },
+
 ];
 
 export const FORM_ROUTES: Routes = [

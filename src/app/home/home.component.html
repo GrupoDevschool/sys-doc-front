@@ -1,3 +1,5 @@
 
-<app-header></app-header>
-<app-menu></app-menu>
+<div class="container">
+  <app-header (switchMenu)="toggle()"></app-header>
+  <app-menu id="menu" [opened]="opened"></app-menu>
+</div>

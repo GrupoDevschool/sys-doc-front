@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,8 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  opened: boolean = false;
 
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) { }
+
+  toggle(): void {
+    this.opened = !this.opened;
+  }
   ngOnInit(): void {
   }
 

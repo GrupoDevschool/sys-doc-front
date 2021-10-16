@@ -1,0 +1,17 @@
+<mat-sidenav-container class="sidenav-container" autosize="true" hasBackdrop="false">
+  <mat-sidenav
+  id="menu"
+  opened="true">
+    <mat-nav-list>
+      <app-item
+        *ngFor="let item of items"
+        [item]="item"
+        [opened]="opened">
+      </app-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content id="main">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
