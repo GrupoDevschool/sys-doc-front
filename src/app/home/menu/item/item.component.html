@@ -1,0 +1,11 @@
+<a
+  mat-list-item
+  [routerLink]="item.path"
+  routerLinkActive="active"
+  title="{{item.name}}"
+  color="primary"
+  backgroud-color="contrast"
+  >
+  <mat-icon class="icon">{{item.icon}}</mat-icon>
+  <ng-container *ngIf="opened">{{item.name}}</ng-container>
+</a>

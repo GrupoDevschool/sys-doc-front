@@ -1,17 +1,22 @@
+@import '~@angular/material/theming';
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 * {
   margin: 0;
   padding: 0;
 }
 
 header {
+  padding: 5px;
   display: flex;
   align-items: center;
+  @include mat-elevation(2);
   justify-content: space-between;
   font-family: "Poppins", "sans-serif";
+
   background: rgb(252, 131, 87);
+
   height: 9vh;
-  padding: 0 1rem;
 }
 
 .logo {
@@ -19,102 +24,34 @@ header {
   display: flex;
 }
 
+.logo a {
+  margin-left: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .logo img{
   max-width: 100%;
   background-size:cover;
-  margin-left: 50px;
+
 }
 
-.material-icons{
+.user-button .material-icons {
   color: #fbfbfb;
-  font-size: 40px;
   cursor: pointer;
 }
 
 .btn {
-  margin-right: 24px;
-  min-width: 0;
-  padding-bottom: 15px;
-  line-height: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.sidenav-container {
-  flex: 1;
-  width: 100%;
-  height: 100%;
-  font-family: 'Poppins', 'sans-serif';
-  .sidenav {
-      min-width: 240px;
-      a {
-          font-family: 'Poppins', 'sans-serif';
-          display: block;
-          margin-top: 20px;
-          padding: 10px 24px;
-          width: 100%;
-          text-align: left;
-      }
-  }
-  main {
-      padding: 18px 24px;
-  }
-}
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-* {
-  margin: 0;
-  padding: 0
-}
-
-.menu {
-  width: 20%;
-  height: 50%;
-  left: 0%;
-  font-family: "Poppins", "sans-serif";
-  background-color: rgb(133, 173, 247);
-  color: #fbfbfb;
-  position: fixed;
-  border-radius: 10px;
-  transition: all .5s ease;
-}
-
-.menu-list {
-  padding-top: 20px;
-  list-style: none;
-  letter-spacing: 3px;
-}
-
-.nav-link{
-  color: #fbfbfb;
-  display: list-item;
   padding: 5px;
-  text-decoration: none;
 }
-
-.nav-link:hover {
-  background-color: #fbfbfb;
-  color: cornflowerblue;
-  .material-icons{
-     color: cornflowerblue;
-  }
-}
-
-.align {
-  padding-left: 10px;
-}
-
-.material-icons {
-  color: #fbfbfb;
-}
-
-a {
-  display: block;
-  line-height: 30px;
-  transition: all .5s ease;
-}
-
-
-
-
-
-

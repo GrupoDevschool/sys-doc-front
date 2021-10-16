@@ -20,6 +20,7 @@ import { HeaderComponent } from './header/header.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { MenuComponent } from './menu/menu.component';
+import { ItemComponent } from './menu/item/item.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { MenuComponent } from './menu/menu.component';
     EventTypeFormComponent,
     EventFormComponent,
     ScreenFormComponent,
-    VersionFormComponent
+    VersionFormComponent,
+    ItemComponent
   ],
   imports: [
     CommonModule,

@@ -1,54 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-* {
-  margin: 0;
-  padding: 0
-}
+@import '~@angular/material/theming';
 
-.menu {
-  width: 20%;
-  height: 50%;
-  left: 0%;
-  font-family: "Poppins", "sans-serif";
-  background-color: rgb(133, 173, 247);
-  color: #fbfbfb;
-  position: fixed;
-  border-radius: 10px;
-  transition: all .5s ease;
-}
+#menu {
+  overflow: visible;
+  display: block;
+  position: relative;
 
-.menu-list {
-  padding-top: 20px;
-  list-style: none;
-  letter-spacing: 3px;
-}
+  @include mat-elevation-transition;
+  @include mat-elevation(6);
 
-.nav-link{
-  color: #fbfbfb;
-  display: list-item;
-  padding: 5px;
-  text-decoration: none;
-}
+  &:hover {
+    @include mat-elevation(10);
+  }
 
-.nav-link:hover {
-  background-color: #fbfbfb;
-  color: cornflowerblue;
-  .material-icons{
-     color: cornflowerblue;
+  &.fullWidth{
+    width: 255px;
   }
 }
 
-.align {
-  padding-left: 10px;
+#main {
+  overflow: auto;
+  width: 90%;
+  padding: 1rem;
+  margin: 0 auto;
 }
 
-.material-icons {
-  color: #fbfbfb;
+.sidenav-container {
+  flex: 1;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
 }
-
-a {
-  display: block;
-  line-height: 30px;
-  transition: all .5s ease;
-}
-
-

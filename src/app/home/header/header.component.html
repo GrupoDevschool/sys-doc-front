@@ -1,26 +1,33 @@
 <header>
   <div class="logo">
-        <button mat-button class="btn" (click)="sidenav.toggle()">
+        <button
+        mat-icon-button
+        class="btn"
+
+        (click)="emit()">
           <mat-icon>{{ isMenuOpen ? 'close' : 'menu'}}</mat-icon>
         </button>
       <a routerLink ="dashboard"><img src="./assets/images/mobicare-white.png" class="" alt="Logo Mobicare"></a>
   </div>
   <div class="user">
-      <mat-icon>person</mat-icon>
-      <mat-icon class="material-icons btn" (click)="logout()">logout</mat-icon>
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="user-button">
+      <mat-icon >account_circle</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" class="mat-menu">
+      <div class="menu-item">
+        <span>{{userData.name || 'User'}}</span>
+      </div>
+      <div class="menu-item">
+        <span>{{userData.loginDate | date: "dd/MM/yyyy HH:mm:ss"}}</span>
+      </div>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon color='accent'>exit_to_app</mat-icon>
+        <span>Logout</span>
+      </button>
+
+    </mat-menu>
+
   </div>
 </header>
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #sidenav autoFocus="false" mode="over" [(opened)]="isMenuOpen" class="sidenav">
-    <a mat-button routerLink="dashboard"><mat-icon>screen_lock_landscape</mat-icon>Dashboard</a>
-    <a mat-button routerLink="project"><mat-icon>folder</mat-icon>Project</a>
-    <a mat-button routerLink="version"><mat-icon>description</mat-icon>Version</a>
-    <a mat-button routerLink="screen"><mat-icon>desktop_windows</mat-icon>Screen</a>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <main>
-      <router-outlet></router-outlet>
-    </main>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+
 
