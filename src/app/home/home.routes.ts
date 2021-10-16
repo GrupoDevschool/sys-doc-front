@@ -62,7 +62,7 @@ export const LIST_ROUTES: Routes = [
 
 export const MENU_ITEMS: IMenuItem[] = [
   {
-    icon: 'description',
+    icon: 'article',
     name: 'Dashboard',
     path: 'dashboard',
   },
@@ -77,27 +77,27 @@ export const MENU_ITEMS: IMenuItem[] = [
     path: 'version',
   },
   {
-    icon: 'description',
+    icon: 'desktop_windows',
     name: 'Tela',
     path: 'screen',
   },
   {
-    icon: 'description',
+    icon: 'schedule_send',
     name: 'Tipo de Evento',
     path: 'event-type',
   },
   {
-    icon: 'description',
+    icon: 'schedule',
     name: 'Evento',
     path: 'event',
   },
   {
-    icon: 'description',
+    icon: 'request_page',
     name: 'Requisição de Evento',
     path: 'event-request',
   },
   {
-    icon: 'description',
+    icon: 'construction',
     name: 'Propriedade de requisição',
     path: 'request-property',
   },

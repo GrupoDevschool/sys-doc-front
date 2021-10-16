@@ -40,18 +40,24 @@ header {
 .user-button .material-icons {
   color: #fbfbfb;
   cursor: pointer;
+  margin-right: 20px;
 }
 
 .btn {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #fbfbfb;
 }
 
 .menu-item {
   display: flex;
   align-items: center;
   justify-content: center;
-
+  font-family: 'Poppins', 'sans-serif';
   padding: 5px;
+}
+
+.font {
+  font-family: 'Poppins', 'sans-serif';
 }
