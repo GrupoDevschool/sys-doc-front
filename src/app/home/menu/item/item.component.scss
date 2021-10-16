@@ -1,10 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 .mat-list-item {
+
+  font-family: 'Poppins';
+  transition: all .5s ease;
+
   .icon {
     margin-right: 5px;
   }
 
   &.active {
-    background-color: #5da6e9;
+    background-color: rgb(248, 165, 135);
     color:#ffffff;
   }
 }
@@ -14,3 +19,4 @@
     border-bottom: 4px solid rgba(0, 0, 0, 0.06);
   }
 }
+
