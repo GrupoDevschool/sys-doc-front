@@ -11,8 +11,8 @@ export class ScreenService {
 
   constructor(private api: ApiService) { }
 
-  getAll(versionId: number): Observable<Screen[]> {
-    return this.api.getAll(URL + '/' + versionId);
+  getAll(): Observable<Screen[]> {
+    return this.api.getAll(URL);
   }
 
   getById(id: number): Observable<Screen> {
