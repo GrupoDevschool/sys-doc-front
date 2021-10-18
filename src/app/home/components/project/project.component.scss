@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+.mat-card {
+  display: flex;
+  font-family: 'Poppins', 'sans-serif';
+  font-weight: bold;
+  align-items: center;
+}
+
+.mat-raised-button {
+  align-items: center;
+}
+
+.mat-elevation-z8 {
+  margin-top: 15px;
+}
+
+.mat-table {
+  font-family: 'Poppins', 'sans-serif';
+}
+
+table {
+  width: 100%;
+}
+
+.mat-raised-button {
+  font-family: 'Poppins', 'sans-serif';
+  float: right;
+  bottom: 0;
+  border-radius: 20px;
+}
