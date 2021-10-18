@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-
+.container {
+  height: 100%;
+}
 .mat-card {
   display: flex;
   font-family: 'Poppins', 'sans-serif';
   font-weight: bold;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -12,7 +15,8 @@
 }
 
 .mat-elevation-z8 {
-  margin-top: 15px;
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 
 .mat-table {
@@ -28,4 +32,9 @@ table {
   float: right;
   bottom: 0;
   border-radius: 20px;
+}
+
+.filtro {
+  margin-top: 10px;
+  width: 100%;
 }
