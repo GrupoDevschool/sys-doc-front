@@ -21,6 +21,8 @@
   align-items: center;
 }
 
+
+
 .mat-elevation-z8 {
   margin-top: 10px;
   margin-bottom: 5px;
@@ -43,6 +45,15 @@ table {
   float: right;
   bottom: 0;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+.mat-raised-button.delete {
+  margin-left: 10px;
+}
+
+th .gerenciamento  {
+  float: left;
 }
 
 .mat-form-field {

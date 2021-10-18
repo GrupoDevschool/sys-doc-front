@@ -13,7 +13,9 @@ import { SelectionModel } from '@angular/cdk/collections';
 })
 export class ProjectComponent implements AfterViewInit {
 
-  displayedColumns: string[] = ['id', 'name', 'status'];
+  projects: Project[];
+  updateProject: Project = {} as Project;
+  displayedColumns: string[] = ['id', 'name', 'status', 'gerenciamento'];
   dataSource: MatTableDataSource<Project>;
   selection = new SelectionModel<string>(true, []);
 
@@ -24,14 +26,19 @@ export class ProjectComponent implements AfterViewInit {
 
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(){
+
+    this.reloadData();
+  }
+
+  reloadData() {
     this.projectsService.getAll().subscribe((projects) => {
       this.dataSource = new MatTableDataSource(projects)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-    }
-    )
+    })
   }
+
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -39,6 +46,18 @@ export class ProjectComponent implements AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  delete(id: number){
+    this.projectsService.delete(id).subscribe(() => {
+      this.projects = this.projects.filter((element) => element.id != id)
+      }
+    )
+    this.reloadData();
+  }
+
+  edit(){
+    this.projectsService.update(this.updateProject).subscribe(() => {} )
   }
 }
 

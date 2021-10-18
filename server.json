@@ -2,36 +2,10 @@
   "login": {
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkpvaG4gRG9lIiwiZW1haWwiOiJqaG9uQGV4YW1wbGUuY29tIiwiZXhwIjoiMDUvMDEvMjAyMiJ9.nQMT15cqX0i4IjKtxj-lLveWWJqsRCz7vJjMgSCIgjQ"
   },
-
   "project": [
-    {
-      "id": 1,
-      "name": "Mobicare project",
-      "active": true
-    },
-    {
-      "id": 2,
-      "name": "Akross project",
-      "active": "true"
-    },
-    {
-      "id": 3,
-      "name": "Claro project",
-      "active": "false"
-    },
-    {
-      "id": 4,
-      "name": "Disney project",
-      "active": "true"
-    },
     {
       "id": 5,
       "name": "Pica pau project",
-      "active": "true"
-    },
-    {
-      "id": 6,
-      "name": "Amazon service",
       "active": "true"
     },
     {
