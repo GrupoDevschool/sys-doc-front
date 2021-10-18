@@ -4,9 +4,13 @@
         <mat-card-subtitle></mat-card-subtitle>
     </mat-card-header>
     <button mat-raised-button color="primary">ADD</button>
-
-
 </mat-card>
+
+<div class="example-header" [style.display]="selection.isEmpty() ? '' : 'none'">
+  <mat-form-field floatPlaceholder="never">
+    <input matInput #filter placeholder="Filtrar projetos" (keyup)="applyFilter(filter.value)">
+  </mat-form-field>
+</div>
 
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort>
