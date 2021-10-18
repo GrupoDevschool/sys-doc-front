@@ -40,8 +40,6 @@ export class ProjectComponent implements AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
-
 }
 
 

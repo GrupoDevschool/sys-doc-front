@@ -1,10 +1,10 @@
 <div class="container">
   <mat-card class="mat-card">
       <mat-card-header>
-          <mat-card-title>Project</mat-card-title>
+          <mat-card-title>Projetos</mat-card-title>
           <mat-card-subtitle></mat-card-subtitle>
       </mat-card-header>
-      <button mat-raised-button color="primary">ADD</button>
+      <button mat-raised-button color="primary">Cadastrar Novo</button>
   </mat-card>
 
   <div class="filtro" [style.display]="selection.isEmpty() ? '' : 'none'">
@@ -31,7 +31,7 @@
       <!-- Status Column -->
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-        <td mat-cell *matCellDef="let project"> {{project.active}} </td>
+        <td mat-cell *matCellDef="let project" [style.color]="project.active? 'green':'red' "> {{project.active}} </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
