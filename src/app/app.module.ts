@@ -11,16 +11,13 @@ import { HomeModule } from './home/home.module';
 import { AuthGuardService } from './login/auth-guard.service';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
-import { MensagemComponent } from './shared/components/mensagem/mensagem.component';
 import { MaterialCommonModule, MODULES } from './shared/module/material.module';
-import { SpinnerButtonComponent } from './shared/components/spinner-button/spinner-button.component';
+import { SharedModule } from './shared/module/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    MensagemComponent,
-    SpinnerButtonComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +26,7 @@ import { SpinnerButtonComponent } from './shared/components/spinner-button/spinn
     HomeModule,
     BrowserAnimationsModule,
     MaterialCommonModule,
+    SharedModule,
     FormsModule,
     ToastrModule.forRoot({
       timeOut: 4000,
@@ -36,7 +34,7 @@ import { SpinnerButtonComponent } from './shared/components/spinner-button/spinn
     })
   ],
   exports: [
-    ...MODULES
+    ...MODULES,
   ],
   providers: [
     AuthGuardService,

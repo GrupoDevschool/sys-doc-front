@@ -1,6 +1,9 @@
-import { MaterialCommonModule } from './../shared/module/material.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
+import { SharedModule } from '../shared/module/shared.module';
+import { MaterialCommonModule } from './../shared/module/material.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EventRequestPropertyComponent } from './components/event-request-property/event-request-property.component';
 import { PropertyFormComponent } from './components/event-request-property/property-form/property-form.component';
@@ -19,8 +22,8 @@ import { VersionComponent } from './components/version/version.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
-import { MenuComponent } from './menu/menu.component';
 import { ItemComponent } from './menu/item/item.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -44,10 +47,15 @@ import { ItemComponent } from './menu/item/item.component';
     VersionFormComponent,
     ItemComponent
   ],
+  providers: [
+    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}
+  ],
   imports: [
     CommonModule,
+    SharedModule,
     HomeRoutingModule,
-    MaterialCommonModule
+    MaterialCommonModule,
+    ReactiveFormsModule,
   ],
   exports: [HomeComponent]
 })

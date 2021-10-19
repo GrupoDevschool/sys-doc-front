@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from 'src/app/core/api/api.service';
 import { Observable } from 'rxjs';
+import { ApiService } from 'src/app/core/api/api.service';
+import { CreateProject } from 'src/app/shared/model/Project';
 import { Project } from '../../model/Project';
 
 const URL = '/project';
@@ -20,11 +21,11 @@ export class ProjectService {
     return this.api.get(URL + '/' + id);
   }
 
-  create(project: Project): Observable<Project> {
+  create(project: CreateProject): Observable<Project> {
     return this.api.post(URL, project);
   }
 
-  update(project: Project): Observable<Project> {
+  update(project: CreateProject): Observable<Project> {
     return this.api.put(URL + '/' + project.id, project);
   }
 

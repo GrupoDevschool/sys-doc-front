@@ -1,42 +1,48 @@
-import { ProjectService } from './../../../shared/services/project/project.service';
-import { Project } from './../../../shared/model/Project';
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { SelectionModel } from '@angular/cdk/collections';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { SelectionModel } from '@angular/cdk/collections';
+import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { Project } from './../../../shared/model/Project';
+import { ProjectService } from './../../../shared/services/project/project.service';
 
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.scss']
 })
-export class ProjectComponent implements AfterViewInit {
+export class ProjectComponent implements OnInit {
 
-  projects: Project[];
-  updateProject: Project = {} as Project;
+  projects!: Project[];
+
   displayedColumns: string[] = ['id', 'name', 'status', 'gerenciamento'];
-  dataSource: MatTableDataSource<Project>;
+
+  dataSource!: MatTableDataSource<Project>;
+
+  loading: boolean = false;
+
   selection = new SelectionModel<string>(true, []);
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private projectsService: ProjectService ) {
+  constructor(private projectsService: ProjectService, private router: Router ) {
 
   }
 
-  ngAfterViewInit(){
+  ngOnInit(){
 
     this.reloadData();
   }
 
   reloadData() {
+    this.loading = true;
     this.projectsService.getAll().subscribe((projects) => {
       this.dataSource = new MatTableDataSource(projects)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-    })
+    }).add(() => this.loading = false);
   }
 
 
@@ -56,8 +62,8 @@ export class ProjectComponent implements AfterViewInit {
     this.reloadData();
   }
 
-  edit(){
-    this.projectsService.update(this.updateProject).subscribe(() => {} )
+  edit(project: Project){
+    this.router.navigate(['dashboard/project/add'], { state: project });
   }
 }
 

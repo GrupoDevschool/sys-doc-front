@@ -8,6 +8,8 @@ import { Component,Input, OnInit } from '@angular/core';
 export class MensagemComponent implements OnInit {
   constructor() { }
 
+  @Input() class?: string;
+
   ngOnInit(): void {
   }
 
