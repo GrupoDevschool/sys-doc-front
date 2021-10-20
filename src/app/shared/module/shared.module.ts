@@ -14,12 +14,12 @@ import { MaterialCommonModule } from './material.module';
     declarations: [
       MensagemComponent,
       SpinnerButtonComponent,
-      TableSpinnerComponent
+      TableSpinnerComponent,
     ],
     exports: [
       MensagemComponent,
       SpinnerButtonComponent,
-      TableSpinnerComponent
+      TableSpinnerComponent,
     ]
 })
 export class SharedModule {}

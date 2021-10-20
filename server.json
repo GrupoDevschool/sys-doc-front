@@ -6,52 +6,52 @@
     {
       "id": 1,
       "name": "SysDoc",
-      "status": true
+      "active": true
     },
     {
       "id": 2,
       "name": "System.dev",
-      "status": true
+      "active": true
     },
     {
       "id": 3,
       "name": "DevsDocs.Io",
-      "status": false
+      "active": false
     },
     {
       "id": 4,
       "name": "SysDev",
-      "status": false
+      "active": false
     },
     {
       "id": 5,
       "name": "DevDocs",
-      "status": false
+      "active": false
     },
     {
       "id": 6,
       "name": "AKMODocs",
-      "status": false
+      "active": false
     },
     {
       "id": 7,
       "name": "DocHudson",
-      "status": false
+      "active": false
     },
     {
       "id": 8,
       "name": "DocSys",
-      "status": false
+      "active": false
     },
     {
       "id": 9,
       "name": "SystemDoc.io",
-      "status": false
+      "active": false
     },
     {
-      "id": 10,
-      "name": "SysDocHudson",
-      "status": false
+      "name": "Minha oi",
+      "status": false,
+      "id": 10
     }
   ]
 }

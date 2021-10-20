@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,11 +12,11 @@ import { ProjectService } from './../../../shared/services/project/project.servi
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.scss']
 })
-export class ProjectComponent implements OnInit {
+export class ProjectComponent implements OnInit, AfterViewInit {
 
   projects!: Project[];
 
-  displayedColumns: string[] = ['id', 'name', 'status', 'gerenciamento'];
+  displayedColumns: string[] = ['id', 'name', 'active', 'gerenciamento'];
 
   dataSource!: MatTableDataSource<Project>;
 
@@ -31,18 +31,21 @@ export class ProjectComponent implements OnInit {
 
   }
 
-  ngOnInit(){
-
+  ngAfterViewInit(){
     this.reloadData();
   }
 
-  reloadData() {
+  ngOnInit(){
     this.loading = true;
+  }
+
+  reloadData() {
     this.projectsService.getAll().subscribe((projects) => {
       this.dataSource = new MatTableDataSource(projects)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }).add(() => this.loading = false);
+
   }
 
 
