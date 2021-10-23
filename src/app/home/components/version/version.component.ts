@@ -16,7 +16,7 @@ export class VersionComponent implements OnInit {
 
   versions!: Version[];
 
-  displayedColumns: string[] = ['id', 'active', 'number', 'date', 'gmud', 'order', 'screens']
+  displayedColumns: string[] = ['id', 'active', 'number', 'date', 'gmud', 'order', 'screens', 'gerenciamento']
 
   dataSource!: MatTableDataSource<Version>;
 
@@ -43,6 +43,14 @@ export class VersionComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }).add(() => this.loading = false);
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   delete(id: number){
