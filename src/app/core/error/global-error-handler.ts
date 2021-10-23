@@ -6,9 +6,9 @@ import { LoginService } from 'src/app/login/login.service';
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
   constructor(
+    private loginService: LoginService,
     private injector: Injector,
     private ngZone: NgZone,
-    public loginService: LoginService,
   ) { }
 
   handleError(error: any) {
