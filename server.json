@@ -53,5 +53,100 @@
       "active": false,
       "id": 10
     }
+  ],
+  "screen": [
+    {
+      "id": 1,
+	    "active": true,
+	    "name": "Tela de Login",
+	    "image":  "https://picsum.photos/200/300?random=1",
+	    "order":  1,
+	    "versionId":  1
+    },
+    {
+      "id": 2,
+	    "active": true,
+	    "fatherScreenId": 1,
+	    "name": "Dashboard",
+	    "image":  "https://picsum.photos/200/300?random=2",
+	    "order":  2,
+	    "versionId":  1
+    },
+    {
+      "id": 3,
+	    "active": true,
+	    "fatherScreenId": 1,
+	    "name": "Tela de recuperação de senha",
+	    "image":  "https://picsum.photos/200/300?random=3",
+	    "order":  1,
+	    "versionId":  1
+    },
+    {
+      "id": 4,
+	    "active": true,
+	    "fatherScreenId": 2,
+	    "name": "Tela de cadastro de Projeto",
+	    "image":  "https://picsum.photos/200/300?random=4",
+	    "order":  1,
+	    "versionId":  1
+    },
+    {
+      "id": 5,
+	    "active": true,
+	    "fatherScreenId": 2,
+	    "name": "Tela de Cadastro de Versão",
+	    "image":  "https://picsum.photos/200/300?random=5",
+	    "order":  2,
+	    "versionId":  1
+    },
+    {
+      "id": 6,
+	    "active": true,
+	    "name": "Tela de Login - OI",
+	    "image":  "https://picsum.photos/200/300?random=6",
+	    "order":  1,
+	    "versionId":  2,
+	    "versionClonedId":  1
+    },
+    {
+      "id": 7,
+	    "active": true,
+      "fatherScreenId": 6,
+	    "name": "Dashboard - OI",
+	    "image":  "https://picsum.photos/200/300?random=7",
+	    "order":  2,
+	    "versionId":  2,
+	    "versionClonedId":  1
+    },
+    {
+      "id": 8,
+	    "active": true,
+      "fatherScreenId": 6,
+	    "name": "Tela de recuperação de senha - OI",
+	    "image":  "https://picsum.photos/200/300?random=8",
+	    "order":  1,
+	    "versionId":  2,
+	    "versionClonedId":  1
+    },
+    {
+      "id": 9,
+	    "active": true,
+      "fatherScreenId": 7,
+	    "name": "Tela de cadastro de Projeto - OI",
+	    "image":  "https://picsum.photos/200/300?random=9",
+	    "order":  1,
+	    "versionId":  2,
+	    "versionClonedId":  1
+    },
+    {
+      "id": 10,
+	    "active": true,
+      "fatherScreenId": 7,
+	    "name": "Tela de cadastro de Versão - OI",
+	    "image":  "https://picsum.photos/200/300?random=10",
+	    "order":  2,
+	    "versionId":  2,
+	    "versionClonedId":  1
+    }
   ]
 }
