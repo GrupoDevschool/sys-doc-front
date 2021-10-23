@@ -12,7 +12,7 @@ interface LoginData {
 }
 
 interface LoginResponse {
-  headers: any;
+  headers?: any;
   token: string;
 }
 

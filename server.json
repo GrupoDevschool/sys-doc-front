@@ -50,7 +50,7 @@
     },
     {
       "name": "Minha oi",
-      "status": false,
+      "active": false,
       "id": 10
     }
   ]
