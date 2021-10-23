@@ -53,6 +53,10 @@ export class VersionComponent implements OnInit {
     }
   }
 
+  applyFilterProject(filterValue: number) {
+
+  }
+
   delete(id: number){
     this.versionService.delete(id).subscribe(() => {
       this.versions = this.versions.filter((element) => element.id != id)
