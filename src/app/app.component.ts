@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { LoginService } from './login/login.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +9,5 @@ export class AppComponent{
 
   title = 'sys-doc';
 
-  isLogged: boolean;
-
-  constructor(
-  private loginService:LoginService) {
-    this.isLogged = this.loginService.isLoggedIn();
-    this.loginService.getIsAuthenticated().subscribe(data => this.isLogged = data);
-  }
+  constructor() {  }
 }
