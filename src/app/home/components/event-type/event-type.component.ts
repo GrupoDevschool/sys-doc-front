@@ -56,6 +56,6 @@ export class EventTypeComponent implements OnInit {
   }
 
   edit(eventType: EventType) {
-    this.router.navigate(['dashboard/project/add'], { state: eventType });
+    this.router.navigate(['dashboard/event-type/add'], { state: eventType });
   }
 }
