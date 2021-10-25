@@ -1,1 +1,53 @@
-<p>event-type-form works!</p>
+<div class="container">
+  <mat-card class="mat-card">
+    <mat-card-title>Cadastrar novo Tipo de Evento</mat-card-title>
+    <button mat-raised-button color="accent" routerLink="..">voltar</button>
+  </mat-card>
+
+  <mat-card>
+    <form [formGroup]="eventTypeForm" class="form">
+      <input type="number" formControlName="id" hidden />
+
+      <div>
+        <mat-form-field class="inputs" appearance="outline">
+          <mat-label>Nome do Tipo de Evento</mat-label>
+          <input
+            matInput
+            placeholder="Ex: onClick"
+            formControlName="name"
+            [errorStateMatcher]="matcher"
+          />
+          <mat-error *ngIf="eventTypeForm.get('name')?.hasError('required')">
+            Nome é um campo obrigatório
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status" [errorStateMatcher]="matcher">
+            <mat-option [value]="true">Ativo</mat-option>
+            <mat-option [value]="false">Inativo</mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="eventTypeForm.controls['status'].hasError('required')"
+            >Active é um campo obrigatório</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="action">
+        <app-spinner-button
+          type="submit"
+          (action)="submit()"
+          color="primary"
+          borderRadius="4px"
+          [fullWidth]="true"
+          [loading]="loading"
+          [disabled]="!eventTypeForm.valid"
+        >
+          Salvar
+        </app-spinner-button>
+      </div>
+    </form>
+  </mat-card>
+</div>
