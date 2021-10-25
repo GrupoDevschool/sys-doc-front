@@ -17,6 +17,7 @@ export class VersionFormComponent implements OnInit {
   matcher = new ErrorStateMatcher;
   loading: boolean = false;
   updateVersion: Version | undefined;
+  createVersion: CreateVersion | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,8 +33,13 @@ export class VersionFormComponent implements OnInit {
     this.versionForm = this.formBuilder.group({
       id: new FormControl(this.updateVersion?.id ?? null),
       active: new FormControl(this.updateVersion?.active? true : false, [Validators.required]),
-      number: new FormControl(this.updateVersion?.number ?? '', [Validators.required]),
-
+      versionNumber: new FormControl(this.createVersion?.versionNumber ?? '', [Validators.required]),
+      description: new FormControl(this.createVersion?.description ?? '', [Validators.required]),
+      deployDate: new FormControl(this.createVersion?.deployDate ?? '', [Validators.required]),
+      status: new FormControl(this.createVersion?.status? true : false, [Validators.required]),
+      order: new FormControl(this.createVersion?.order ?? '', [Validators.required]),
+      versionCloneId: new FormControl(this.createVersion?.order ?? '', [Validators.required]),
+      projectId: new FormControl(this.createVersion?.projectId ?? '', [Validators.required])
     })
   }
 
@@ -69,7 +75,6 @@ export class VersionFormComponent implements OnInit {
 
       } else {
         const newVersion: CreateVersion = {
-          id: formFields.id,
           versionNumber: formFields.versionNumber,
           description: formFields.description,
           deployDate: formFields.deployDate,
