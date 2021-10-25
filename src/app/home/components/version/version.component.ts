@@ -6,6 +6,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
+import { Project } from 'src/app/shared/model/Project';
 
 @Component({
   selector: 'app-version',
@@ -14,9 +15,10 @@ import { Router } from '@angular/router';
 })
 export class VersionComponent implements OnInit {
 
-  versions!: Version[];
 
-  displayedColumns: string[] = ['id', 'active', 'number', 'date', 'gmud', 'order', 'screens', 'gerenciamento']
+  versions!: Version[];
+  projects!: Project[];
+  displayedColumns: string[] = ['id', 'id do Projeto', 'active', 'number', 'date', 'gmud', 'order', 'screens', 'gerenciamento']
 
   dataSource!: MatTableDataSource<Version>;
 

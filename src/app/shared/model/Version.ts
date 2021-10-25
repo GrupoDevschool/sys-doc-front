@@ -6,6 +6,7 @@ export interface Version {
   date: string;
   gmud: string;
   order: number;
+  projectId: number;
   screens: number;
 }
 

@@ -19,6 +19,11 @@
         <td mat-cell *matCellDef="let version"> {{version.id}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="id do Projeto">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id do projeto </th>
+        <td mat-cell *matCellDef="let version"> {{version.projectId}} </td>
+      </ng-container>
+
       <!-- Active Column -->
       <ng-container matColumnDef="active">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Ativo </th>
