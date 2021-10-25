@@ -1,3 +1,4 @@
+import { ProjectService } from './../../../shared/services/project/project.service';
 import { VersionService } from './../../../shared/services/version/version.service';
 import { Version } from './../../../shared/model/Version';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -7,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { Project } from 'src/app/shared/model/Project';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-version',
@@ -18,7 +20,9 @@ export class VersionComponent implements OnInit {
 
   versions!: Version[];
   projects!: Project[];
-  displayedColumns: string[] = ['id', 'id do Projeto', 'active', 'number', 'date', 'gmud', 'order', 'screens', 'gerenciamento']
+  displayedColumns: string[] = ['id do Projeto', 'id', 'active', 'number', 'date', 'gmud', 'order', 'screens', 'gerenciamento']
+  idProjectFilter = new FormControl('');
+  newProjectId!: string
 
   dataSource!: MatTableDataSource<Version>;
 
@@ -29,7 +33,7 @@ export class VersionComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private versionService: VersionService, private router: Router ) { }
+  constructor(private versionService: VersionService, private projectService: ProjectService, private router: Router ) { }
 
   ngAfterViewInit() {
     this.reloadData()
@@ -37,6 +41,11 @@ export class VersionComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
+
+    this.dataSource.filterPredicate = (data: Version, filter: string) => {
+      return data.projectId.toString() == filter;
+    };
+
   }
 
   reloadData() {
@@ -55,8 +64,8 @@ export class VersionComponent implements OnInit {
     }
   }
 
-  applyFilterProject(filterValue: number) {
-
+  applyFilterIdProjeto(filterValue: string) {
+    this.dataSource.filter = filterValue;
   }
 
   delete(id: number){

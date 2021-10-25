@@ -57,6 +57,7 @@
   "version": [
     {
       "id": 1,
+      "projectId": 1,
       "active": true,
       "number": "1",
       "date": "12/05/2021",
@@ -66,6 +67,7 @@
     },
     {
       "id": 1,
+      "projectId": 1,
       "active": true,
       "number": "1",
       "date": "12/05/2021",
@@ -75,6 +77,7 @@
     },
     {
       "id": 1,
+      "projectId": 1,
       "active": true,
       "number": "1",
       "date": "12/05/2021",
@@ -84,6 +87,7 @@
     },
     {
       "id": 1,
+      "projectId": 1,
       "active": true,
       "number": "1",
       "date": "12/05/2021",
@@ -93,6 +97,7 @@
     },
     {
       "id": 1,
+      "projectId": 1,
       "active": true,
       "number": "1",
       "date": "12/05/2021",
