@@ -1,5 +1,5 @@
-@import '~@angular/material/theming';
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import "~@angular/material/theming";
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
 * {
   margin: 0;
@@ -7,7 +7,6 @@
 }
 
 header {
-  padding: 5px;
   display: flex;
   align-items: center;
   @include mat-elevation(2);
@@ -31,10 +30,9 @@ header {
   justify-content: center;
 }
 
-.logo img{
+.logo img {
   max-width: 100%;
-  background-size:cover;
-
+  background-size: cover;
 }
 
 .user-button .material-icons {
@@ -54,11 +52,10 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Poppins', 'sans-serif';
+  font-family: "Poppins", "sans-serif";
   padding: 5px;
 }
 
 .font {
-  font-family: 'Poppins', 'sans-serif';
+  font-family: "Poppins", "sans-serif";
 }
-
