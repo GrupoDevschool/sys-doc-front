@@ -4,7 +4,7 @@
       <button mat-raised-button color="accent" routerLink="..">voltar</button>
   </mat-card>
 
-  <mat-card>
+  <mat-card class="mat-card2">
     <form [formGroup]="versionForm" class="form">
       <input
       type="number"
@@ -13,11 +13,25 @@
       />
 
       <div>
+
         <mat-form-field class="inputs" appearance="outline">
-          <mat-label></mat-label>
+          <mat-label>Id do projeto</mat-label>
           <input
           matInput
-          placeholder="Ex: Minha Oi"
+          placeholder="Ex: 32"
+          formControlName="projectId"
+          [errorStateMatcher]="matcher"
+          />
+          <mat-error *ngIf="versionForm.get('projectId')?.hasError('required')">
+            Id do projeto é um campo obrigatório
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="inputs" appearance="outline">
+          <mat-label>Número da versão</mat-label>
+          <input
+          matInput
+          placeholder="Ex: 3.0"
           formControlName="versionNumber"
           [errorStateMatcher]="matcher"
           />
@@ -27,51 +41,64 @@
         </mat-form-field>
 
         <mat-form-field class="inputs" appearance="outline">
-          <mat-label>Nome do Projeto</mat-label>
+          <mat-label>Data</mat-label>
           <input
           matInput
-          placeholder="Ex: Minha Oi"
-          formControlName="name"
+          placeholder="Ex: 09/10/2021"
+          formControlName="deployDate"
           [errorStateMatcher]="matcher"
           />
-          <mat-error *ngIf="versionForm.get('name')?.hasError('required')">
-            Nome é um campo obrigatório
+          <mat-error *ngIf="versionForm.get('deployDate')?.hasError('required')">
+            Data é um campo obrigatório
           </mat-error>
         </mat-form-field>
 
         <mat-form-field class="inputs" appearance="outline">
-          <mat-label>Nome do Projeto</mat-label>
+          <mat-label>Descrição</mat-label>
           <input
           matInput
-          placeholder="Ex: Minha Oi"
-          formControlName="name"
+          placeholder="Ex: Um projeto"
+          formControlName="description"
           [errorStateMatcher]="matcher"
           />
-          <mat-error *ngIf="versionForm.get('name')?.hasError('required')">
-            Nome é um campo obrigatório
+          <mat-error *ngIf="versionForm.get('description')?.hasError('required')">
+            Descrição é um campo obrigatório
           </mat-error>
         </mat-form-field>
 
         <mat-form-field class="inputs" appearance="outline">
-          <mat-label>Nome do Projeto</mat-label>
+          <mat-label>Ordem</mat-label>
           <input
           matInput
-          placeholder="Ex: Minha Oi"
-          formControlName="name"
+          placeholder="Ex: 3"
+          formControlName="order"
           [errorStateMatcher]="matcher"
           />
-          <mat-error *ngIf="versionForm.get('name')?.hasError('required')">
-            Nome é um campo obrigatório
+          <mat-error *ngIf="versionForm.get('order')?.hasError('required')">
+            Ordem é um campo obrigatório
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="inputs" appearance="outline">
+          <mat-label>Clone de Id da versão</mat-label>
+          <input
+          matInput
+          placeholder="Ex: 2"
+          formControlName="versionCloneId"
+          [errorStateMatcher]="matcher"
+          />
+          <mat-error *ngIf="versionForm.get('versionCloneId')?.hasError('required')">
+            Clone de Id da versão é um campo obrigatório
           </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Active</mat-label>
-          <mat-select formControlName="active" [errorStateMatcher]="matcher">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status" [errorStateMatcher]="matcher">
             <mat-option [value]="true">Ativo</mat-option>
             <mat-option [value]="false">Inativo</mat-option>
           </mat-select>
-          <mat-error *ngIf="versionForm.controls['active'].hasError('required')">Active é um campo obrigatório</mat-error>
+          <mat-error *ngIf="versionForm.controls['status'].hasError('required')">Active é um campo obrigatório</mat-error>
         </mat-form-field>
       </div>
 

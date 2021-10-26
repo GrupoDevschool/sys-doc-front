@@ -57,13 +57,13 @@
   "version": [
     {
       "id": 1,
-      "projectId": 1,
-      "active": true,
-      "number": "1",
-      "date": "12/05/2021",
-      "gmud": "123456",
-      "order": 1,
-      "screens": 2
+      "versionNumber": "2",
+      "description": "blbalbalba",
+      "deployDate": "09/10/2021",
+      "status": true,
+      "order": "3",
+      "versionCloneId": "2",
+      "projectId": "1"
     },
     {
       "id": 1,
@@ -98,6 +98,16 @@
     {
       "id": 1,
       "projectId": 1,
+      "active": true,
+      "number": "1",
+      "date": "12/05/2021",
+      "gmud": "123456",
+      "order": 1,
+      "screens": 2
+    },
+    {
+      "id": 1,
+      "projectId": 2,
       "active": true,
       "number": "1",
       "date": "12/05/2021",
