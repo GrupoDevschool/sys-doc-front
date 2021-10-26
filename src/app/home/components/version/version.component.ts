@@ -22,7 +22,6 @@ export class VersionComponent implements OnInit {
   projects!: Project[];
   displayedColumns: string[] = ['id do Projeto', 'id', 'active', 'number', 'date', 'gmud', 'order', 'screens', 'gerenciamento']
   idProjectFilter = new FormControl('');
-  newProjectId!: string
 
   dataSource!: MatTableDataSource<Version>;
 
@@ -42,9 +41,9 @@ export class VersionComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
 
-    this.dataSource.filterPredicate = (data: Version, filter: string) => {
+    /*this.dataSource.filterPredicate = (data: Version, filter: string) => {
       return data.projectId.toString() == filter;
-    };
+    };*/
 
   }
 

@@ -19,4 +19,5 @@ export interface CreateVersion {
   order: number;
   versionCloneId?: number;
   projectId: number;
+  gmud: string;
 }

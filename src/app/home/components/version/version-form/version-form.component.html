@@ -1,11 +1,11 @@
 <div class="container">
   <mat-card class="mat-card">
-      <mat-card-title>Cadastrar novo projeto</mat-card-title>
+      <mat-card-title>Cadastrar nova Versão</mat-card-title>
       <button mat-raised-button color="accent" routerLink="..">voltar</button>
   </mat-card>
 
-  <mat-card class="mat-card2">
-    <form [formGroup]="versionForm" class="form">
+  <mat-card class="mat-card2 ui-g">
+    <form [formGroup]="versionForm">
       <input
       type="number"
       formControlName="id"
@@ -14,20 +14,21 @@
 
       <div>
 
-        <mat-form-field class="inputs" appearance="outline">
-          <mat-label>Id do projeto</mat-label>
-          <input
-          matInput
-          placeholder="Ex: 32"
-          formControlName="projectId"
-          [errorStateMatcher]="matcher"
-          />
-          <mat-error *ngIf="versionForm.get('projectId')?.hasError('required')">
-            Id do projeto é um campo obrigatório
-          </mat-error>
-        </mat-form-field>
+          <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
+            <mat-label>Id do projeto</mat-label>
+            <input
+            matInput
+            placeholder="Ex: 32"
+            formControlName="projectId"
+            [errorStateMatcher]="matcher"
+            />
+            <mat-error *ngIf="versionForm.get('projectId')?.hasError('required')">
+              Id do projeto é um campo obrigatório
+            </mat-error>
+          </mat-form-field>
 
-        <mat-form-field class="inputs" appearance="outline">
+
+        <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
           <mat-label>Número da versão</mat-label>
           <input
           matInput
@@ -40,7 +41,20 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="inputs" appearance="outline">
+        <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
+          <mat-label>GMUD</mat-label>
+          <input
+          matInput
+          placeholder="Ex: "
+          formControlName="gmud"
+          [errorStateMatcher]="matcher"
+          />
+          <mat-error *ngIf="versionForm.get('gmud')?.hasError('required')">
+            Gmud é um campo obrigatório
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
           <mat-label>Data</mat-label>
           <input
           matInput
@@ -52,6 +66,7 @@
             Data é um campo obrigatório
           </mat-error>
         </mat-form-field>
+
 
         <mat-form-field class="inputs" appearance="outline">
           <mat-label>Descrição</mat-label>
@@ -66,7 +81,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="inputs" appearance="outline">
+        <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
           <mat-label>Ordem</mat-label>
           <input
           matInput
@@ -79,7 +94,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="inputs" appearance="outline">
+        <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
           <mat-label>Clone de Id da versão</mat-label>
           <input
           matInput
@@ -92,7 +107,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
           <mat-label>Status</mat-label>
           <mat-select formControlName="status" [errorStateMatcher]="matcher">
             <mat-option [value]="true">Ativo</mat-option>
@@ -100,21 +115,23 @@
           </mat-select>
           <mat-error *ngIf="versionForm.controls['status'].hasError('required')">Active é um campo obrigatório</mat-error>
         </mat-form-field>
+
+
       </div>
 
       <div class="action">
-        <app-spinner-button
-          type="submit"
-          (action)="submit()"
-          color="primary"
-          borderRadius="4px"
-          [fullWidth]="true"
-          [loading]="loading"
-          [disabled]="!versionForm.valid"
-        >
-          Salvar
-        </app-spinner-button>
-      </div>
+          <app-spinner-button
+            type="submit"
+            (action)="submit()"
+            color="primary"
+            borderRadius="4px"
+            [fullWidth]="true"
+            [loading]="loading"
+            [disabled]="!versionForm.valid"
+          >
+            Salvar
+          </app-spinner-button>
+        </div>
     </form>
 
 

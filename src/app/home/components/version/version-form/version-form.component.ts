@@ -32,13 +32,13 @@ export class VersionFormComponent implements OnInit {
   ngOnInit(): void {
     this.versionForm = this.formBuilder.group({
       id: new FormControl(this.updateVersion?.id ?? null),
-      active: new FormControl(this.updateVersion?.active? true : false, [Validators.required]),
       versionNumber: new FormControl(this.createVersion?.versionNumber ?? '', [Validators.required]),
       description: new FormControl(this.createVersion?.description ?? '', [Validators.required]),
       deployDate: new FormControl(this.createVersion?.deployDate ?? '', [Validators.required]),
       status: new FormControl(this.createVersion?.status? true : false, [Validators.required]),
       order: new FormControl(this.createVersion?.order ?? '', [Validators.required]),
       versionCloneId: new FormControl(this.createVersion?.order ?? '', [Validators.required]),
+      gmud: new FormControl(this.updateVersion?.gmud ?? '', [Validators.required]),
       projectId: new FormControl(this.createVersion?.projectId ?? '', [Validators.required])
     })
   }
@@ -58,7 +58,8 @@ export class VersionFormComponent implements OnInit {
           status: formFields.status,
           order: formFields.order,
           versionCloneId: formFields.versionCloneId,
-          projectId: formFields.projectId
+          projectId: formFields.projectId,
+          gmud: formFields.gmud
         }
 
         this.versionService.update(updateVersion).subscribe(
@@ -81,7 +82,8 @@ export class VersionFormComponent implements OnInit {
           status: formFields.status,
           order: formFields.order,
           versionCloneId: formFields.versionCloneId,
-          projectId: formFields.projectId
+          projectId: formFields.projectId,
+          gmud: formFields.gmud
         }
 
         this.versionService.create(newVersion).subscribe(

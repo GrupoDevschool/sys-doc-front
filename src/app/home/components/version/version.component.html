@@ -40,13 +40,13 @@
       <!-- Version Number column -->
       <ng-container matColumnDef="number">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> number </th>
-        <td mat-cell *matCellDef="let version"> {{version.number}} </td>
+        <td mat-cell *matCellDef="let version"> {{version.versionNumber}} </td>
       </ng-container>
 
       <!-- Date column -->
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Data </th>
-        <td mat-cell *matCellDef="let version"> {{version.date}} </td>
+        <td mat-cell *matCellDef="let version"> {{version.deployDate}} </td>
       </ng-container>
 
       <!-- Gmud column -->
@@ -79,7 +79,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
       <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="12">Não existem projetos com o nome {{filter.value}}</td>
+        <td class="mat-cell" colspan="12">Não existem versões com esse Id {{filter.value}}</td>
       </tr>
     </table>
 
