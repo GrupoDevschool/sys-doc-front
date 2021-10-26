@@ -57,11 +57,11 @@
   "screen": [
     {
       "id": 1,
-	    "active": true,
-	    "name": "Tela de Login",
-	    "image":  "https://picsum.photos/200/300?random=1",
-	    "order":  1,
-	    "versionId":  1
+      "active": true,
+      "name": "Tela de Login",
+      "image": "https://picsum.photos/200/300?random=1",
+      "order": 1,
+      "versionId": 1
     },
     {
       "id": 2,
@@ -101,12 +101,12 @@
     },
     {
       "id": 6,
-	    "active": true,
-	    "name": "Tela de Login - OI",
-	    "image":  "https://picsum.photos/200/300?random=6",
-	    "order":  1,
-	    "versionId":  2,
-	    "versionClonedId":  1
+      "active": true,
+      "name": "Tela de Login - OI",
+      "image": "https://picsum.photos/200/300?random=6",
+      "order": 1,
+      "versionId": 2,
+      "versionClonedId": 1
     },
     {
       "id": 7,

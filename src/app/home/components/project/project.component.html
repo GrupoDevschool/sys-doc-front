@@ -28,7 +28,7 @@
       <!-- Active Column -->
       <ng-container matColumnDef="active">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Ativo </th>
-        <td mat-cell *matCellDef="let project" [style.color]="project.active? 'green':'red' "> {{project.active}} </td>
+        <td mat-cell *matCellDef="let project"><app-status-tag>{{project.active ? 'ativo' : 'inativo'}}</app-status-tag></td>
       </ng-container>
 
       <!-- Action Column -->

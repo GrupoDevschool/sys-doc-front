@@ -1,1 +1,139 @@
-<p>version-form works!</p>
+<div class="container">
+  <mat-card class="mat-card">
+      <mat-card-title>Cadastrar nova Versão</mat-card-title>
+      <button mat-raised-button color="accent" routerLink="..">voltar</button>
+  </mat-card>
+
+  <mat-card class="mat-card2 ui-g">
+    <form [formGroup]="versionForm">
+      <input
+      type="number"
+      formControlName="id"
+      hidden
+      />
+
+      <div>
+
+          <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
+            <mat-label>Id do projeto</mat-label>
+            <input
+            matInput
+            placeholder="Ex: 32"
+            formControlName="projectId"
+            [errorStateMatcher]="matcher"
+            />
+            <mat-error *ngIf="versionForm.get('projectId')?.hasError('required')">
+              Id do projeto é um campo obrigatório
+            </mat-error>
+          </mat-form-field>
+
+
+        <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
+          <mat-label>Número da versão</mat-label>
+          <input
+          matInput
+          placeholder="Ex: 3.0"
+          formControlName="versionNumber"
+          [errorStateMatcher]="matcher"
+          />
+          <mat-error *ngIf="versionForm.get('versionNumber')?.hasError('required')">
+            Número da versão é um campo obrigatório
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
+          <mat-label>GMUD</mat-label>
+          <input
+          matInput
+          placeholder="Ex: "
+          formControlName="gmud"
+          [errorStateMatcher]="matcher"
+          />
+          <mat-error *ngIf="versionForm.get('gmud')?.hasError('required')">
+            Gmud é um campo obrigatório
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
+          <mat-label>Data</mat-label>
+          <input
+          matInput
+          placeholder="Ex: 09/10/2021"
+          formControlName="deployDate"
+          [errorStateMatcher]="matcher"
+          />
+          <mat-error *ngIf="versionForm.get('deployDate')?.hasError('required')">
+            Data é um campo obrigatório
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field class="inputs" appearance="outline">
+          <mat-label>Descrição</mat-label>
+          <input
+          matInput
+          placeholder="Ex: Um projeto"
+          formControlName="description"
+          [errorStateMatcher]="matcher"
+          />
+          <mat-error *ngIf="versionForm.get('description')?.hasError('required')">
+            Descrição é um campo obrigatório
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
+          <mat-label>Ordem</mat-label>
+          <input
+          matInput
+          placeholder="Ex: 3"
+          formControlName="order"
+          [errorStateMatcher]="matcher"
+          />
+          <mat-error *ngIf="versionForm.get('order')?.hasError('required')">
+            Ordem é um campo obrigatório
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
+          <mat-label>Clone de Id da versão</mat-label>
+          <input
+          matInput
+          placeholder="Ex: 2"
+          formControlName="versionCloneId"
+          [errorStateMatcher]="matcher"
+          />
+          <mat-error *ngIf="versionForm.get('versionCloneId')?.hasError('required')">
+            Clone de Id da versão é um campo obrigatório
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status" [errorStateMatcher]="matcher">
+            <mat-option [value]="true">Ativo</mat-option>
+            <mat-option [value]="false">Inativo</mat-option>
+          </mat-select>
+          <mat-error *ngIf="versionForm.controls['status'].hasError('required')">Active é um campo obrigatório</mat-error>
+        </mat-form-field>
+
+
+      </div>
+
+      <div class="action">
+          <app-spinner-button
+            type="submit"
+            (action)="submit()"
+            color="primary"
+            borderRadius="4px"
+            [fullWidth]="true"
+            [loading]="loading"
+            [disabled]="!versionForm.valid"
+          >
+            Salvar
+          </app-spinner-button>
+        </div>
+    </form>
+
+
+  </mat-card>
+</div>

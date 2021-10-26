@@ -1,0 +1,35 @@
+.status-tag {
+  text-transform: uppercase;
+  padding: 3px 7px;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  display: inline-block;
+  font-weight: bold;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 5px;
+    margin-right: 6px;
+  }
+}
+
+.active {
+  background: #DFF0DF;
+  color: #2CA42B;
+
+  &::before {
+    background: #2CA42B;
+  }
+}
+
+.inactive {
+  background: #FAB0B0;
+  color: #DE3B3B;
+
+  &::before {
+    background: #DE3B3B;
+  }
+}

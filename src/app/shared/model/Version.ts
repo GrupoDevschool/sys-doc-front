@@ -6,6 +6,7 @@ export interface Version {
   date: string;
   gmud: string;
   order: number;
+  projectId: number;
   screens: number;
 }
 
@@ -18,4 +19,5 @@ export interface CreateVersion {
   order: number;
   versionCloneId?: number;
   projectId: number;
+  gmud: string;
 }

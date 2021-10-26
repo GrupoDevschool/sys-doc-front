@@ -1,9 +1,12 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { Project } from 'src/app/shared/model/Project';
 import { Screen } from 'src/app/shared/model/Screen';
 import { Version } from 'src/app/shared/model/Version';
@@ -16,12 +19,16 @@ import { VersionService } from 'src/app/shared/services/version/version.service'
   templateUrl: './screen.component.html',
   styleUrls: ['./screen.component.scss']
 })
-export class ScreenComponent  implements OnInit, AfterViewInit {
-
+export class ScreenComponent  implements OnInit {
   projects!: Project[];
+  filteredProjects!: Observable<Project[]>;
+  projectControl = new FormControl();
+
   versions!: Version[];
+
   screens!: Screen[];
-  displayedColumns: string[] = ['id', 'versionId', 'image', 'name', 'active', 'fatherScreenId', 'order', 'versionClonedId', 'gerenciamento'];
+
+  displayedColumns: string[] = ['id', 'image', 'name', 'active', 'screenFatherId', 'order', 'gerenciamento'];
 
   dataSource!: MatTableDataSource<any>;
 
@@ -39,29 +46,83 @@ export class ScreenComponent  implements OnInit, AfterViewInit {
     private router: Router ) {
   }
 
-  ngAfterViewInit(){
+  ngOnInit(){
+    this.loading = true;
+
+
+
     this.reloadData();
   }
 
-  ngOnInit(){
-    this.loading = true;
-  }
-
   reloadData() {
+    this.getProjects();
+
     this.screensService.getAll().subscribe((screens) => {
-      this.dataSource = new MatTableDataSource(screens)
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      this.screens = screens;
+      this.setDataSource();
     }).add(() => this.loading = false);
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  setDataSource() {
+    this.dataSource = new MatTableDataSource(this.screens);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+  getProjects() {
+    this.projectsService.getAll().subscribe((projects) => {
+      this.projects = projects;
+
+      this.filteredProjects = this.projectControl.valueChanges.pipe(
+        startWith(''),
+        map(value => {
+          this.filterVersions(value);
+          return this.filterProject(value)
+        })
+      );
+    });
+  }
+
+  getVersions(id: number) {
+    this.versionsService.getByProjectId(id).subscribe((versions) => {
+      this.versions = versions;
+    });
+  }
+
+  getScreenByVersion(id: number){
+    this.loading = true;
+    this.screens = [];
+    this.setDataSource();
+
+    this.screensService.getByVersionId(id).subscribe((screens) => {
+      this.screens = screens;
+      this.setDataSource();
+    }).add(() => this.loading = false);
+  }
+
+  filterProject(value: string): Project[] {
+    const filterValue = value.toLowerCase();
+
+    this.versions = [];
+
+    return this.projects.filter(project => project.name.toLowerCase().includes(filterValue));
+  }
+
+  filterVersions(projectName: string) {
+    const selectedProject = this.projects.find(project => project.name === projectName);
+
+    if(selectedProject?.id) {
+      this.getVersions(selectedProject.id);
     }
   }
+
+  filterScreen(value: any){
+    this.getScreenByVersion(value);
+  }
+
+
+
+
 
   delete(id: number){
     this.screensService.delete(id).subscribe(() => {

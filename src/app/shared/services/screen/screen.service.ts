@@ -1,7 +1,7 @@
-import { ApiService } from './../../../core/api/api.service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { createScreen } from '../../model/Screen';
+import { createScreen, Screen } from '../../model/Screen';
+import { ApiService } from './../../../core/api/api.service';
 
 const URL = "/screen";
 @Injectable({
@@ -17,6 +17,10 @@ export class ScreenService {
 
   getById(id: number): Observable<Screen> {
     return this.api.get(URL + '/' + id);
+  }
+
+  getByVersionId(versionId: number): Observable<Screen[]> {
+    return this.api.get(URL + '?versionId=' + versionId);
   }
 
   create(screen: createScreen): Observable<createScreen> {
