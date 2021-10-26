@@ -6,7 +6,7 @@
 
   <div class="filtro" [style.display]="selection.isEmpty() ? '' : 'none'">
     <mat-form-field floatPlaceholder="never">
-      <input matInput #filter placeholder="Filtrar Versões" (keyup)="applyFilter(filter.value)" (focus)="applyFilterIdProjeto('projectId')">
+      <input matInput #filter placeholder="Filtrar Versões por Id de Projeto" (keyup)="applyFilter(filter.value)" (focus)="applyFilterIdProjeto('projectId')">
     </mat-form-field>
   </div>
 
