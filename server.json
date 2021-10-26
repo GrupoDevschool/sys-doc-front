@@ -185,5 +185,88 @@
       "name": "mouseover",
       "status": true
     }
+  ],
+  "version": [
+    {
+      "id": 1,
+      "projectId": 1,
+      "active": true,
+      "number": "1.0",
+      "date": "12/05/2021",
+      "gmud": "123456",
+      "order": 1,
+      "screens": 2
+    },
+    {
+      "id": 1,
+      "projectId": 1,
+      "active": false,
+      "number": "2.0",
+      "date": "12/05/2021",
+      "gmud": "123456",
+      "order": 1,
+      "screens": 2
+    },
+    {
+      "id": 1,
+      "projectId": 1,
+      "active": true,
+      "number": "3.0",
+      "date": "12/05/2021",
+      "gmud": "123456",
+      "order": 1,
+      "screens": 2
+    },
+    {
+      "id": 1,
+      "projectId": 2,
+      "active": false,
+      "number": "4.0",
+      "date": "12/05/2021",
+      "gmud": "123456",
+      "order": 1,
+      "screens": 2
+    },
+    {
+      "id": 1,
+      "projectId": 4,
+      "active": false,
+      "number": "4.0",
+      "date": "12/05/2021",
+      "gmud": "123456",
+      "order": 1,
+      "screens": 2
+    },
+    {
+      "id": 1,
+      "projectId": 5,
+      "active": false,
+      "number": "4.0",
+      "date": "12/05/2021",
+      "gmud": "123456",
+      "order": 1,
+      "screens": 2
+    },
+    {
+      "id": 1,
+      "projectId": 6,
+      "active": false,
+      "number": "4.0",
+      "date": "12/05/2021",
+      "gmud": "123456",
+      "order": 1,
+      "screens": 2
+    },
+    {
+      "number": "1",
+      "description": "sdasdsads",
+      "date": "09/2021",
+      "active": true,
+      "order": "34",
+      "versionCloneId": "5",
+      "projectId": "3",
+      "gmud": "21",
+      "id": 2
+    }
   ]
 }
