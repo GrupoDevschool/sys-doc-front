@@ -1,7 +1,7 @@
-import { CreateVersion, Version } from './../../model/Version';
 import { Injectable } from '@angular/core';
-import { ApiService } from 'src/app/core/api/api.service';
 import { Observable } from 'rxjs';
+import { ApiService } from 'src/app/core/api/api.service';
+import { CreateVersion, Version } from './../../model/Version';
 
 const URL = '/version';
 @Injectable({
@@ -17,6 +17,10 @@ export class VersionService {
 
   getById(id: number): Observable<Version> {
     return this.api.get(URL + '/' + id);
+  }
+
+  getByProjectId(id: number): Observable<Version[]> {
+    return this.api.get(URL + '?projectId=' + id);
   }
 
   create(version: CreateVersion): Observable<CreateVersion> {
