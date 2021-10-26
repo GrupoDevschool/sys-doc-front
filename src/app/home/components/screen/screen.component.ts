@@ -49,8 +49,6 @@ export class ScreenComponent  implements OnInit {
   ngOnInit(){
     this.loading = true;
 
-
-
     this.reloadData();
   }
 
@@ -119,10 +117,6 @@ export class ScreenComponent  implements OnInit {
   filterScreen(value: any){
     this.getScreenByVersion(value);
   }
-
-
-
-
 
   delete(id: number){
     this.screensService.delete(id).subscribe(() => {
