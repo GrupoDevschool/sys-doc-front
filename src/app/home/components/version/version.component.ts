@@ -1,6 +1,6 @@
 import { ProjectService } from './../../../shared/services/project/project.service';
 import { VersionService } from './../../../shared/services/version/version.service';
-import { Version } from './../../../shared/model/Version';
+import { CreateVersion, Version } from './../../../shared/model/Version';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -20,8 +20,7 @@ export class VersionComponent implements OnInit {
 
   versions!: Version[];
   projects!: Project[];
-  displayedColumns: string[] = ['id do Projeto', 'id', 'active', 'number', 'date', 'gmud', 'order', 'screens', 'gerenciamento']
-  idProjectFilter = new FormControl('');
+  displayedColumns: string[] = ['projectId', 'id', 'active', 'number', 'date', 'gmud', 'order', 'screens', 'gerenciamento']
 
   dataSource!: MatTableDataSource<Version>;
 
@@ -40,10 +39,6 @@ export class VersionComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-
-    /*this.dataSource.filterPredicate = (data: Version, filter: string) => {
-      return data.projectId.toString() == filter;
-    };*/
 
   }
 
@@ -64,7 +59,12 @@ export class VersionComponent implements OnInit {
   }
 
   applyFilterIdProjeto(filterValue: string) {
-    this.dataSource.filter = filterValue;
+
+    this.dataSource.filterPredicate = (data: Version, filter: string) => {
+      filter = filterValue;
+      return data.projectId.toString() == filter;
+    };
+
   }
 
   delete(id: number){

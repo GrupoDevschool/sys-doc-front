@@ -6,7 +6,7 @@
 
   <div class="filtro" [style.display]="selection.isEmpty() ? '' : 'none'">
     <mat-form-field floatPlaceholder="never">
-      <input matInput #filter placeholder="Filtrar Versões" (keyup)="applyFilter(filter.value)">
+      <input matInput #filter placeholder="Filtrar Versões" (keyup)="applyFilter(filter.value)" (focus)="applyFilterIdProjeto('id do projeto')">
     </mat-form-field>
   </div>
 
@@ -14,12 +14,12 @@
     <table mat-table [dataSource]="dataSource" matSort>
 
       <!-- Id column -->
-      <ng-container matColumnDef="id do Projeto">
+      <ng-container matColumnDef="projectId">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
           Id do projeto
-          <mat-form-field class="filter" floatLabel="never">
+          <!--<mat-form-field class="filter" floatLabel="never">
             <input matInput #filter placeholder="Filtrar por Id do projeto" type="number" (keyup)="applyFilterIdProjeto(filter.value)">
-          </mat-form-field>
+          </mat-form-field>-->
         </th>
         <td mat-cell *matCellDef="let version"> {{version.projectId}} </td>
       </ng-container>
@@ -40,13 +40,13 @@
       <!-- Version Number column -->
       <ng-container matColumnDef="number">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> number </th>
-        <td mat-cell *matCellDef="let version"> {{version.versionNumber}} </td>
+        <td mat-cell *matCellDef="let version"> {{version.number}} </td>
       </ng-container>
 
       <!-- Date column -->
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Data </th>
-        <td mat-cell *matCellDef="let version"> {{version.deployDate}} </td>
+        <td mat-cell *matCellDef="let version"> {{version.date}} </td>
       </ng-container>
 
       <!-- Gmud column -->
@@ -79,7 +79,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
       <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="12">Não existem versões com esse Id {{filter.value}}</td>
+        <td class="mat-cell" colspan="12">Não existem versões com do projeto com esse Id: {{filter.value}}</td>
       </tr>
     </table>
 
