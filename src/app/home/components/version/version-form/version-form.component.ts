@@ -16,8 +16,7 @@ export class VersionFormComponent implements OnInit {
   versionForm!: FormGroup;
   matcher = new ErrorStateMatcher;
   loading: boolean = false;
-  updateVersion: Version | undefined;
-  createVersion: CreateVersion | undefined;
+  updateVersion: CreateVersion | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,21 +24,21 @@ export class VersionFormComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService
   ) {
-    const state = this.router.getCurrentNavigation()?.extras?.state as Version;
+    const state = this.router.getCurrentNavigation()?.extras?.state as CreateVersion;
     this.updateVersion = state;
   }
 
   ngOnInit(): void {
     this.versionForm = this.formBuilder.group({
       id: new FormControl(this.updateVersion?.id ?? null),
-      versionNumber: new FormControl(this.createVersion?.versionNumber ?? '', [Validators.required]),
-      description: new FormControl(this.createVersion?.description ?? '', [Validators.required]),
-      deployDate: new FormControl(this.createVersion?.deployDate ?? '', [Validators.required]),
-      status: new FormControl(this.createVersion?.status? true : false, [Validators.required]),
-      order: new FormControl(this.createVersion?.order ?? '', [Validators.required]),
-      versionCloneId: new FormControl(this.createVersion?.order ?? '', [Validators.required]),
+      versionNumber: new FormControl(this.updateVersion?.versionNumber ?? '', [Validators.required]),
+      description: new FormControl(this.updateVersion?.description ?? '', [Validators.required]),
+      deployDate: new FormControl(this.updateVersion?.deployDate ?? '', [Validators.required]),
+      status: new FormControl(this.updateVersion?.status? true : false, [Validators.required]),
+      order: new FormControl(this.updateVersion?.order ?? '', [Validators.required]),
+      versionCloneId: new FormControl(this.updateVersion?.order ?? '', [Validators.required]),
       gmud: new FormControl(this.updateVersion?.gmud ?? '', [Validators.required]),
-      projectId: new FormControl(this.createVersion?.projectId ?? '', [Validators.required])
+      projectId: new FormControl(this.updateVersion?.projectId ?? '', [Validators.required])
     })
   }
 
