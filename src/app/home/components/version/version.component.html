@@ -37,8 +37,8 @@
 
       <!-- Active Column -->
       <ng-container matColumnDef="active">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Ativo </th>
-        <td mat-cell *matCellDef="let version" [style.color]="version.active? 'green':'red' "> {{version.active}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+        <td mat-cell *matCellDef="let version"><app-status-tag>{{version.active ? 'Ativo' : 'Inativo'}}</app-status-tag></td>
       </ng-container>
 
       <!-- Version Number column -->
