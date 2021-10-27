@@ -1,6 +1,6 @@
 import { ProjectService } from './../../../shared/services/project/project.service';
 import { VersionService } from './../../../shared/services/version/version.service';
-import { CreateVersion, Version } from './../../../shared/model/Version';
+import { Version } from './../../../shared/model/Version';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -8,7 +8,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { Project } from 'src/app/shared/model/Project';
+import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-version',
@@ -20,6 +22,9 @@ export class VersionComponent implements OnInit {
 
   versions!: Version[];
   projects!: Project[];
+  filteredProjects!: Observable<Project[]>;
+  projectControl = new FormControl();
+
   displayedColumns: string[] = ['projectId', 'id', 'active', 'number', 'date', 'gmud', 'order', 'screens', 'gerenciamento']
 
   dataSource!: MatTableDataSource<Version>;
@@ -43,14 +48,15 @@ export class VersionComponent implements OnInit {
   }
 
   reloadData() {
+    this.getProjects()
+
     this.versionService.getAll().subscribe((versions) => {
-      this.dataSource = new MatTableDataSource(versions)
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      this.versions = versions;
+      this.setDataSource();
     }).add(() => this.loading = false);
   }
 
-  applyFilter(filterValue: string) {
+  /*applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
@@ -65,7 +71,7 @@ export class VersionComponent implements OnInit {
       return data.projectId.toString() == filter;
     };
 
-  }
+  }*/
 
   delete(id: number){
     this.versionService.delete(id).subscribe(() => {
@@ -79,4 +85,45 @@ export class VersionComponent implements OnInit {
     this.router.navigate(['dashboard/version/add'], {state: version});
   }
 
+  getProjects() {
+    this.projectService.getAll().subscribe((projects) => {
+      this.projects = projects;
+
+      this.filteredProjects = this.projectControl.valueChanges.pipe(
+        startWith(''),
+        map(value => {
+          return this.filterProject(value)
+        })
+      );
+    });
+  }
+
+  filterProject(value: string): Project[] {
+    const filterValue = value.toLowerCase();
+
+    this.versions = [];
+
+    return this.projects.filter(project => project.name.toLowerCase().includes(filterValue));
+  }
+
+  filterVersionProjectId(value: any){
+    this.getVersionByProject(value);
+  }
+
+  getVersionByProject(id: number){
+    this.loading = true;
+    this.versions = [];
+    this.setDataSource();
+
+    this.versionService.getByProjectId(id).subscribe((versions) => {
+      this.versions = versions;
+      this.setDataSource();
+    }).add(() => this.loading = false);
+  }
+
+  setDataSource() {
+    this.dataSource = new MatTableDataSource(this.versions);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 }
