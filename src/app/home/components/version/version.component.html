@@ -9,8 +9,8 @@
     <div class="filtro" [style.display]="selection.isEmpty() ? '' : 'none'">
       <mat-form-field floatPlaceholder="never">
         <mat-label>Projetos</mat-label>
-        <mat-select #filter name="version"
-                    placeholder="Escolha uma versão"
+        <mat-select #filter name="projeto"
+                    placeholder="Escolha um projeto"
                     (selectionChange)="filterVersionProjectId($event.value)"
                     >
           <mat-option *ngFor="let project of projects" [value]="project.id">
