@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  ErrorStateMatcher,
+  ShowOnDirtyErrorStateMatcher,
+} from '@angular/material/core';
 import { SharedModule } from '../shared/module/shared.module';
 import { MaterialCommonModule } from './../shared/module/material.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -45,18 +48,19 @@ import { MenuComponent } from './menu/menu.component';
     EventFormComponent,
     ScreenFormComponent,
     VersionFormComponent,
-    ItemComponent
+    ItemComponent,
   ],
   providers: [
-    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}
+    { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
   ],
   imports: [
     CommonModule,
     SharedModule,
     HomeRoutingModule,
     MaterialCommonModule,
+    FormsModule,
     ReactiveFormsModule,
   ],
-  exports: [HomeComponent]
+  exports: [HomeComponent],
 })
-export class HomeModule { }
+export class HomeModule {}

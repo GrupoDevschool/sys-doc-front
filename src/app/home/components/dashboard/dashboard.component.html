@@ -1,1 +1,64 @@
-<p>dashboard works!</p>
+<div class="dashboard-options">
+  <select
+    name="projects"
+    id="projects"
+    [(ngModel)]="projectId"
+    (ngModelChange)="handleProjectChange()"
+  >
+    <option value="">Select a category</option>
+    <option *ngFor="let project of projects" [ngValue]="project.id">
+      {{ project.name }}
+    </option>
+  </select>
+  <select
+    name="versions"
+    id="version"
+    [(ngModel)]="versionId"
+    (ngModelChange)="handleVersionChange()"
+    ng-disabled="versionsSelect"
+  >
+    <option value="">Select a version</option>
+    <option *ngFor="let version of versionsSelect" [ngValue]="version.id">
+      {{ version.number }}
+    </option>
+  </select>
+</div>
+<main class="dashboard-main">
+  <div class="diva">
+    <div class="tree">
+      <div class="father">
+        <div *ngFor="let screen of paiEIrmaos">
+          {{ screen?.name }}
+        </div>
+      </div>
+      <div class="me">
+        <div *ngFor="let screen of atualEIrmaos">
+          <div class="me-img">
+            <img
+              [src]="screen?.image"
+              (click)="handleScreenChange(screen?.id)"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="childs">
+        <div *ngFor="let screen of filhos">
+          {{ screen?.name }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="divb">
+    <div class="card-bla">
+      <div class="img">
+        <img [src]="screenSelecionada?.image" alt="" />
+      </div>
+      <div class="screen">
+        <div class="screen-description">
+          <p><strong>Titulo:</strong> {{ screenSelecionada?.name }}</p>
+          <p><strong>Status:</strong> {{ screenSelecionada?.active }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
