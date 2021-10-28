@@ -213,23 +213,6 @@
     }
   ],
   "event-type": [
-    {
-      "id": 1,
-      "name": "Evento de click",
-      "status": true
-    },
-    {
-      "id": 2,
-      "name": "Evento de mudança",
-      "status": true
-    },
-    {
-      "id": 3,
-      "name": "Evento de callback",
-      "status": true
-    }
-  ],
-  "event-type": [
         {
       "id": 1,
       "name": "onClick",
