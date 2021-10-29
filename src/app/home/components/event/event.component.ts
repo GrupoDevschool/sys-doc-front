@@ -1,4 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { EventService } from './../../../shared/services/event/event.service';
+import { EventTypeService } from 'src/app/shared/services/event-type/event-type.service';
+import { EventType } from './../../../shared/model/EventType';
+import { Event } from './../../../shared/model/Event';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Project } from 'src/app/shared/model/Project';
+import { Version } from 'src/app/shared/model/Version';
+import { Screen } from 'src/app/shared/model/Screen';
+import { MatTableDataSource } from '@angular/material/table';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { ProjectService } from 'src/app/shared/services/project/project.service';
+import { VersionService } from 'src/app/shared/services/version/version.service';
+import { ScreenService } from 'src/app/shared/services/screen/screen.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-event',
@@ -6,10 +23,119 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./event.component.scss']
 })
 export class EventComponent implements OnInit {
+  projects!: Project[];
+  filteredProjects!: Observable<Project[]>;
 
-  constructor() { }
+  projectControl = new FormControl();
+
+  versions!: Version[];
+  filteredVersions!: Observable<Version[]>;
+
+  eventsType!: EventType[];
+  filteredEventsType!: Observable<EventType[]>;
+
+  screens!: Screen[];
+  events!: Event[];
+
+  displayedColumns: string[] = ['id', 'active', 'order', 'parameter', 'screenId', 'eventTypeId'];
+
+  dataSource!: MatTableDataSource<any>;
+
+  loading: boolean = false;
+
+  selection = new SelectionModel<string>(true, []);
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  constructor(
+    private projectsService: ProjectService,
+    private versionsService: VersionService,
+    private screensService: ScreenService,
+    private eventsService: EventService,
+    private eventTypesService: EventTypeService,
+    private router: Router) { }
 
   ngOnInit(): void {
+    this.loading = true;
+  }
+
+  reloadData() {
+    this.getProjects();
+
+    this.eventsService.getAll().subscribe((events) => {
+      this.events = events;
+      this.setDataSource();
+    }).add(() => this.loading = false);
+  }
+
+  getProjects() {
+    this.projectsService.getAll().subscribe((projects) => {
+      this.projects = projects;
+    });
+  }
+
+  getVersionsByProjectId(id: number) {
+    this.versions = [];
+
+    this.versionsService.getByProjectId(id).subscribe((versions) => {
+      this.versions = versions;
+    });
+  }
+
+  getEventByScreenId(id: number){
+    this.loading = true;
+    console.log(this.loading);
+    this.events = [];
+    this.setDataSource();
+
+    this.eventsService.getByScreenId(id).subscribe((events) => {
+      this.events = events;
+      this.setDataSource();
+    }).add(() => {this.loading = false});
+  }
+
+  getScreenName(id: number){
+    const screen = this.screens.find((element) => element.id == id);
+
+    return screen?.name ?? '';
+  }
+
+  getProjectName(id: number){
+    const project = this.projects.find((element) => element.id == id);
+
+    return project?.name ?? '';
+  }
+
+  getEventTypeName(id: number){
+    const eventType = this.eventsType.find((element) => element.id == id);
+
+    return eventType?.name ?? ''
+  }
+
+  getVersionNumber(id: number){
+    const version = this.versions.find((element) => element.id == id);
+
+    return version?.number ?? '';
+  }
+
+  setDataSource() {
+    this.dataSource = new MatTableDataSource(this.events);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  delete(id: number){
+    this.eventsService.delete(id).subscribe(() => {
+      this.events = this.events.filter((element) => element.id != id)
+      }
+    )
+
+    this.reloadData();
+  }
+
+  edit(event: Event){
+    this.router.navigate(['dashboard/event/add'], { state: event });
   }
 
 }

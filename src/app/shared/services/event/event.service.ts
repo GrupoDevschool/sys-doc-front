@@ -20,6 +20,10 @@ export class EventService {
     return this.api.get(URL + '/' + id);
   }
 
+  getByScreenId(screenId: number): Observable<Event[]> {
+    return this.api.get(URL + 'screenId=' + screenId);
+  }
+
   create(event: Event): Observable<Event> {
     return this.api.post(URL, event);
   }
