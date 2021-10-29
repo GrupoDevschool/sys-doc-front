@@ -5,8 +5,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 import { Project } from 'src/app/shared/model/Project';
 import { Version } from './../../../shared/model/Version';
 import { ProjectService } from './../../../shared/services/project/project.service';
@@ -22,7 +20,6 @@ export class VersionComponent implements OnInit {
 
   versions!: Version[];
   projects!: Project[];
-  filteredProjects!: Observable<Project[]>;
   projectControl = new FormControl();
 
   displayedColumns: string[] = ['projectId', 'id', 'active', 'number', 'date', 'gmud', 'order', 'screens', 'gerenciamento']
@@ -71,22 +68,7 @@ export class VersionComponent implements OnInit {
   getProjects() {
     this.projectService.getAll().subscribe((projects) => {
       this.projects = projects;
-
-      this.filteredProjects = this.projectControl.valueChanges.pipe(
-        startWith(''),
-        map(value => {
-          return this.filterProject(value)
-        })
-      );
     });
-  }
-
-  filterProject(value: string): Project[] {
-    const filterValue = value.toLowerCase();
-
-    this.versions = [];
-
-    return this.projects.filter(project => project.name.toLowerCase().includes(filterValue));
   }
 
   filterVersionProjectId(value: any){
