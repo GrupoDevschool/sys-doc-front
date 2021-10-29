@@ -104,6 +104,28 @@
       "order": 2,
       "projectId": 2,
       "screens": 0
+    },
+    {
+      "versionNumber": "1.0.0",
+      "description": "asdsadsad",
+      "deployDate": "09/08/2021",
+      "status": true,
+      "order": "3",
+      "versionCloneId": "1",
+      "projectId": 2,
+      "gmud": "123",
+      "id": 6
+    },
+    {
+      "versionNumber": "1",
+      "description": "sadsadsad",
+      "deployDate": "09/12/2021",
+      "status": true,
+      "order": "2",
+      "versionCloneId": "1",
+      "projectId": 1,
+      "gmud": "3",
+      "id": 7
     }
   ],
   "screen": [
@@ -223,7 +245,7 @@
     }
   ],
   "eventType": [
-        {
+    {
       "id": 1,
       "name": "onClick",
       "status": true

@@ -16,12 +16,15 @@
 
           <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
             <mat-label>Id do projeto</mat-label>
-            <input
-            matInput
-            placeholder="Ex: 32"
-            formControlName="projectId"
-            [errorStateMatcher]="matcher"
-            />
+            <mat-select #filterProject
+                    name="projeto"
+                    placeholder="Escolha um projeto"
+                    formControlName="projectId"
+                    >
+              <mat-option *ngFor="let project of    projects" [value]="project.id">
+            {{project.name}}
+              </mat-option>
+            </mat-select>
             <mat-error *ngIf="versionForm.get('projectId')?.hasError('required')">
               Id do projeto é um campo obrigatório
             </mat-error>

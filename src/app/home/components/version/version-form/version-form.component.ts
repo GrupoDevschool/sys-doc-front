@@ -3,7 +3,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Project } from 'src/app/shared/model/Project';
 import { CreateVersion, Version } from 'src/app/shared/model/Version';
+import { ProjectService } from 'src/app/shared/services/project/project.service';
 import { VersionService } from 'src/app/shared/services/version/version.service';
 
 @Component({
@@ -17,8 +19,10 @@ export class VersionFormComponent implements OnInit {
   matcher = new ErrorStateMatcher;
   loading: boolean = false;
   updateVersion: CreateVersion | undefined;
+  projects!: Project[];
 
   constructor(
+    private projectService: ProjectService,
     private formBuilder: FormBuilder,
     private versionService: VersionService,
     private router: Router,
@@ -40,6 +44,8 @@ export class VersionFormComponent implements OnInit {
       gmud: new FormControl(this.updateVersion?.gmud ?? '', [Validators.required]),
       projectId: new FormControl(this.updateVersion?.projectId ?? '', [Validators.required])
     })
+
+    this.getProjects();
   }
 
   submit() {
@@ -106,5 +112,11 @@ export class VersionFormComponent implements OnInit {
 
   showSucess(message: string) {
     this.toastr.success(message, "Versão Salva")
+  }
+
+  getProjects() {
+    this.projectService.getAll().subscribe((projects) => {
+      this.projects = projects;
+    });
   }
 }
