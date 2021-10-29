@@ -83,6 +83,18 @@ export class EventComponent implements OnInit {
     });
   }
 
+  getScreenByVersionId(id: number){
+    this.loading = true;
+    console.log(this.loading);
+    this.screens = [];
+    this.setDataSource();
+
+    this.screensService.getByVersionId(id).subscribe((screens) => {
+      this.screens = screens;
+      this.setDataSource();
+    }).add(() => {this.loading = false});
+  }
+
   getEventByScreenId(id: number){
     this.loading = true;
     console.log(this.loading);
@@ -91,6 +103,18 @@ export class EventComponent implements OnInit {
 
     this.eventsService.getByScreenId(id).subscribe((events) => {
       this.events = events;
+      this.setDataSource();
+    }).add(() => {this.loading = false});
+  }
+
+  getEventByEventTypeId(id: number) {
+    this.loading = true;
+    console.log(this.loading);
+    this.eventsType = [];
+    this.setDataSource();
+
+    this.eventsService.getByEventTypeId(id).subscribe((eventsType) => {
+      this.eventsType = eventsType;
       this.setDataSource();
     }).add(() => {this.loading = false});
   }

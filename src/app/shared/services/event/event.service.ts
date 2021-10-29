@@ -2,6 +2,7 @@ import { Event } from './../../model/Event';
 import { ApiService } from './../../../core/api/api.service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { EventType } from '../../model/EventType';
 
 const URL = "/event"
 
@@ -22,6 +23,10 @@ export class EventService {
 
   getByScreenId(screenId: number): Observable<Event[]> {
     return this.api.get(URL + 'screenId=' + screenId);
+  }
+
+  getByEventTypeId(eventTypeId: number): Observable<EventType[]>{
+    return this.api.get(URL + 'eventTypeId=' + eventTypeId);
   }
 
   create(event: Event): Observable<Event> {

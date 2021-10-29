@@ -1,1 +1,138 @@
-<p>event works!</p>
+<div class="container slide-in-left">
+  <mat-card class="mat-card">
+      <mat-card-title>Eventos</mat-card-title>
+      <button mat-raised-button color="primary" [routerLink]="['./add']">Cadastrar Novo</button>
+  </mat-card>
+
+  <!-- Filtros -->
+  <form class="example-form" class="filters">
+
+    <!-- Filtro de Projeto -->
+    <div class="filtro" [style.display]="selection.isEmpty() ? '' : 'none'">
+      <mat-form-field floatPlaceholder="never" appearance="outline">
+        <mat-label>Projetos</mat-label>
+          <mat-select #filterProject
+                    name="projeto"
+                    placeholder="Escolha um projeto"
+                    (selectionChange)="getVersionsByProjectId($event.value)"
+                    >
+          <mat-option *ngFor="let project of projects" [value]="project.id">
+            {{project.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Filtro de Versão -->
+    <div class="filtro" [style.display]="selection.isEmpty() ? '' : 'none'">
+      <mat-form-field floatPlaceholder="never" appearance="outline">
+        <mat-label>Versões</mat-label>
+        <mat-select name="version"
+                    #filterVersion
+                    placeholder="Escolha uma versão"
+                    (selectionChange)="getScreenByVersionId($event.value)"
+                    [disabled]="!versions?.length">
+          <mat-option *ngFor="let version of versions" [value]="version.id">
+            {{version.number}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!--Filtro de Telas-->
+    <div class="filtro" [style.display]="selection.isEmpty() ? '' : 'none'">
+      <mat-form-field floatPlaceholder="never" appearance="outline">
+        <mat-label>Versões</mat-label>
+        <mat-select name="version"
+                    #filterVersion
+                    placeholder="Escolha uma versão"
+                    (selectionChange)="getEventByScreenId($event.value)"
+                    [disabled]="!screens?.length">
+          <mat-option *ngFor="let screen of screens" [value]="screen.id">
+            {{screen.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!--Filtro tipo de Evento-->
+    <div class="filtro" [style.display]="selection.isEmpty() ? '' : 'none'">
+      <mat-form-field floatPlaceholder="never" appearance="outline">
+        <mat-label>Versões</mat-label>
+        <mat-select name="version"
+                    #filterVersion
+                    placeholder="Escolha uma versão"
+                    (selectionChange)="getEventByEventTypeId($event.value)"
+                    >
+          <mat-option *ngFor="let eventType of eventsType" [value]="eventType.id">
+            {{eventType.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+
+
+  <!-- Tabela -->
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- Id column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+        <td mat-cell *matCellDef="let event"> {{event.id}} </td>
+      </ng-container>
+
+      <!-- versionId Column -->
+      <ng-container matColumnDef="screenId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Id Versão</th>
+        <td mat-cell *matCellDef="let event"> {{event.screenId}} </td>
+      </ng-container>
+
+
+      <!-- Name column -->
+      <ng-container matColumnDef="order">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome da Tela </th>
+        <td mat-cell *matCellDef="let event">{{event.order}}</td>
+      </ng-container>
+
+      <!-- Active Column -->
+      <ng-container matColumnDef="active">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+        <td mat-cell *matCellDef="let event"><app-status-tag>{{event.active ? 'Ativo' : 'Inativo'}}</app-status-tag></td>
+      </ng-container>
+
+       <!-- order Column -->
+      <ng-container matColumnDef="eventTypeId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id do tipo de Evento </th>
+        <td mat-cell *matCellDef="let event"> {{event.eventTypeId}} </td>
+      </ng-container>
+
+       <!-- order Column -->
+       <ng-container matColumnDef="parameter">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Parâmetro </th>
+        <td mat-cell *matCellDef="let event"> {{event.parameter}} </td>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="gerenciamento">
+        <th mat-header-cell *matHeaderCellDef style="text-align: end;"> Gerenciamento </th>
+        <td mat-cell *matCellDef="let event" >
+          <button mat-raised-button color="warn" (click)="delete(event.id)" class='delete'><mat-icon>close</mat-icon></button>
+          <button mat-raised-button color="accent" (click)="edit(event)" class='edit'><mat-icon>mode_edit</mat-icon></button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <app-table-spinner [loading]="loading" spinnerColor="accent"></app-table-spinner>
+
+    <mat-paginator [pageSizeOptions]="[5]"
+                  showFirstLastButtons
+                  aria-label="Select page of projects">
+    </mat-paginator>
+  </div>
+</div>
+
