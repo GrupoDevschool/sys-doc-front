@@ -134,23 +134,6 @@ export class EventComponent implements OnInit {
     return screen?.name ?? '';
   }
 
-  getProjectName(id: number){
-    const project = this.projects.find((element) => element.id == id);
-
-    return project?.name ?? '';
-  }
-
-  getEventTypeName(id: number){
-    const eventType = this.eventsType.find((element) => element.id == id);
-
-    return eventType?.name ?? ''
-  }
-
-  getVersionNumber(id: number){
-    const version = this.versions.find((element) => element.id == id);
-
-    return version?.number ?? '';
-  }
 
   setDataSource() {
     this.dataSource = new MatTableDataSource(this.events);
