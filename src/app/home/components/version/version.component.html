@@ -4,10 +4,9 @@
       <button mat-raised-button color="primary" [routerLink]="['./add']">Cadastrar Novo</button>
   </mat-card>
 
-  <form class="example-form" class="filters">
-
+  <div class="example-form" class="filters">
     <div class="filtro" [style.display]="selection.isEmpty() ? '' : 'none'">
-      <mat-form-field floatPlaceholder="never">
+      <mat-form-field floatPlaceholder="never" appearance="outline">
         <mat-label>Projetos</mat-label>
         <mat-select #filter name="projeto"
                     placeholder="Escolha um projeto"
@@ -19,8 +18,7 @@
         </mat-select>
       </mat-form-field>
     </div>
-
-  </form>
+  </div>
 
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>

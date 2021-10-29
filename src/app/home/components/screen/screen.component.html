@@ -9,29 +9,28 @@
 
     <!-- Filtro de Projeto -->
     <div class="filtro" [style.display]="selection.isEmpty() ? '' : 'none'">
-      <mat-form-field floatPlaceholder="never">
+      <mat-form-field floatPlaceholder="never" appearance="outline">
         <mat-label>Projetos</mat-label>
-        <input type="text"
-               placeholder="Escolha um projeto"
-               aria-label="text"
-               matInput
-               [formControl]="projectControl"
-               [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let project of filteredProjects | async" [value]="project.name">
+          <mat-select #filterProject
+                    name="projeto"
+                    placeholder="Escolha um projeto"
+                    (selectionChange)="getVersionsByProjectId($event.value)"
+                    >
+          <mat-option *ngFor="let project of projects" [value]="project.id">
             {{project.name}}
           </mat-option>
-        </mat-autocomplete>
+        </mat-select>
       </mat-form-field>
     </div>
 
     <!-- Filtro de Versão -->
     <div class="filtro" [style.display]="selection.isEmpty() ? '' : 'none'">
-      <mat-form-field floatPlaceholder="never">
+      <mat-form-field floatPlaceholder="never" appearance="outline">
         <mat-label>Versões</mat-label>
         <mat-select name="version"
+                    #filterVersion
                     placeholder="Escolha uma versão"
-                    (selectionChange)="filterScreen($event.value)"
+                    (selectionChange)="getScreenByVersionId($event.value)"
                     [disabled]="!versions?.length">
           <mat-option *ngFor="let version of versions" [value]="version.id">
             {{version.number}}

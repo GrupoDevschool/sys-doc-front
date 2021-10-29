@@ -4,10 +4,12 @@
       <button mat-raised-button color="primary" [routerLink]="['./add']">Cadastrar Novo</button>
   </mat-card>
 
-  <div class="filtro" [style.display]="selection.isEmpty() ? '' : 'none'">
-    <mat-form-field floatPlaceholder="never">
-      <input matInput #filter placeholder="Filtrar projetos" (keyup)="applyFilter(filter.value)">
-    </mat-form-field>
+  <div class="example-form" class="filters">
+    <div class="filtro" [style.display]="selection.isEmpty() ? '' : 'none'">
+      <mat-form-field floatPlaceholder="never" appearance="outline">
+        <input matInput #filter placeholder="Filtrar projetos" (keyup)="applyFilter(filter.value)">
+      </mat-form-field>
+    </div>
   </div>
 
   <div class="mat-elevation-z8">

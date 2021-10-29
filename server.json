@@ -111,7 +111,7 @@
       "id": 1,
       "active": true,
       "name": "Tela de Login",
-      "screenFatherId": null,
+      "fatherScreenId": null,
       "image": "https://picsum.photos/200/300?random=1",
       "order": 1,
       "urlog": "http://google.com",

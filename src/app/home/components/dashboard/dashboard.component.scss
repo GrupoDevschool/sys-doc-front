@@ -1,3 +1,12 @@
+.filtros {
+  padding: 10px;
+  display: flex;
+
+  div {
+    padding: 5px;
+  }
+}
+
 .dashboard-options {
   padding: 40px 0;
 }
@@ -5,7 +14,7 @@
 .dashboard-main {
   display: flex;
 
-  .diva {
+  .screens-container {
     width: 30%;
 
     .tree {
@@ -50,13 +59,12 @@
     }
   }
 
-  .divb {
+  .screen-details {
     width: 70%;
 
     .card-bla {
       width: 100%;
       padding: 40px 0;
-      background-color: #eeee;
 
       display: flex;
 

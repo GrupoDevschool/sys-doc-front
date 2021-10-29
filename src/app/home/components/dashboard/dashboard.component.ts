@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from 'src/app/shared/model/Project';
-import { Version } from 'src/app/shared/model/Version';
 import { Screen } from 'src/app/shared/model/Screen';
+import { Version } from 'src/app/shared/model/Version';
 import { ProjectService } from 'src/app/shared/services/project/project.service';
-import { VersionService } from 'src/app/shared/services/version/version.service';
 import { ScreenService } from 'src/app/shared/services/screen/screen.service';
+import { VersionService } from 'src/app/shared/services/version/version.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -47,20 +47,30 @@ export class DashboardComponent implements OnInit {
   handleVersionChange() {
     this.screenService.getByVersionId(this.versionId).subscribe((screens) => {
       this.screens = screens;
-      console.log(this.screens);
-      this.atualEIrmaos = this.screens.filter(
-        (screen) => screen.fatherScreenId == null
-      );
 
-      console.log(this.atualEIrmaos);
+      this.atualEIrmaos = this.screens.filter((screen) => screen.fatherScreenId === null);
+
       this.screenSelecionada = this.screens.find(
-        (s) => !s.fatherScreenId
+        (screen) => !screen.fatherScreenId
       ) as Screen;
-      console.log(this.screenSelecionada);
+
+      if (this.screenSelecionada?.id) {
+        this.screenService.getByScreenFatherId(this.screenSelecionada.id).subscribe((screens) => {
+          this.filhos = screens;
+        });
+      }
     });
   }
 
   handleScreenChange(id: number | undefined) {
+    // setar a tela atual
+
+    // pegar tela pai e após pegar a tela pai setar pai e irmaos baseado no id da tela avo
+
+    // pegar atual e irmaos baseado no id da tela pai
+
+    // pegar filhos baseados no id da tela atual
+
     this.screenService.getById(id as number).subscribe((screen) => {
       this.screenSelecionada = screen;
     });

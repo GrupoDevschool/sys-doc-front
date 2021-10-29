@@ -48,8 +48,6 @@ export class ProjectFormComponent implements OnInit {
           status: formFields.active
         }
 
-        console.log(updatedProject);
-
         this.projectService.update(updatedProject).subscribe(
           data => {
             this.showSucess("Projeto atualizado com sucesso!");

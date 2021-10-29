@@ -6,7 +6,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 import { Project } from 'src/app/shared/model/Project';
 import { Screen } from 'src/app/shared/model/Screen';
 import { Version } from 'src/app/shared/model/Version';
@@ -48,7 +47,6 @@ export class ScreenComponent  implements OnInit {
 
   ngOnInit(){
     this.loading = true;
-
     this.reloadData();
   }
 
@@ -70,52 +68,39 @@ export class ScreenComponent  implements OnInit {
   getProjects() {
     this.projectsService.getAll().subscribe((projects) => {
       this.projects = projects;
-
-      this.filteredProjects = this.projectControl.valueChanges.pipe(
-        startWith(''),
-        map(value => {
-          this.filterVersions(value);
-          return this.filterProject(value)
-        })
-      );
     });
   }
 
-  getVersions(id: number) {
+  getVersionsByProjectId(id: number) {
+    this.versions = [];
+
     this.versionsService.getByProjectId(id).subscribe((versions) => {
       this.versions = versions;
     });
   }
 
-  getScreenByVersion(id: number){
+  getScreenByVersionId(id: number){
     this.loading = true;
+    console.log(this.loading);
     this.screens = [];
     this.setDataSource();
 
     this.screensService.getByVersionId(id).subscribe((screens) => {
       this.screens = screens;
       this.setDataSource();
-    }).add(() => this.loading = false);
+    }).add(() => {this.loading = false});
   }
 
-  filterProject(value: string): Project[] {
-    const filterValue = value.toLowerCase();
+  getProjectName(id: number){
+    const project = this.projects.find((element) => element.id == id);
 
-    this.versions = [];
-
-    return this.projects.filter(project => project.name.toLowerCase().includes(filterValue));
+    return project?.name ?? '';
   }
 
-  filterVersions(projectName: string) {
-    const selectedProject = this.projects.find(project => project.name === projectName);
+  getVersionNumber(id: number){
+    const version = this.versions.find((element) => element.id == id);
 
-    if(selectedProject?.id) {
-      this.getVersions(selectedProject.id);
-    }
-  }
-
-  filterScreen(value: any){
-    this.getScreenByVersion(value);
+    return version?.number ?? '';
   }
 
   delete(id: number){

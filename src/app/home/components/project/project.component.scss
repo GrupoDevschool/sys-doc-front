@@ -57,9 +57,14 @@ table {
   width: 100%;
 }
 
+.filters {
+  display: flex;
+}
+
 .filtro {
   margin-top: 10px;
   width: 100%;
+  padding: 0 5%;
 }
 
 //animation?

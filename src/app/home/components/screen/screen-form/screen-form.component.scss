@@ -1,0 +1,49 @@
+.container {
+  height: 100%;
+}
+
+.mat-card {
+  display: flex;
+  font-family: 'Poppins', 'sans-serif';
+  font-weight: bold;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mat-card-title {
+  font-size: 1.5rem;
+  margin: left;
+  font-weight: bold;
+  line-height: normal;
+}
+
+.mat-elevation-z8 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+
+
+.form {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form div {
+  display: flex;
+  width: 100%;
+}
+
+.inputs {
+  width: 100%;
+  padding: 0 10px;
+}
+
+.form .action {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+}

@@ -1,30 +1,45 @@
-<div class="dashboard-options">
-  <select
-    name="projects"
-    id="projects"
-    [(ngModel)]="projectId"
-    (ngModelChange)="handleProjectChange()"
-  >
-    <option value="">Select a category</option>
-    <option *ngFor="let project of projects" [ngValue]="project.id">
-      {{ project.name }}
-    </option>
-  </select>
-  <select
-    name="versions"
-    id="version"
-    [(ngModel)]="versionId"
-    (ngModelChange)="handleVersionChange()"
-    ng-disabled="versionsSelect"
-  >
-    <option value="">Select a version</option>
-    <option *ngFor="let version of versionsSelect" [ngValue]="version.id">
-      {{ version.number }}
-    </option>
-  </select>
+<div class="filtros">
+<!-- Filtro de Projetos -->
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Projetos</mat-label>
+      <mat-select
+        name="projects"
+        id="projects"
+        placeholder="Selecione um projeto"
+        [(ngModel)]="projectId"
+        (ngModelChange)="handleProjectChange()"
+      >
+        <mat-option *ngFor="let project of projects" [value]="project.id">
+          {{ project.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+<!-- Filtro de Versão -->
+<div>
+    <mat-form-field appearance="outline">
+      <mat-label>Versões</mat-label>
+      <mat-select
+        name="versions"
+        id="version"
+        placeholder="Selecione uma versão"
+        [disabled]="!projectId"
+        [(ngModel)]="versionId"
+        (ngModelChange)="handleVersionChange()"
+        ng-disabled="versionsSelect"
+      >
+        <mat-option *ngFor="let version of versionsSelect" [value]="version.id">
+          {{ version.number }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 </div>
+
 <main class="dashboard-main">
-  <div class="diva">
+  <div class="screens-container">
     <div class="tree">
       <div class="father">
         <div *ngFor="let screen of paiEIrmaos">
@@ -48,10 +63,10 @@
       </div>
     </div>
   </div>
-  <div class="divb">
-    <div class="card-bla">
+  <div class="screen-details">
+    <mat-card class="card-bla" *ngIf="screenSelecionada; else noSelected">
       <div class="img">
-        <img [src]="screenSelecionada?.image" alt="" />
+        <img [src]="screenSelecionada?.image" alt="screen-image" />
       </div>
       <div class="screen">
         <div class="screen-description">
@@ -59,6 +74,14 @@
           <p><strong>Status:</strong> {{ screenSelecionada?.active }}</p>
         </div>
       </div>
-    </div>
+    </mat-card>
   </div>
 </main>
+
+<ng-template #noSelected>
+  <mat-card>
+    <mat-card-title>
+      Selecione uma projeto e uma versão para visualizar as telas
+    </mat-card-title>
+  </mat-card>
+</ng-template>
