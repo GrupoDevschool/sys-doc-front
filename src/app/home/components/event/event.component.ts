@@ -32,12 +32,11 @@ export class EventComponent implements OnInit {
   filteredVersions!: Observable<Version[]>;
 
   eventsType!: EventType[];
-  filteredEventsType!: Observable<EventType[]>;
 
   screens!: Screen[];
   events!: Event[];
 
-  displayedColumns: string[] = ['id', 'active', 'order', 'parameter', 'screenId', 'eventTypeId'];
+  displayedColumns: string[] = ['id', 'active', 'order', 'parameter', 'screenId', 'eventTypeId', 'gerenciamento'];
 
   dataSource!: MatTableDataSource<any>;
 
@@ -58,10 +57,14 @@ export class EventComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
+
+    this.reloadData();
   }
 
   reloadData() {
     this.getProjects();
+
+    this.getEventTypes();
 
     this.eventsService.getAll().subscribe((events) => {
       this.events = events;
@@ -73,6 +76,12 @@ export class EventComponent implements OnInit {
     this.projectsService.getAll().subscribe((projects) => {
       this.projects = projects;
     });
+  }
+
+  getEventTypes(){
+    this.eventTypesService.getAll().subscribe((eventTypes) => {
+      this.eventsType = eventTypes;
+    })
   }
 
   getVersionsByProjectId(id: number) {
@@ -107,10 +116,10 @@ export class EventComponent implements OnInit {
     }).add(() => {this.loading = false});
   }
 
-  getEventByEventTypeId(id: number) {
+  getEventTypeByEventId(id: number) {
     this.loading = true;
     console.log(this.loading);
-    this.eventsType = [];
+    this.events = [];
     this.setDataSource();
 
     this.eventsService.getByEventTypeId(id).subscribe((eventsType) => {
