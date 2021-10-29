@@ -4,37 +4,123 @@
       <button mat-raised-button color="accent" routerLink="..">voltar</button>
   </mat-card>
 
-  <mat-card>
+  <mat-card class="mat-card2 ui-g">
+    <!-- Projeto -->
+    <mat-form-field class="" appearance="outline">
+      <mat-label>Projeto</mat-label>
+      <mat-select
+        name="project"
+        placeholder="Ex: Minha Oi"
+        (selectionChange)="filterVersions($event.value)"
+        [(ngModel)]="projectId"
+      >
+        <mat-option *ngFor="let project of projects" [value]="project.id">{{project.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Form -->
     <form [formGroup]="screenForm" class="form">
+      <!-- hidden id -->
       <input
       type="number"
       formControlName="id"
       hidden
       />
 
-      <div>
-      <mat-form-field class="inputs" appearance="outline">
-        <mat-label>Nome da Tela</mat-label>
-        <input
-        matInput
-        placeholder="Ex: Minha Oi"
-        formControlName="name"
-        [errorStateMatcher]="matcher"
-        />
-        <mat-error *ngIf="screenForm.get('name')?.hasError('required')">
-          Nome é um campo obrigatório
-        </mat-error>
-      </mat-form-field>
+      <!-- hidden versionClonedId -->
+      <input
+      type="number"
+      formControlName="versionClonedId"
+      hidden
+      />
 
-      <mat-form-field appearance="outline">
-        <mat-label>Active</mat-label>
-        <mat-select formControlName="active" [errorStateMatcher]="matcher">
-          <mat-option [value]="true">Ativo</mat-option>
-          <mat-option [value]="false">Inativo</mat-option>
-        </mat-select>
-        <mat-error *ngIf="screenForm.controls['active'].hasError('required')">Active é um campo obrigatório</mat-error>
-      </mat-form-field>
+        <!-- Versão -->
+        <mat-form-field class="" appearance="outline">
+          <mat-label>Versão</mat-label>
+          <mat-select
+            formControlName="versionId"
+            [errorStateMatcher]="matcher"
+            [disabled]="!projectId"
+            (selectionChange)="filterScreens($event.value)"
+          >
+            <mat-option *ngFor="let version of versions" [value]="version.id">{{version.number}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="screenForm.controls['versionId'].hasError('required')">Versão é um campo obrigatório</mat-error>
+        </mat-form-field>
+
+        <div class="wrapper">
+        <div class="row">
+        <!-- Nome -->
+        <mat-form-field class="inputs" appearance="outline">
+          <mat-label>Nome da Tela</mat-label>
+          <input
+          matInput
+          placeholder="Ex: Tela de Login"
+          formControlName="name"
+          [errorStateMatcher]="matcher"
+          />
+          <mat-error *ngIf="screenForm.get('name')?.hasError('required')">
+            Nome é um campo obrigatório
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Active -->
+        <mat-form-field class="" appearance="outline">
+          <mat-label>Active</mat-label>
+          <mat-select formControlName="active" [errorStateMatcher]="matcher">
+            <mat-option [value]="true">Ativo</mat-option>
+            <mat-option [value]="false">Inativo</mat-option>
+          </mat-select>
+          <mat-error *ngIf="screenForm.controls['active'].hasError('required')">Active é um campo obrigatório</mat-error>
+        </mat-form-field>
+
+        <!-- Order -->
+        <mat-form-field class="" appearance="outline">
+          <mat-label>Ordem</mat-label>
+          <input
+          matInput
+          type="number"
+          placeholder="Ex: 1"
+          formControlName="order"
+          [errorStateMatcher]="matcher"
+          />
+          <mat-error *ngIf="screenForm.get('order')?.hasError('required')">
+            Ordem é um campo obrigatório
+          </mat-error>
+        </mat-form-field>
       </div>
+      <div class="row">
+        <!-- Urlog -->
+        <mat-form-field class="" appearance="outline">
+          <mat-label>Urlog</mat-label>
+          <input
+          matInput
+          formControlName="urlog"
+          [errorStateMatcher]="matcher"
+          />
+          <mat-error *ngIf="screenForm.get('urlog')?.hasError('required')">
+            Urlog é um campo obrigatório
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Tela Pai -->
+        <mat-form-field class="" appearance="outline">
+          <mat-label>Hierarquia</mat-label>
+          <mat-select
+            formControlName="fatherScreenId"
+            [errorStateMatcher]="matcher"
+            [disabled]="!versionId || !screens?.length"
+          >
+            <mat-option *ngFor="let screen of screens" [value]="screen.id">{{screen.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <!-- image selection -->
+
+        <!-- image preview -->
+      </div>
+    </div>
 
       <div class="action">
         <app-spinner-button
