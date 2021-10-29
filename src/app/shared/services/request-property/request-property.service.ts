@@ -1,9 +1,9 @@
-import { ApiService } from './../../../core/api/api.service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RequestProperty } from '../../model/RequestProperty';
+import { ApiService } from './../../../core/api/api.service';
 
-const URL = "/request-property";
+const URL = "/requestProperty";
 
 @Injectable({
   providedIn: 'root'

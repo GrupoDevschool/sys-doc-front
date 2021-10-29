@@ -5,6 +5,8 @@ export interface Screen {
 	name: string;
 	image:  string;
 	order:  number;
+  urlog: string;
+  createdDate: string;
 	versionId:  number;
 	versionClonedId?:  number;
 }

@@ -115,6 +115,7 @@
       "image": "https://picsum.photos/200/300?random=1",
       "order": 1,
       "urlog": "http://google.com",
+      "createdDate": "26/10/2021",
       "versionId": 1
     },
     {
@@ -125,6 +126,7 @@
       "image": "https://picsum.photos/200/300?random=2",
       "order": 2,
       "urlog": "http://google.com",
+      "createdDate": "26/10/2021",
       "versionId": 1
     },
     {
@@ -135,6 +137,7 @@
       "image": "https://picsum.photos/200/300?random=3",
       "order": 1,
       "urlog": "http://google.com",
+      "createdDate": "26/10/2021",
       "versionId": 1
     },
     {
@@ -145,6 +148,7 @@
       "image": "https://picsum.photos/200/300?random=4",
       "order": 1,
       "urlog": "http://google.com",
+      "createdDate": "26/10/2021",
       "versionId": 1
     },
     {
@@ -155,6 +159,7 @@
       "image": "https://picsum.photos/200/300?random=5",
       "order": 2,
       "urlog": "http://google.com",
+      "createdDate": "26/10/2021",
       "versionId": 1
     },
     {
@@ -164,6 +169,7 @@
       "image": "https://picsum.photos/200/300?random=6",
       "order": 1,
       "urlog": "http://google.com",
+      "createdDate": "26/10/2021",
       "versionId": 2,
       "versionClonedId": 1
     },
@@ -175,6 +181,7 @@
       "image": "https://picsum.photos/200/300?random=7",
       "order": 2,
       "urlog": "http://google.com",
+      "createdDate": "26/10/2021",
       "versionId": 2,
       "versionClonedId": 1
     },
@@ -186,6 +193,7 @@
       "image": "https://picsum.photos/200/300?random=8",
       "order": 1,
       "urlog": "http://google.com",
+      "createdDate": "26/10/2021",
       "versionId": 2,
       "versionClonedId": 1
     },
@@ -197,6 +205,7 @@
       "image": "https://picsum.photos/200/300?random=9",
       "order": 1,
       "urlog": "http://google.com",
+      "createdDate": "26/10/2021",
       "versionId": 2,
       "versionClonedId": 1
     },
@@ -208,11 +217,12 @@
       "image": "https://picsum.photos/200/300?random=10",
       "order": 2,
       "urlog": "http://google.com",
+      "createdDate": "26/10/2021",
       "versionId": 2,
       "versionClonedId": 1
     }
   ],
-  "event-type": [
+  "eventType": [
         {
       "id": 1,
       "name": "onClick",
@@ -227,6 +237,147 @@
       "id": 3,
       "name": "onPress",
       "status": true
+    }
+  ],
+  "event": [
+    {
+      "id": 1,
+      "active": true,
+      "order": 1,
+      "parameter": "email e senha",
+      "screenId": 1,
+      "eventTypeId": 1
+    },
+    {
+      "id": 2,
+      "active": true,
+      "order": 2,
+      "parameter": "email",
+      "screenId": 1,
+      "eventTypeId": 2
+    },
+    {
+      "id": 3,
+      "active": false,
+      "order": 1,
+      "parameter": "email e senha",
+      "screenId": 1,
+      "eventTypeId": 3
+    },
+    {
+      "id": 4,
+      "active": true,
+      "order": 1,
+      "parameter": "path",
+      "screenId": 2,
+      "eventTypeId": 1
+    },
+    {
+      "id": 5,
+      "active": true,
+      "order": 1,
+      "parameter": "userData",
+      "screenId": 2,
+      "eventTypeId": 2
+    },
+    {
+      "id": 6,
+      "active": false,
+      "order": 1,
+      "parameter": "tokenJWT",
+      "screenId": 2,
+      "eventTypeId": 2
+    }
+  ],
+  "request": [
+    {
+      "id": 1,
+      "uri_homolog": "http://aws.mobicare.hml.com/auth",
+      "eventId": 1,
+      "uri_prod": "http://aws.mobicare.com/auth",
+      "description": "Request auth api to login",
+      "layer": "auth api",
+      "status": true,
+      "order": 1
+    },
+    {
+      "id": 2,
+      "uri_homolog": "http://aws.mobicare.hml.com/validation",
+      "eventId": 2,
+      "uri_prod": "http://aws.mobicare.com/validation",
+      "description": "verify if the email is correct",
+      "layer": "validation api",
+      "status": true,
+      "order": 1
+    },
+    {
+      "id": 3,
+      "uri_homolog": "http://aws.mobicare.hml.com/auth",
+      "eventId": 1,
+      "requestFatherId": 1,
+      "uri_prod": "http://aws.mobicare.com/auth",
+      "description": "Generate token jwt",
+      "layer": "auth api",
+      "status": true,
+      "order": 1
+    },
+    {
+      "id": 4,
+      "uri_homolog": "http://aws.mobicare.hml.com/auth",
+      "eventId": 4,
+      "uri_prod": "http://aws.mobicare.com/data",
+      "description": "Valida o token",
+      "layer": "auth api",
+      "status": true,
+      "order": 1
+    },
+    {
+      "id": 5,
+      "uri_homolog": "http://aws.mobicare.hml.com/data",
+      "eventId": 4,
+      "requestFatherId": 4,
+      "uri_prod": "http://aws.mobicare.com/auth",
+      "description": "Log das informações do usuário",
+      "layer": "auth api",
+      "status": false,
+      "order": 1
+    }
+  ],
+  "requestProperty": [
+    {
+      "requestPropertyId": 1,
+      "requestId": 1,
+      "key": "cache",
+      "value": 1,
+      "order": "Sei la"
+    },
+    {
+      "requestPropertyId": 2,
+      "requestId": 1,
+      "key": "email",
+      "value": 2,
+      "order": "sei la"
+    },
+    {
+      "requestPropertyId": 3,
+      "requestId": 3,
+      "key": "jwt",
+      "value": 1,
+      "order": "sei la"
+    },
+    {
+      "requestPropertyId": 4,
+      "requestId": 3,
+      "key": "redis",
+      "value": 2,
+      "order": "sei la"
+    },
+    {
+      "requestPropertyId": 5,
+      "requestId": 3,
+      "key": "log",
+      "value": 3,
+      "order": "sei la"
     }
   ]
 }
