@@ -28,7 +28,7 @@ export class ScreenComponent  implements OnInit {
 
   screens!: Screen[];
 
-  displayedColumns: string[] = ['id', 'image', 'name', 'active', 'screenFatherId', 'order', 'gerenciamento'];
+  displayedColumns: string[] = ['id', 'image', 'name', 'active', 'fatherScreenId', 'order', 'urlog', 'createdDate', 'gerenciamento'];
 
   dataSource!: MatTableDataSource<any>;
 

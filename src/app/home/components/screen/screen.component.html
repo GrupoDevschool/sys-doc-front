@@ -80,10 +80,10 @@
         <td mat-cell *matCellDef="let screen"><app-status-tag>{{screen.active ? 'Ativo' : 'Inativo'}}</app-status-tag></td>
       </ng-container>
 
-      <!-- screenFatherId Column -->
-      <ng-container matColumnDef="screenFatherId">
+      <!-- fatherScreenId Column -->
+      <ng-container matColumnDef="fatherScreenId">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Hierarquia</th>
-        <td mat-cell *matCellDef="let screen" title="id da tela pai: {{screen.screenFatherId ?? '-'}}"> {{screen.screenFatherId ?? 'Raiz' }} </td>
+        <td mat-cell *matCellDef="let screen" title="id da tela pai: {{screen.fatherScreenId ?? '-'}}"> {{screen.fatherScreenId ?? 'Raiz' }} </td>
       </ng-container>
 
        <!-- order Column -->
@@ -97,6 +97,23 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Versão Clonada</th>
         <td mat-cell *matCellDef="let screen"> {{screen.versionClonedId ?? 'Não'}} </td>
       </ng-container> -->
+
+      <!-- urlog Column -->
+      <ng-container matColumnDef="urlog">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Urlog</th>
+        <td mat-cell *matCellDef="let screen" title="{{screen.urlog}}">
+          {{screen.urlog | slice:0:60}}
+          <ng-container *ngIf="screen?.urlog?.length > 60">...</ng-container>
+        </td>
+      </ng-container>
+
+      <!-- createdDate Column -->
+      <ng-container matColumnDef="createdDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Data de Criação</th>
+        <td mat-cell *matCellDef="let screen" title="{{screen.createdDate}}">
+          {{screen.createdDate}}
+        </td>
+      </ng-container>
 
       <!-- Action Column -->
       <ng-container matColumnDef="gerenciamento">
