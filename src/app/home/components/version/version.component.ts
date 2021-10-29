@@ -1,16 +1,16 @@
-import { ProjectService } from './../../../shared/services/project/project.service';
-import { VersionService } from './../../../shared/services/version/version.service';
-import { Version } from './../../../shared/model/Version';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Project } from 'src/app/shared/model/Project';
 import { Observable } from 'rxjs';
-import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
+import { Project } from 'src/app/shared/model/Project';
+import { Version } from './../../../shared/model/Version';
+import { ProjectService } from './../../../shared/services/project/project.service';
+import { VersionService } from './../../../shared/services/version/version.service';
 
 @Component({
   selector: 'app-version',
@@ -55,23 +55,6 @@ export class VersionComponent implements OnInit {
       this.setDataSource();
     }).add(() => this.loading = false);
   }
-
-  /*applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-  applyFilterIdProjeto(filterValue: string) {
-
-    this.dataSource.filterPredicate = (data: Version, filter: string) => {
-      filter = filterValue;
-      return data.projectId.toString() == filter;
-    };
-
-  }*/
 
   delete(id: number){
     this.versionService.delete(id).subscribe(() => {
@@ -125,5 +108,10 @@ export class VersionComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.versions);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  getProjectName(value: number): string {
+    const project = this.projects.find((element) => element.id == value);
+    return project ? project.name : '';
   }
 }

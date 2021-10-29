@@ -82,8 +82,8 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-      <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="12">Não existem versões com do projeto com esse Id: {{filter.value}}</td>
+      <tr class="mat-row" *ngIf="!loading">
+        <td *matNoDataRow class="mat-cell" colspan="12">Não existem versões cadastradas no projeto: {{getProjectName(filter.value)}}</td>
       </tr>
     </table>
 
