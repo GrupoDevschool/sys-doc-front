@@ -37,8 +37,7 @@ export class EventTypeComponent implements OnInit {
       this.dataSource = new MatTableDataSource(eventTypes);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-    });
-    this.loading = false;
+    }).add(() => this.loading = false);
   }
 
   applyFilter(filterValue: string) {
