@@ -1,0 +1,112 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+.container {
+  height: 100%;
+}
+
+.mat-card {
+  display: flex;
+  font-family: "Poppins", "sans-serif";
+  font-weight: bold;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mat-card-title {
+  font-size: 30px;
+  margin: left;
+  font-weight: bold;
+  line-height: normal;
+}
+
+.mat-raised-button {
+  align-items: center;
+}
+
+.mat-elevation-z8 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.mat-table {
+  font-family: "Poppins", "sans-serif";
+}
+
+.mat-cell.cdk-cell.long {
+  padding-right: 5px !important;
+}
+
+.mat-cell.cdk-cell.long.break {
+  word-break: break-all;
+}
+
+.mat-column-eventId {
+  text-align: center;
+  flex: 0 0 5% !important;
+  width: 5% !important;
+}
+
+.mat-column-description {
+  flex: 0 0 15% !important;
+  width: 15% !important;
+}
+
+.mat-column-uri_homolog {
+  flex: 0 0 25% !important;
+  width: 25% !important;
+}
+
+.mat-column-uri_prod {
+  flex: 0 0 5% !important;
+  width: 25% !important;
+}
+
+.mat-column-order {
+  text-align: center;
+  flex: 0 0 5% !important;
+  width: 5% !important;
+}
+
+.mat-column-status {
+  flex: 0 0 7% !important;
+  width: 7% !important;
+}
+
+.mat-column-actions {
+  flex: 0 0 15% !important;
+  width: 15% !important;
+}
+
+.mat-paginator {
+  font-family: "Poppins", "sans-serif";
+}
+
+table {
+  width: 100%;
+}
+
+.mat-raised-button {
+  font-family: "Poppins", "sans-serif";
+  float: right;
+  bottom: 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.mat-raised-button.delete {
+  margin-left: 5px;
+}
+
+.mat-form-field {
+  font-family: "Poppins", "sans-serif";
+  width: 100%;
+}
+
+.filters {
+  display: flex;
+}
+
+.filtro {
+  margin-top: 10px;
+  width: 100%;
+  padding: 0 5%;
+}
