@@ -16,7 +16,7 @@ interface LoginResponse {
   token: string;
 }
 
-const URL_API: string = environment.url_api;
+const URL_API: string = environment.URL;
 
 @Injectable({
   providedIn: 'root'

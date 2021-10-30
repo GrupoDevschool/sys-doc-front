@@ -1,12 +1,12 @@
 ### STAGE 1: Build ###
-FROM node AS build
+FROM node:16-alpine AS build
 WORKDIR /usr/src/app
 COPY package.json yarn.lock ./
 RUN yarn install
 COPY . .
-RUN yarn build --prod
+RUN yarn build
 
 ### STAGE 2: Run ###
-FROM nginx
+FROM nginx:1.17.1-alpine
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY /dist/sys-doc /usr/share/nginx/html
+COPY --from=build /usr/src/app/dist/sys-doc /usr/share/nginx/html

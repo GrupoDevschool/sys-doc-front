@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { LoginService } from 'src/app/login/login.service';
 import { environment } from 'src/environments/environment';
 
-const URL_API: string = environment.url_api;
+const URL: string = environment.URL;
 
 @Injectable({
   providedIn: 'root'
@@ -78,6 +78,6 @@ export class ApiService {
   }
 
   getURL(path: string): string {
-    return URL_API + path;
+    return URL + path;
   }
 }
