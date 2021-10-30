@@ -72,7 +72,7 @@ export class EventFormComponent implements OnInit {
       this.loading = true;
 
       if (formFields.id) {
-        const updateEvent: Event = {
+        const updateEvent: any = {
           id: formFields.id,
           active: formFields.active,
           order: formFields.order,
@@ -94,7 +94,7 @@ export class EventFormComponent implements OnInit {
         });
 
       } else {
-        const newEvent: Event = {
+        const newEvent: any = {
           active: formFields.active,
           order: formFields.order,
           parameter: formFields.parameter,

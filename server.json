@@ -280,6 +280,14 @@
       "parameter": "tokenJWT",
       "screenId": 2,
       "eventTypeId": 2
+    },
+    {
+      "active": true,
+      "order": "3",
+      "parameter": "1",
+      "screenId": 6,
+      "eventTypeId": 2,
+      "id": 7
     }
   ],
   "request": [
