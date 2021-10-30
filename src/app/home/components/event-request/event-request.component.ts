@@ -3,13 +3,17 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { Event } from 'src/app/shared/model/Event';
+import { Project } from 'src/app/shared/model/Project';
 import { Request } from 'src/app/shared/model/Request';
+import { Screen } from 'src/app/shared/model/Screen';
+import { Version } from 'src/app/shared/model/Version';
 import { ProjectService } from 'src/app/shared/services/project/project.service';
 import { RequestService } from 'src/app/shared/services/request/request.service';
 import { ScreenService } from 'src/app/shared/services/screen/screen.service';
 import { VersionService } from 'src/app/shared/services/version/version.service';
 import { EventService } from './../../../shared/services/event/event.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-event-request',
@@ -18,6 +22,11 @@ import { Router } from '@angular/router';
 })
 export class EventRequestComponent implements OnInit {
   dataSource!: MatTableDataSource<Request>;
+
+  projects!: Project[];
+  versions!: Version[];
+  screens!: Screen[];
+  events!: Event[];
 
   displayedColumns: string[] = ['id', 'eventId', 'description' ,'uri_homolog', 'uri_prod', 'layer', 'status', 'order','actions'];
 
@@ -41,6 +50,28 @@ export class EventRequestComponent implements OnInit {
 
   ngOnInit(): void {
     this.reloadData();
+
+    this.projectService.getAll().subscribe(
+      (data: Project[]) => {
+        this.projects = data;
+      }
+    );
+  }
+
+  getVersionsByProjectId(projectId: number) {
+    this.versionService.getByProjectId(projectId).subscribe();
+  }
+
+  getScreenByVersionId(versionId: number) {
+    this.screenService.getByVersionId(versionId).subscribe();
+  }
+
+  getEventByScreenId(screenId: number) {
+    this.eventService.getByScreenId(screenId).subscribe();
+  }
+
+  getRequestByEventId(eventId: number) {
+    this.requestService.getAllbyEventId(eventId).subscribe();
   }
 
   reloadData() {

@@ -293,7 +293,7 @@
   "request": [
     {
       "id": 1,
-      "uri_homolog": "http://aws.mobicare.hml.com/auth",
+      "uri_homolog": "http://aws.minhaoi.mobicare.hml.com/v1/api/auth",
       "eventId": 1,
       "uri_prod": "http://aws.mobicare.com/auth",
       "description": "Request auth api to login",
@@ -303,9 +303,9 @@
     },
     {
       "id": 2,
-      "uri_homolog": "http://aws.mobicare.hml.com/validation",
+      "uri_homolog": "http://aws.minhaoi.mobicare.hml.com/v1/api/validation",
       "eventId": 2,
-      "uri_prod": "http://aws.mobicare.com/validation",
+      "uri_prod": "http://aws.minhaoi.mobicare.com/v1/api/validation",
       "description": "verify if the email is correct",
       "layer": "validation api",
       "status": true,
@@ -313,10 +313,10 @@
     },
     {
       "id": 3,
-      "uri_homolog": "http://aws.mobicare.hml.com/auth",
+      "uri_homolog": "http://aws.minhaoi.mobicare.hml.com/v1/api/auth",
       "eventId": 1,
       "requestFatherId": 1,
-      "uri_prod": "http://aws.mobicare.com/auth",
+      "uri_prod": "http://aws.minhaoi.mobicare.com/v1/api/auth",
       "description": "Generate token jwt",
       "layer": "auth api",
       "status": true,
@@ -324,9 +324,9 @@
     },
     {
       "id": 4,
-      "uri_homolog": "http://aws.mobicare.hml.com/auth",
+      "uri_homolog": "http://aws.minhaoi.mobicare.hml.com/v1/api/auth",
       "eventId": 4,
-      "uri_prod": "http://aws.mobicare.com/data",
+      "uri_prod": "http://aws.minhaoi.mobicare.com/v1/api/data",
       "description": "Valida o token",
       "layer": "auth api",
       "status": true,
@@ -334,10 +334,10 @@
     },
     {
       "id": 5,
-      "uri_homolog": "http://aws.mobicare.hml.com/data",
+      "uri_homolog": "http://aws.minhaoi.mobicare.hml.com/v1/api/data",
       "eventId": 4,
       "requestFatherId": 4,
-      "uri_prod": "http://aws.mobicare.com/auth",
+      "uri_prod": "http://aws.minhaoi.mobicare.com/v1/api/auth",
       "description": "Log das informações do usuário",
       "layer": "auth api",
       "status": false,
