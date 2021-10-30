@@ -14,6 +14,7 @@ import { VersionService } from 'src/app/shared/services/version/version.service'
   styleUrls: ['./version-form.component.scss']
 })
 export class VersionFormComponent implements OnInit {
+  versions: Version[] = [];
 
   versionForm!: FormGroup;
   matcher = new ErrorStateMatcher;
@@ -34,6 +35,12 @@ export class VersionFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProjects();
+
+    if (this.updateVersion?.projectId) {
+      this.getVersionByProjectId(this.updateVersion?.projectId);
+    } else {
+      this.getVersions();
+    }
 
     this.versionForm = this.formBuilder.group({
       id: new FormControl(this.updateVersion?.id ?? null),
@@ -123,6 +130,18 @@ export class VersionFormComponent implements OnInit {
   getProjects() {
     this.projectService.getAll().subscribe((projects) => {
       this.projects = projects;
+    });
+  }
+
+  getVersions() {
+    this.versionService.getAll().subscribe((versions) => {
+      this.versions = versions;
+    });
+  }
+
+  getVersionByProjectId(projectId: number) {
+    this.versionService.getByProjectId(projectId).subscribe((versions) => {
+      this.versions = versions;
     });
   }
 }

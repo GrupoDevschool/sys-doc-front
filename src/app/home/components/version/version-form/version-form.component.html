@@ -97,16 +97,17 @@
         </mat-form-field>
 
         <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
-          <mat-label>Clone de Id da versão</mat-label>
-          <input
-          matInput
-          placeholder="Ex: 2"
+          <mat-label>Clonar de uma versão</mat-label>
+          <mat-select
+          placeholder="Escolha um projeto"
           formControlName="versionCloneId"
+          placeholder="3.0"
           [errorStateMatcher]="matcher"
-          />
-          <mat-error *ngIf="versionForm.get('versionCloneId')?.hasError('required')">
-            Clone de Id da versão é um campo obrigatório
-          </mat-error>
+          >
+          <mat-option [value]="null">{{"Não Clonar"}}</mat-option>
+          <mat-option *ngFor="let version of versions" [value]="version.id">{{"numero: "}} {{version.number}} {{" gmud: "}} {{version.gmud}}
+          </mat-option>
+        </mat-select>
         </mat-form-field>
 
         <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
