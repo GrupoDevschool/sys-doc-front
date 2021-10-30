@@ -1,5 +1,5 @@
 export interface Event {
-  id?: number;
+  id: number;
   active: boolean;
   order: number;
   parameter: string;

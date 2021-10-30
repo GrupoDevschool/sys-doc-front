@@ -3,17 +3,20 @@ import { Observable } from 'rxjs';
 import { RequestProperty } from '../../model/RequestProperty';
 import { ApiService } from './../../../core/api/api.service';
 
-const URL = "/requestProperty";
+const URL = '/requestProperty';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RequestPropertyService {
-
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService) {}
 
   getAll(): Observable<RequestProperty[]> {
     return this.api.getAll(URL);
+  }
+
+  getAllByRequestId(requestPropertyId: number): Observable<RequestProperty[]> {
+    return this.api.get(URL + '?requestPropertyId' + requestPropertyId);
   }
 
   getById(id: number): Observable<RequestProperty> {
@@ -25,7 +28,10 @@ export class RequestPropertyService {
   }
 
   update(requestProperty: RequestProperty): Observable<RequestProperty> {
-    return this.api.put(URL + '/' + requestProperty.requestPropertyId, requestProperty);
+    return this.api.put(
+      URL + '/' + requestProperty.requestPropertyId,
+      requestProperty
+    );
   }
 
   delete(id: number): Observable<any> {

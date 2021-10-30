@@ -3,17 +3,20 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Request } from '../../model/Request';
 
-const URL = "/request"
+const URL = '/request';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RequestService {
-
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService) {}
 
   getAll(): Observable<Request[]> {
     return this.api.getAll(URL);
+  }
+
+  getAllbyEventId(eventId: number): Observable<Request[]> {
+    return this.api.get(URL + '?eventId=' + eventId);
   }
 
   getById(id: number): Observable<Request> {
