@@ -4,7 +4,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Project } from 'src/app/shared/model/Project';
-import { createScreen, Screen } from 'src/app/shared/model/Screen';
+import { Screen } from 'src/app/shared/model/Screen';
 import { Version } from 'src/app/shared/model/Version';
 import { ProjectService } from 'src/app/shared/services/project/project.service';
 import { ScreenService } from 'src/app/shared/services/screen/screen.service';
@@ -68,7 +68,7 @@ export class ScreenFormComponent implements OnInit {
 		})
   }
 
-  submit() {
+  async submit() {
 		if (this.screenForm.valid) {
 			const formFields = this.screenForm.getRawValue() as Screen; // Pega os valores dos inputs
 
@@ -76,10 +76,9 @@ export class ScreenFormComponent implements OnInit {
 
       // if is update
       if (formFields.id) {
-        const updatedScreen: createScreen = {
+        const updatedScreen: any = {
           id: formFields.id,
           name: formFields.name,
-          image: formFields.image,
           active: formFields.active,
           order: formFields.order,
           urlog: formFields.urlog,
@@ -88,8 +87,56 @@ export class ScreenFormComponent implements OnInit {
 
         if (formFields.fatherScreenId) {updatedScreen.screenFatherId = formFields.fatherScreenId}
 
-        this.screenService.update(updatedScreen).subscribe(
-          data => {
+        if (typeof formFields.image !== 'string') {
+          const formInput = formFields.image as any;
+          const url = await this.uploadImage(formInput._files[0]);
+
+          updatedScreen.image = url;
+
+          this.screenService.update(updatedScreen).subscribe(data => {
+              this.showSucess("Tela atualizada com sucesso!");
+              this.router.navigate(['dashboard/screen']);
+            },
+            error => {
+              this.showError(error.message);
+            }
+          ).add(() => {
+          this.loading = false;
+          });
+        } else {
+          this.screenService.update(updatedScreen).subscribe(
+            data => {
+              this.showSucess("Tela atualizada com sucesso!");
+              this.router.navigate(['dashboard/screen']);
+            },
+            error => {
+              this.showError(error.message);
+            }
+          ).add(() => {
+            this.loading = false;
+          });
+        }
+        return;
+      }
+
+      const newScreen: any = {
+        name: formFields.name,
+        active: formFields.active,
+        order: formFields.order,
+        urlog: formFields.urlog,
+        versionId: formFields.versionId,
+        cloneVersionId: formFields.versionClonedId,
+      }
+
+      if (formFields.fatherScreenId) {newScreen.screenFatherId = formFields.fatherScreenId}
+
+      if (typeof formFields.image !== 'string') {
+        const formInput = formFields.image as any;
+        const url = await this.uploadImage(formInput._files[0]);
+
+        newScreen.image = url;
+
+        this.screenService.update(newScreen).subscribe(data => {
             this.showSucess("Tela atualizada com sucesso!");
             this.router.navigate(['dashboard/screen']);
           },
@@ -97,35 +144,21 @@ export class ScreenFormComponent implements OnInit {
             this.showError(error.message);
           }
         ).add(() => {
+        this.loading = false;
+        });
+      }else {
+        this.screenService.create(newScreen).subscribe(
+          data => {
+            this.showSucess("Tela criada com sucesso!");
+            this.router.navigate(['dashboard/Screen']);
+          },
+          error => {
+            this.showError(error.message);
+          }
+        ).add(() => {
           this.loading = false;
         });
-
-        return;
-
       }
-
-      const newScreen: createScreen = {
-        name: formFields.name,
-        image: formFields.image,
-        active: formFields.active,
-        order: formFields.order,
-        urlog: formFields.urlog,
-        versionId: formFields.versionId,
-        screenFatherId: formFields.fatherScreenId,
-        cloneVersionId: formFields.versionClonedId,
-      }
-
-      this.screenService.create(newScreen).subscribe(
-        data => {
-          this.showSucess("Tela criada com sucesso!");
-          this.router.navigate(['dashboard/Screen']);
-        },
-        error => {
-          this.showError(error.message);
-        }
-      ).add(() => {
-        this.loading = false;
-      });
 		}
 	}
 
@@ -137,12 +170,9 @@ export class ScreenFormComponent implements OnInit {
     this.toastr.success(message, "Tela Salva")
   }
 
-  uploadImage(file: File) {
-
-
-    this.screenService.uploadImage(file).subscribe(
-
-    );
+  async uploadImage(file: any): Promise<string> {
+    const url = await this.screenService.uploadImage(file).toPromise();
+    return url;
   }
 
   filterVersions(projectId: number) {

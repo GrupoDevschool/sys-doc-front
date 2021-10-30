@@ -117,6 +117,14 @@
       </div>
       <div class="row">
         <!-- image selection -->
+        <mat-form-field class="" appearance="outline">
+          <mat-label>Imagem</mat-label>
+          <ngx-mat-file-input
+          formControlName="image"
+          [errorStateMatcher]="matcher"
+          ></ngx-mat-file-input>
+          <mat-icon matSuffix>folder</mat-icon>
+        </mat-form-field>
 
         <!-- image preview -->
       </div>
