@@ -62,7 +62,7 @@
         <mat-select name="eventType"
                     #filterEventType
                     placeholder="Escolha um tipo de evento"
-                    (selectionChange)="getEventTypeByEventId($event.value)"
+                    (selectionChange)="getEventByEventTypeId($event.value)"
                     >
           <mat-option *ngFor="let eventType of eventsType" [value]="eventType.id">
             {{eventType.name}}
@@ -103,14 +103,14 @@
 
       <!-- screenId Column -->
       <ng-container matColumnDef="screenId">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Id da Tela</th>
-        <td mat-cell *matCellDef="let event"> {{event.screenId}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome da Tela</th>
+        <td mat-cell *matCellDef="let event"> {{getScreenName(event.screenId)}} </td>
       </ng-container>
 
       <!-- eventTypeId Column -->
       <ng-container matColumnDef="eventTypeId">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id do tipo de Evento</th>
-        <td mat-cell *matCellDef="let event"> {{event.eventTypeId}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome do tipo de Evento</th>
+        <td mat-cell *matCellDef="let event"> {{getEventTypeName(event.eventTypeId)}} </td>
       </ng-container>
 
       <!-- Action Column -->

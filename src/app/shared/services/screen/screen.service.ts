@@ -39,4 +39,7 @@ export class ScreenService {
     return this.api.delete(URL + '/' + id);
   }
 
+  uploadImage(file: File): Observable<any> {
+    return this.api.upload(URL + '/upload', file);
+  }
 }

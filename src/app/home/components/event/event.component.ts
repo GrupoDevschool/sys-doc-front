@@ -1,21 +1,20 @@
-import { EventService } from './../../../shared/services/event/event.service';
-import { EventTypeService } from 'src/app/shared/services/event-type/event-type.service';
-import { EventType } from './../../../shared/model/EventType';
-import { Event } from './../../../shared/model/Event';
+import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { Project } from 'src/app/shared/model/Project';
-import { Version } from 'src/app/shared/model/Version';
-import { Screen } from 'src/app/shared/model/Screen';
-import { MatTableDataSource } from '@angular/material/table';
-import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { ProjectService } from 'src/app/shared/services/project/project.service';
-import { VersionService } from 'src/app/shared/services/version/version.service';
-import { ScreenService } from 'src/app/shared/services/screen/screen.service';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Project } from 'src/app/shared/model/Project';
+import { Screen } from 'src/app/shared/model/Screen';
+import { Version } from 'src/app/shared/model/Version';
+import { EventTypeService } from 'src/app/shared/services/event-type/event-type.service';
+import { ProjectService } from 'src/app/shared/services/project/project.service';
+import { ScreenService } from 'src/app/shared/services/screen/screen.service';
+import { VersionService } from 'src/app/shared/services/version/version.service';
+import { Event } from './../../../shared/model/Event';
+import { EventType } from './../../../shared/model/EventType';
+import { EventService } from './../../../shared/services/event/event.service';
 
 @Component({
   selector: 'app-event',
@@ -24,16 +23,16 @@ import { Router } from '@angular/router';
 })
 export class EventComponent implements OnInit {
   projects!: Project[];
-  filteredProjects!: Observable<Project[]>;
 
   projectControl = new FormControl();
 
   versions!: Version[];
-  filteredVersions!: Observable<Version[]>;
 
   eventsType!: EventType[];
-
+  eventTypeId!: number;
   screens!: Screen[];
+  screendId!: number;
+
   events!: Event[];
 
   displayedColumns: string[] = ['id', 'active', 'order', 'parameter', 'screenId', 'eventTypeId', 'gerenciamento'];
@@ -66,6 +65,10 @@ export class EventComponent implements OnInit {
 
     this.getEventTypes();
 
+    this.screensService.getAll().subscribe((screens) => {
+      this.screens = screens;
+    });
+
     this.eventsService.getAll().subscribe((events) => {
       this.events = events;
       this.setDataSource();
@@ -94,36 +97,52 @@ export class EventComponent implements OnInit {
 
   getScreenByVersionId(id: number){
     this.loading = true;
-    console.log(this.loading);
-    this.screens = [];
-    this.setDataSource();
-
     this.screensService.getByVersionId(id).subscribe((screens) => {
       this.screens = screens;
-      this.setDataSource();
     }).add(() => {this.loading = false});
   }
 
   getEventByScreenId(id: number){
     this.loading = true;
-    console.log(this.loading);
     this.events = [];
     this.setDataSource();
 
-    this.eventsService.getByScreenId(id).subscribe((events) => {
-      this.events = events;
-      this.setDataSource();
-    }).add(() => {this.loading = false});
+    if (this.eventTypeId) {
+      this.screendId = id;
+      this.getEventByEventTypeIdAndScreenId(id, this.screendId);
+    } else {
+      this.eventsService.getByScreenId(id).subscribe((events) => {
+        this.events = events;
+        this.screendId = id;
+        this.setDataSource();
+      }).add(() =>  this.loading = false);
+    }
   }
 
-  getEventTypeByEventId(id: number) {
+  getEventByEventTypeId(id: number) {
     this.loading = true;
-    console.log(this.loading);
     this.events = [];
     this.setDataSource();
 
-    this.eventsService.getByEventTypeId(id).subscribe((eventsType) => {
-      this.eventsType = eventsType;
+    if (this.screendId) {
+      this.eventTypeId = id;
+      this.getEventByEventTypeIdAndScreenId(id, this.screendId);
+    } else {
+      this.eventsService.getByEventTypeId(id).subscribe((event) => {
+        this.events = event;
+        this.eventTypeId = id;
+        this.setDataSource();
+      }).add(() => this.loading = false);
+    }
+  }
+
+  getEventByEventTypeIdAndScreenId(eventTypeId: number, screenId: number){
+    this.loading = true;
+    this.events = [];
+    this.setDataSource();
+
+    this.eventsService.getByEventTypeIdAndScreenId(eventTypeId, screenId).subscribe((events) => {
+      this.events = events;
       this.setDataSource();
     }).add(() => {this.loading = false});
   }
@@ -132,6 +151,12 @@ export class EventComponent implements OnInit {
     const screen = this.screens.find((element) => element.id == id);
 
     return screen?.name ?? '';
+  }
+
+  getEventTypeName(id: number): string{
+    const eventType = this.eventsType.find((element) => element.id == id);
+
+    return eventType?.name ?? '';
   }
 
 

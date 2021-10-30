@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
@@ -21,6 +21,9 @@ export class ScreenFormComponent implements OnInit {
   versions!: Version[];
   versionId!: number | undefined;
   screens!: Screen[];
+
+  @ViewChild("fileUpload", {static: false}) fileUpload!: ElementRef;
+  file!: File;
 
   screenForm!: FormGroup;
   matcher = new ErrorStateMatcher;
@@ -132,6 +135,14 @@ export class ScreenFormComponent implements OnInit {
 
   showSucess(message: string){
     this.toastr.success(message, "Tela Salva")
+  }
+
+  uploadImage(file: File) {
+
+
+    this.screenService.uploadImage(file).subscribe(
+
+    );
   }
 
   filterVersions(projectId: number) {
