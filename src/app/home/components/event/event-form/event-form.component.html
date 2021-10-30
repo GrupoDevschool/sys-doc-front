@@ -1,1 +1,130 @@
-<p>event-form works!</p>
+<div class="container">
+  <mat-card class="mat-card">
+      <mat-card-title>Cadastrar novo Evento</mat-card-title>
+      <button mat-raised-button color="accent" routerLink="..">voltar</button>
+  </mat-card>
+
+  <mat-card class="mat-card2 ui-g">
+    <form [formGroup]="eventForm">
+      <input
+      type="number"
+      formControlName="id"
+      hidden
+      />
+
+      <div>
+        <!-- Projeto -->
+        <mat-form-field class="" appearance="outline">
+          <mat-label>Projeto</mat-label>
+          <mat-select
+            name="project"
+            placeholder="Ex: Minha Oi"
+            (selectionChange)="filterVersions($event.value)"
+            [(ngModel)]="projectId"
+          >
+            <mat-option *ngFor="let project of projects" [value]="project.id">{{project.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Versão -->
+        <mat-form-field class="" appearance="outline">
+          <mat-label>Versão</mat-label>
+          <mat-select
+            [errorStateMatcher]="matcher"
+            [disabled]="!projectId"
+            (selectionChange)="filterScreens($event.value)"
+          >
+            <mat-option *ngFor="let version of versions" [value]="version.id">{{version.number}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
+            <mat-label>Id do tipo de Evento</mat-label>
+            <mat-select #filterEventType
+                    name="eventType"
+                    placeholder="Escolha um tipo de evento"
+                    formControlName="eventTypeId"
+                    >
+              <mat-option *ngFor="let eventType of eventTypes" [value]="eventType.id">
+                {{eventType.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="eventForm.get('eventTypeId')?.hasError('required')">
+              tipo de evento é um campo obrigatório
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
+            <mat-label>Id da Tela</mat-label>
+            <mat-select #filterScreen
+                    name="screen"
+                    placeholder="Escolha uma tela"
+                    formControlName="screenId"
+                    >
+              <mat-option *ngFor="let screen of screens" [value]="screen.id">
+                {{screen.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="eventForm.get('screenId')?.hasError('required')">
+              Tela é um campo obrigatório
+            </mat-error>
+        </mat-form-field>
+
+
+
+        <mat-form-field class="inputs" appearance="outline">
+          <mat-label>Parâmetro</mat-label>
+          <input
+          matInput
+          placeholder="Ex: Um parâmetro"
+          formControlName="parameter"
+          [errorStateMatcher]="matcher"
+          />
+          <mat-error *ngIf="eventForm.get('parameter')?.hasError('required')">
+            Parâmetro é um campo obrigatório
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
+          <mat-label>Ordem</mat-label>
+          <input
+          matInput
+          placeholder="Ex: 3"
+          formControlName="order"
+          [errorStateMatcher]="matcher"
+          />
+          <mat-error *ngIf="eventForm.get('order')?.hasError('required')">
+            Ordem é um campo obrigatório
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="active" [errorStateMatcher]="matcher">
+            <mat-option [value]="true">Ativo</mat-option>
+            <mat-option [value]="false">Inativo</mat-option>
+          </mat-select>
+          <mat-error *ngIf="eventForm.controls['active'].hasError('required')">Active é um campo obrigatório</mat-error>
+        </mat-form-field>
+
+
+      </div>
+
+      <div class="action">
+          <app-spinner-button
+            type="submit"
+            (action)="submit()"
+            color="primary"
+            borderRadius="4px"
+            [fullWidth]="true"
+            [loading]="loading"
+            [disabled]="!eventForm.valid"
+          >
+            Salvar
+          </app-spinner-button>
+        </div>
+    </form>
+
+
+  </mat-card>
+</div>
