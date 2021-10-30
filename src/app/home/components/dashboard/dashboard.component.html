@@ -1,5 +1,5 @@
 <div class="filtros">
-<!-- Filtro de Projetos -->
+  <!-- Filtro de Projetos -->
   <div>
     <mat-form-field appearance="outline">
       <mat-label>Projetos</mat-label>
@@ -17,8 +17,8 @@
     </mat-form-field>
   </div>
 
-<!-- Filtro de Versão -->
-<div>
+  <!-- Filtro de Versão -->
+  <div>
     <mat-form-field appearance="outline">
       <mat-label>Versões</mat-label>
       <mat-select
@@ -72,6 +72,13 @@
         <div class="screen-description">
           <p><strong>Titulo:</strong> {{ screenSelecionada?.name }}</p>
           <p><strong>Status:</strong> {{ screenSelecionada?.active }}</p>
+        </div>
+        <div class="events">
+          <div class="event-item" *ngFor="let event of events">
+            <p>{{ event.eventTypeId }}</p>
+            <p>{{ event.parameter }}</p>
+            <app-request-list [eventId]="event.id"></app-request-list>
+          </div>
         </div>
       </div>
     </mat-card>

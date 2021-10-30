@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Project } from 'src/app/shared/model/Project';
 import { Screen } from 'src/app/shared/model/Screen';
 import { Version } from 'src/app/shared/model/Version';
+import { Event } from 'src/app/shared/model/Event';
+import { EventService } from 'src/app/shared/services/event/event.service';
 import { ProjectService } from 'src/app/shared/services/project/project.service';
 import { ScreenService } from 'src/app/shared/services/screen/screen.service';
 import { VersionService } from 'src/app/shared/services/version/version.service';
@@ -21,6 +23,7 @@ export class DashboardComponent implements OnInit {
 
   screens!: Screen[];
   screenSelecionada!: Screen;
+  events!: Event[];
 
   paiEIrmaos!: Screen[];
   atualEIrmaos!: Screen[];
@@ -29,7 +32,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private projectService: ProjectService,
     private versionService: VersionService,
-    private screenService: ScreenService
+    private screenService: ScreenService,
+    private eventService: EventService
   ) {}
 
   ngOnInit(): void {
@@ -53,8 +57,16 @@ export class DashboardComponent implements OnInit {
       );
 
       this.screenSelecionada = this.screens.find(
-        (screen) => !screen.fatherScreenId
+        (screen) => screen.fatherScreenId === undefined
       ) as Screen;
+
+      if (this.screenSelecionada.id) {
+        this.eventService
+          .getByScreenId(this.screenSelecionada.id)
+          .subscribe((events) => {
+            this.events = events;
+          });
+      }
 
       if (this.screenSelecionada?.id) {
         this.screenService

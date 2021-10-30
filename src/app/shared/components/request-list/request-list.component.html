@@ -1,1 +1,6 @@
-<p>request-list works!</p>
+<div *ngFor="let request of requests">
+  <p>Request: {{ request.id }}</p>
+  <app-property-request-list
+    [requestId]="request.id"
+  ></app-property-request-list>
+</div>
