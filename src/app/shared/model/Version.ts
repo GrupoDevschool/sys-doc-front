@@ -2,6 +2,7 @@
 export interface Version {
   id?: number;
   active: boolean;
+  description: string;
   number: string;
   date: string;
   gmud: string;

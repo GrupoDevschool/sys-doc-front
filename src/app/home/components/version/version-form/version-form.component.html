@@ -13,7 +13,6 @@
       />
 
       <div>
-
           <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
             <mat-label>Id do projeto</mat-label>
             <mat-select #filterProject
@@ -36,10 +35,10 @@
           <input
           matInput
           placeholder="Ex: 3.0"
-          formControlName="versionNumber"
+          formControlName="number"
           [errorStateMatcher]="matcher"
           />
-          <mat-error *ngIf="versionForm.get('versionNumber')?.hasError('required')">
+          <mat-error *ngIf="versionForm.get('number')?.hasError('required')">
             Número da versão é um campo obrigatório
           </mat-error>
         </mat-form-field>
@@ -62,10 +61,10 @@
           <input
           matInput
           placeholder="Ex: 09/10/2021"
-          formControlName="deployDate"
+          formControlName="date"
           [errorStateMatcher]="matcher"
           />
-          <mat-error *ngIf="versionForm.get('deployDate')?.hasError('required')">
+          <mat-error *ngIf="versionForm.get('date')?.hasError('required')">
             Data é um campo obrigatório
           </mat-error>
         </mat-form-field>
@@ -112,11 +111,11 @@
 
         <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
           <mat-label>Status</mat-label>
-          <mat-select formControlName="status" [errorStateMatcher]="matcher">
+          <mat-select formControlName="active" [errorStateMatcher]="matcher">
             <mat-option [value]="true">Ativo</mat-option>
             <mat-option [value]="false">Inativo</mat-option>
           </mat-select>
-          <mat-error *ngIf="versionForm.controls['status'].hasError('required')">Active é um campo obrigatório</mat-error>
+          <mat-error *ngIf="versionForm.controls['active'].hasError('required')">Active é um campo obrigatório</mat-error>
         </mat-form-field>
 
 

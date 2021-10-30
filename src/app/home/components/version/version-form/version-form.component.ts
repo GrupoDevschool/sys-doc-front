@@ -18,7 +18,7 @@ export class VersionFormComponent implements OnInit {
   versionForm!: FormGroup;
   matcher = new ErrorStateMatcher;
   loading: boolean = false;
-  updateVersion: CreateVersion | undefined;
+  updateVersion: Version | undefined;
   projects!: Project[];
 
   constructor(
@@ -28,43 +28,46 @@ export class VersionFormComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService
   ) {
-    const state = this.router.getCurrentNavigation()?.extras?.state as CreateVersion;
+    const state = this.router.getCurrentNavigation()?.extras?.state as Version;
     this.updateVersion = state;
   }
 
   ngOnInit(): void {
+    this.getProjects();
+
     this.versionForm = this.formBuilder.group({
       id: new FormControl(this.updateVersion?.id ?? null),
-      versionNumber: new FormControl(this.updateVersion?.versionNumber ?? '', [Validators.required]),
+      number: new FormControl(this.updateVersion?.number ?? '', [Validators.required]),
       description: new FormControl(this.updateVersion?.description ?? '', [Validators.required]),
-      deployDate: new FormControl(this.updateVersion?.deployDate ?? '', [Validators.required]),
-      status: new FormControl(this.updateVersion?.status? true : false, [Validators.required]),
-      order: new FormControl(this.updateVersion?.order ?? '', [Validators.required]),
-      versionCloneId: new FormControl(this.updateVersion?.order ?? '', [Validators.required]),
+      active: new FormControl(this.updateVersion?.active? true : false, [Validators.required]),
+      date: new FormControl(this.updateVersion?.date ?? '', [Validators.required]),
+      order: new FormControl(this.updateVersion?.order ?? null, [Validators.required]),
+      versionCloneId: new FormControl(),
       gmud: new FormControl(this.updateVersion?.gmud ?? '', [Validators.required]),
-      projectId: new FormControl(this.updateVersion?.projectId ?? '', [Validators.required])
+      projectId: new FormControl(this.updateVersion?.projectId ?? null, [Validators.required])
     })
-
-    this.getProjects();
   }
 
   submit() {
     if (this.versionForm.valid) {
-      const formFields = this.versionForm.getRawValue() as CreateVersion;
+      const formFields = this.versionForm.getRawValue();
 
       this.loading = true;
 
       if (formFields.id) {
         const updateVersion: CreateVersion = {
           id: formFields.id,
-          versionNumber: formFields.versionNumber,
+          versionNumber: formFields.number,
           description: formFields.description,
-          deployDate: formFields.deployDate,
-          status: formFields.status,
+          deployDate: formFields.date,
+          status: formFields.active,
           order: formFields.order,
-          versionCloneId: formFields.versionCloneId,
           projectId: formFields.projectId,
           gmud: formFields.gmud
+        }
+
+        if (formFields.versionCloneId) {
+          updateVersion.versionCloneId = formFields.versionCloneId;
         }
 
         this.versionService.update(updateVersion).subscribe(
@@ -81,14 +84,17 @@ export class VersionFormComponent implements OnInit {
 
       } else {
         const newVersion: CreateVersion = {
-          versionNumber: formFields.versionNumber,
+          versionNumber: formFields.number,
           description: formFields.description,
-          deployDate: formFields.deployDate,
-          status: formFields.status,
+          deployDate: formFields.date,
+          status: formFields.active,
           order: formFields.order,
-          versionCloneId: formFields.versionCloneId,
           projectId: formFields.projectId,
           gmud: formFields.gmud
+        }
+
+        if (formFields.versionCloneId) {
+          newVersion.versionCloneId = formFields.versionCloneId;
         }
 
         this.versionService.create(newVersion).subscribe(
