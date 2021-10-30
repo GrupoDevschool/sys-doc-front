@@ -48,16 +48,20 @@ export class DashboardComponent implements OnInit {
     this.screenService.getByVersionId(this.versionId).subscribe((screens) => {
       this.screens = screens;
 
-      this.atualEIrmaos = this.screens.filter((screen) => screen.fatherScreenId === null);
+      this.atualEIrmaos = this.screens.filter(
+        (screen) => screen.fatherScreenId === undefined
+      );
 
       this.screenSelecionada = this.screens.find(
         (screen) => !screen.fatherScreenId
       ) as Screen;
 
       if (this.screenSelecionada?.id) {
-        this.screenService.getByScreenFatherId(this.screenSelecionada.id).subscribe((screens) => {
-          this.filhos = screens;
-        });
+        this.screenService
+          .getByScreenFatherId(this.screenSelecionada.id)
+          .subscribe((screens) => {
+            this.filhos = screens;
+          });
       }
     });
   }
