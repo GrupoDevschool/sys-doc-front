@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "mock": "json-server --watch server.json --port 8081 -d 1000"
+    "mock": "json-server --watch server.json --port 8080 -d 1000"
   },
   "private": true,
   "dependencies": {
