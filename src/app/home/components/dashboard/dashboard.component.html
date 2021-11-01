@@ -43,7 +43,12 @@
     <div class="tree">
       <div class="father">
         <div *ngFor="let screen of paiEIrmaos">
-          {{ screen?.name }}
+          <div class="father-img">
+            <img
+              [src]="screen?.image"
+              (click)="handleScreenChange(screen?.id)"
+            />
+          </div>
         </div>
       </div>
       <div class="me">
@@ -58,7 +63,12 @@
       </div>
       <div class="childs">
         <div *ngFor="let screen of filhos">
-          {{ screen?.name }}
+          <div class="child-img">
+            <img
+              [src]="screen?.image"
+              (click)="handleScreenChange(screen?.id)"
+            />
+          </div>
         </div>
       </div>
     </div>

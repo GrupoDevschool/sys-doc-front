@@ -27,6 +27,20 @@
         height: 150px;
         border: 1px solid red;
         overflow-x: scroll;
+
+        display: flex;
+        column-gap: 10px;
+
+        .father-img {
+          width: 60px;
+          height: 120px;
+          cursor: pointer;
+
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
       }
 
       .me {
@@ -55,6 +69,20 @@
         height: 150px;
         border: 1px solid blue;
         overflow-x: scroll;
+
+        display: flex;
+        column-gap: 10px;
+
+        .child-img {
+          width: 60px;
+          height: 120px;
+          cursor: pointer;
+
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
       }
     }
   }
