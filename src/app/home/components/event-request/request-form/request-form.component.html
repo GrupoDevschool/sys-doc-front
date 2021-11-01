@@ -1,1 +1,185 @@
-<p>request-form works!</p>
+<div class="container">
+  <mat-card class="mat-card">
+      <mat-card-title>Cadastrar nova Requisição de Evento</mat-card-title>
+      <button mat-raised-button color="accent" routerLink="..">voltar</button>
+  </mat-card>
+
+  <mat-card class="mat-card2 ui-g">
+    <form [formGroup]="requestForm">
+      <input
+      type="number"
+      formControlName="id"
+      hidden
+      />
+
+      <div>
+        <!-- Projeto -->
+        <mat-form-field class="" appearance="outline">
+          <mat-label>Projeto</mat-label>
+          <mat-select
+            name="project"
+            placeholder="Ex: Minha Oi"
+            (selectionChange)="filterVersions($event.value)"
+            [(ngModel)]="projectId"
+          >
+            <mat-option *ngFor="let project of projects" [value]="project.id">{{project.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Versão -->
+        <mat-form-field class="" appearance="outline">
+          <mat-label>Versão</mat-label>
+          <mat-select
+            [errorStateMatcher]="matcher"
+            [disabled]="!projectId"
+            (selectionChange)="filterScreens($event.value)"
+          >
+            <mat-option *ngFor="let version of versions" [value]="version.id">{{version.number}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Tela -->
+        <mat-form-field class="" appearance="outline">
+          <mat-label>Tela</mat-label>
+          <mat-select
+            [errorStateMatcher]="matcher"
+            [disabled]="!versionId"
+            (selectionChange)="filterEvents($event.value)"
+          >
+            <mat-option *ngFor="let screen of screens" [value]="screen.id">{{screen.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Evento -->
+        <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
+          <mat-label>Evento</mat-label>
+          <mat-select
+                  name="eventId"
+                  placeholder="Escolha um evento"
+                  formControlName="eventId"
+                  (selectionChange)="filterRequests($event.value)"
+                  >
+            <mat-option *ngFor="let event of events" [value]="event.id">
+              {{"parametros: "}} {{event.parameter}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="requestForm.get('eventId')?.hasError('required')">
+            Evento é um campo obrigatório
+          </mat-error>
+      </mat-form-field>
+
+      <!-- Description -->
+      <mat-form-field class="inputs" appearance="outline">
+        <mat-label>Descrição</mat-label>
+        <input
+        matInput
+        placeholder="Ex: Requisição de Autenticação"
+        formControlName="description"
+        [errorStateMatcher]="matcher"
+        />
+        <mat-error *ngIf="requestForm.get('description')?.hasError('required')">
+          Descrição é um campo obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <!-- uri_prod -->
+      <mat-form-field class="inputs" appearance="outline">
+        <mat-label>URI de Produção</mat-label>
+        <input
+        matInput
+        placeholder="Ex: http://aws.minhaoi.com.br"
+        formControlName="uri_prod"
+        [errorStateMatcher]="matcher"
+        />
+        <mat-error *ngIf="requestForm.get('uri_prod')?.hasError('required')">
+          URI de produção é um campo obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <!-- uri_homolog -->
+      <mat-form-field class="inputs" appearance="outline">
+        <mat-label>URI de Homolog</mat-label>
+        <input
+        matInput
+        placeholder="Ex: http://aws.homolog.minhaoi.com.br"
+        formControlName="uri_homolog"
+        [errorStateMatcher]="matcher"
+        />
+        <mat-error *ngIf="requestForm.get('uri_homolog')?.hasError('required')">
+          URI de Homolog é um campo obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <!-- layer -->
+      <mat-form-field class="inputs" appearance="outline">
+        <mat-label>Camada</mat-label>
+        <input
+        matInput
+        placeholder="Ex: Anti-fraud"
+        formControlName="layer"
+        [errorStateMatcher]="matcher"
+        />
+        <mat-error *ngIf="requestForm.get('layer')?.hasError('required')">
+          Camada é um campo obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Order -->
+      <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
+      <mat-label>Ordem</mat-label>
+          <input
+          matInput
+          placeholder="Ex: 3"
+          formControlName="order"
+          [errorStateMatcher]="matcher"
+          />
+          <mat-error *ngIf="requestForm.get('order')?.hasError('required')">
+            Ordem é um campo obrigatório
+          </mat-error>
+        </mat-form-field>
+
+        <!-- status -->
+        <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status" [errorStateMatcher]="matcher">
+            <mat-option [value]="true">Ativo</mat-option>
+            <mat-option [value]="false">Inativo</mat-option>
+          </mat-select>
+          <mat-error *ngIf="requestForm.controls['status'].hasError('required')">Active é um campo obrigatório</mat-error>
+        </mat-form-field>
+
+        <!-- request father -->
+        <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
+          <mat-label>Requisição Pai</mat-label>
+          <mat-select
+                  name="requestFatherId"
+                  placeholder="Escolha uma Requisição"
+                  formControlName="requestFatherId"
+                  [disabled]="!eventId"
+                  >
+            <mat-option *ngFor="let request of requests" [value]="request.id">
+              {{request.description}}
+            </mat-option>
+          </mat-select>
+      </mat-form-field>
+
+
+      </div>
+      <div class="action">
+          <app-spinner-button
+            type="submit"
+            (action)="submit()"
+            color="primary"
+            borderRadius="4px"
+            [fullWidth]="true"
+            [loading]="loading"
+            [disabled]="!requestForm.valid"
+          >
+            Salvar
+          </app-spinner-button>
+        </div>
+    </form>
+
+
+  </mat-card>
+</div>

@@ -1,18 +1,18 @@
-import { EventTypeService } from 'src/app/shared/services/event-type/event-type.service';
-import { Event } from './../../../../shared/model/Event';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { EventType } from 'src/app/shared/model/EventType';
+import { Project } from 'src/app/shared/model/Project';
+import { Screen } from 'src/app/shared/model/Screen';
+import { Version } from 'src/app/shared/model/Version';
+import { EventTypeService } from 'src/app/shared/services/event-type/event-type.service';
+import { EventService } from 'src/app/shared/services/event/event.service';
 import { ProjectService } from 'src/app/shared/services/project/project.service';
 import { ScreenService } from 'src/app/shared/services/screen/screen.service';
 import { VersionService } from 'src/app/shared/services/version/version.service';
-import { ErrorStateMatcher } from '@angular/material/core';
-import { EventService } from 'src/app/shared/services/event/event.service';
-import { Project } from 'src/app/shared/model/Project';
-import { Version } from 'src/app/shared/model/Version';
-import { EventType } from 'src/app/shared/model/EventType';
-import { Screen } from 'src/app/shared/model/Screen';
+import { Event } from './../../../../shared/model/Event';
 
 @Component({
   selector: 'app-event-form',

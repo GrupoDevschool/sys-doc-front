@@ -118,7 +118,7 @@ export class EventRequestComponent implements OnInit {
   }
 
   edit(request: Request) {
-    this.router.navigate(['dashboard/request/add'], { state: request });
+    this.router.navigate(['dashboard/event-request/add'], { state: request });
   }
 
 }
