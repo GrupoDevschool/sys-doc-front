@@ -4,6 +4,7 @@ import { createScreen, Screen } from '../../model/Screen';
 import { ApiService } from './../../../core/api/api.service';
 
 const URL = "/screen";
+const URL_UPLOAD = "/files"
 @Injectable({
   providedIn: 'root'
 })
@@ -24,7 +25,7 @@ export class ScreenService {
   }
 
   getByScreenFatherId(id: number): Observable<Screen[]> {
-    return this.api.get(URL + '?screenFatherId=' + id);
+    return this.api.get(URL + '?fatherScreenId=' + id);
   }
 
   create(screen: createScreen): Observable<createScreen> {
@@ -40,6 +41,6 @@ export class ScreenService {
   }
 
   uploadImage(file: File): Observable<any> {
-    return this.api.upload(URL + '/upload', file);
+    return this.api.upload(URL_UPLOAD, file);
   }
 }
