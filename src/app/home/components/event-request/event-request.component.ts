@@ -5,10 +5,12 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Event } from 'src/app/shared/model/Event';
+import { EventType } from 'src/app/shared/model/EventType';
 import { Project } from 'src/app/shared/model/Project';
 import { Request } from 'src/app/shared/model/Request';
 import { Screen } from 'src/app/shared/model/Screen';
 import { Version } from 'src/app/shared/model/Version';
+import { EventTypeService } from 'src/app/shared/services/event-type/event-type.service';
 import { ProjectService } from 'src/app/shared/services/project/project.service';
 import { RequestService } from 'src/app/shared/services/request/request.service';
 import { ScreenService } from 'src/app/shared/services/screen/screen.service';
@@ -27,6 +29,7 @@ export class EventRequestComponent implements OnInit {
   versions!: Version[];
   screens!: Screen[];
   events!: Event[];
+  eventTypes!: EventType[];
 
   displayedColumns: string[] = ['id', 'eventId', 'description' ,'uri_homolog', 'uri_prod', 'layer', 'status', 'order','actions'];
 
@@ -41,6 +44,7 @@ export class EventRequestComponent implements OnInit {
     private projectService: ProjectService,
     private versionService: VersionService,
     private screenService: ScreenService,
+    private eventTypeService: EventTypeService,
     private eventService: EventService,
     private requestService: RequestService,
     private router: Router
@@ -56,29 +60,50 @@ export class EventRequestComponent implements OnInit {
         this.projects = data;
       }
     );
+
+    this.eventTypeService.getAll().subscribe(eventTypes => {
+        this.eventTypes = eventTypes;
+      }
+    );
   }
 
   getVersionsByProjectId(projectId: number) {
-    this.versionService.getByProjectId(projectId).subscribe();
+    this.versionService.getByProjectId(projectId).subscribe(versions => {
+      this.versions = versions;
+    });
   }
 
   getScreenByVersionId(versionId: number) {
-    this.screenService.getByVersionId(versionId).subscribe();
+    this.screenService.getByVersionId(versionId).subscribe(screens => {
+      this.screens = screens;
+    });
   }
 
   getEventByScreenId(screenId: number) {
-    this.eventService.getByScreenId(screenId).subscribe();
+    this.eventService.getByScreenId(screenId).subscribe(events => {
+      this.events = events;
+    });
   }
 
   getRequestByEventId(eventId: number) {
-    this.requestService.getAllbyEventId(eventId).subscribe();
+    this.loading = true;
+
+    this.requestService.getAllbyEventId(eventId).subscribe(requests => {
+      this.dataSource = new MatTableDataSource(requests);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }).add(() => this.loading = false);
+  }
+
+  getEventTypeName(eventTypeId: number) {
+    return this.eventTypes.find(eventType => eventType.id === eventTypeId)?.name ?? '';
   }
 
   reloadData() {
     this.loading = true;
     this.requestService.getAll().subscribe(
-      (data: Request[]) => {
-        this.dataSource = new MatTableDataSource(data);
+      requests => {
+        this.dataSource = new MatTableDataSource(requests);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.loading = false;
@@ -92,8 +117,8 @@ export class EventRequestComponent implements OnInit {
     });
   }
 
-  edit(eventType: Event) {
-    this.router.navigate(['dashboard/event-type/add'], { state: eventType });
+  edit(request: Request) {
+    this.router.navigate(['dashboard/request/add'], { state: request });
   }
 
 }

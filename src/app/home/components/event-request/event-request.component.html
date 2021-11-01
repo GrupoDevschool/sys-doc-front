@@ -61,13 +61,13 @@
       <mat-form-field floatPlaceholder="never" appearance="outline">
         <mat-label>Filtrar por Eventos</mat-label>
         <mat-select name="eventType"
-                    #filterEventType
-                    placeholder="Escolha um tipo de evento"
+                    #filterEvent
+                    placeholder="Escolha um evento"
                     (selectionChange)="getRequestByEventId($event.value)"
-                    [disabled]="!events?.length">
+                    [disabled]="!events?.length"
                     >
           <mat-option *ngFor="let event of events" [value]="event.id">
-            {{event.parameter}}
+            {{getEventTypeName(event.eventTypeId)}} {{" parametros: "}} {{event.parameter}}
           </mat-option>
         </mat-select>
       </mat-form-field>
