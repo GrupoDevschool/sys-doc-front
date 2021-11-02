@@ -16,17 +16,15 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 })
 export class DashboardComponent implements OnInit {
   customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: true,
+    loop: false,
+    autoWidth: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
     navSpeed: 700,
     navText: ['', ''],
     margin: 10,
-    center: true,
     items: 3,
-    nav: true,
   };
 
   projectId!: number;
