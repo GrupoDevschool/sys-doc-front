@@ -35,7 +35,7 @@ export class EventRequestPropertyComponent implements OnInit {
   eventTypes!: EventType[];
   requests!: Request[];
 
-  displayedColumns: string[] = ['id', 'requestId', 'key' ,'value', 'order'];
+  displayedColumns: string[] = ['id', 'requestId', 'key' ,'value', 'order', 'actions'];
 
   selection = new SelectionModel<string>(true, []);
 
