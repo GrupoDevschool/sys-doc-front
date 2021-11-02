@@ -13,12 +13,11 @@ import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
 import { MaterialCommonModule, MODULES } from './shared/module/material.module';
 import { SharedModule } from './shared/module/shared.module';
+import { ScreenCarouselComponent } from './shared/components/screen-carousel/screen-carousel.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-  ],
+  declarations: [AppComponent, LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,16 +30,14 @@ import { SharedModule } from './shared/module/shared.module';
     ToastrModule.forRoot({
       timeOut: 4000,
       progressBar: true,
-    })
+    }),
   ],
-  exports: [
-    ...MODULES,
-  ],
+  exports: [...MODULES],
   providers: [
     AuthGuardService,
     LoginService,
-    { provide: ErrorHandler, useClass: GlobalErrorHandler }
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

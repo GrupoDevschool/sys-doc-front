@@ -7,6 +7,7 @@ import { EventService } from 'src/app/shared/services/event/event.service';
 import { ProjectService } from 'src/app/shared/services/project/project.service';
 import { ScreenService } from 'src/app/shared/services/screen/screen.service';
 import { VersionService } from 'src/app/shared/services/version/version.service';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +15,20 @@ import { VersionService } from 'src/app/shared/services/version/version.service'
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+  customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: true,
+    navSpeed: 700,
+    navText: ['', ''],
+    margin: 10,
+    center: true,
+    items: 3,
+    nav: true,
+  };
+
   projectId!: number;
   versionId!: number;
   screenId!: number;
@@ -75,6 +90,20 @@ export class DashboardComponent implements OnInit {
             this.filhos = screens;
           });
       }
+
+      if (this.screenSelecionada?.fatherScreenId) {
+        this.screenService
+          .getById(this.screenSelecionada.fatherScreenId)
+          .subscribe((screen) => {
+            if (screen.fatherScreenId) {
+              this.screenService
+                .getByScreenFatherId(screen.fatherScreenId)
+                .subscribe((screens) => {
+                  this.paiEIrmaos = screens;
+                });
+            }
+          });
+      }
     });
   }
 
@@ -89,6 +118,63 @@ export class DashboardComponent implements OnInit {
 
     this.screenService.getById(id as number).subscribe((screen) => {
       this.screenSelecionada = screen;
+
+      if (this.screenSelecionada.id) {
+        this.eventService
+          .getByScreenId(this.screenSelecionada.id)
+          .subscribe((events) => {
+            this.events = events;
+          });
+      }
+
+      if (this.screenSelecionada.fatherScreenId) {
+        this.screenService
+          .getByScreenFatherId(this.screenSelecionada.fatherScreenId)
+          .subscribe((screens) => {
+            this.atualEIrmaos = screens;
+          });
+      } else {
+        this.screenService
+          .getByVersionId(this.versionId)
+          .subscribe((screens) => {
+            this.atualEIrmaos = screens.filter(
+              (screen) => screen.fatherScreenId === undefined
+            );
+          });
+      }
+
+      if (this.screenSelecionada.id) {
+        this.screenService
+          .getByScreenFatherId(this.screenSelecionada.id)
+          .subscribe((screens) => {
+            this.filhos = screens;
+          });
+      }
+
+      if (this.screenSelecionada?.fatherScreenId) {
+        this.screenService
+          .getById(this.screenSelecionada.fatherScreenId)
+          .subscribe((screen) => {
+            if (screen.fatherScreenId) {
+              this.screenService
+                .getByScreenFatherId(screen.fatherScreenId)
+                .subscribe((screens) => {
+                  this.paiEIrmaos = screens;
+                });
+            } else {
+              this.screenService
+                .getByVersionId(this.versionId)
+                .subscribe((screens) => {
+                  this.paiEIrmaos = screens.filter(
+                    (screen) => screen.fatherScreenId === undefined
+                  );
+                  console.log(this.paiEIrmaos);
+                });
+            }
+          });
+      } else {
+        this.paiEIrmaos = [];
+      }
     });
   }
 }

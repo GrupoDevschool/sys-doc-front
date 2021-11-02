@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   ErrorStateMatcher,
-  ShowOnDirtyErrorStateMatcher
+  ShowOnDirtyErrorStateMatcher,
 } from '@angular/material/core';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 import { SharedModule } from '../shared/module/shared.module';
 import { MaterialCommonModule } from './../shared/module/material.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -62,6 +63,7 @@ import { MenuComponent } from './menu/menu.component';
     FormsModule,
     ReactiveFormsModule,
     MaterialFileInputModule,
+    CarouselModule,
   ],
   exports: [HomeComponent],
 })

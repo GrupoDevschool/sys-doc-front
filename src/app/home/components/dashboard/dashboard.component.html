@@ -62,14 +62,29 @@
         </div>
       </div>
       <div class="childs">
-        <div *ngFor="let screen of filhos">
+        <owl-carousel-o class="full" [options]="customOptions">
+          <ng-container *ngFor="let screen of filhos">
+            <ng-template class="child-img" carouselSlide>
+              <img
+                [src]="screen?.image"
+                (click)="handleScreenChange(screen?.id)"
+              />
+            </ng-template>
+          </ng-container>
+          <div class="owl-dots">
+            <div class="owl-dot active"><span></span></div>
+            <div class="owl-dot"><span></span></div>
+            <div class="owl-dot"><span></span></div>
+          </div>
+        </owl-carousel-o>
+        <!-- <div *ngFor="let screen of filhos">
           <div class="child-img">
             <img
               [src]="screen?.image"
               (click)="handleScreenChange(screen?.id)"
             />
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
