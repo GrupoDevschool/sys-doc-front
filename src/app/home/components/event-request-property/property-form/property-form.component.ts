@@ -185,7 +185,7 @@ export class PropertyFormComponent implements OnInit {
   }
 
   showSuccess(message: string){
-    this.toastr.success(message, "Evento Salvo")
+    this.toastr.success(message, "Propriedade de requisição Salva")
   }
 
 }

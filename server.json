@@ -313,12 +313,36 @@
       "eventTypeId": 3
     },
     {
+      "id": 4,
+      "active": true,
+      "order": 1,
+      "parameter": "path",
+      "screenId": 2,
+      "eventTypeId": 1
+    },
+    {
+      "id": 5,
+      "active": true,
+      "order": 1,
+      "parameter": "userData",
+      "screenId": 2,
+      "eventTypeId": 2
+    },
+    {
       "id": 6,
       "active": false,
       "order": 1,
       "parameter": "tokenJWT",
       "screenId": 2,
       "eventTypeId": 2
+    },
+    {
+      "active": true,
+      "order": "3",
+      "parameter": "1",
+      "screenId": 6,
+      "eventTypeId": 2,
+      "id": 7
     }
   ],
   "request": [
@@ -361,6 +385,17 @@
       "description": "Valida o token",
       "layer": "auth api",
       "status": true,
+      "order": 1
+    },
+    {
+      "id": 5,
+      "uri_homolog": "http://aws.minhaoi.mobicare.hml.com/v1/api/data",
+      "eventId": 4,
+      "requestFatherId": 4,
+      "uri_prod": "http://aws.minhaoi.mobicare.com/v1/api/auth",
+      "description": "Log das informações do usuário",
+      "layer": "auth api",
+      "status": false,
       "order": 1
     }
   ],
