@@ -61,9 +61,10 @@ export class PropertyFormComponent implements OnInit {
   ngOnInit(): void {
     this.getAllProjects();
     this.getAllEvents();
+    this.getAllRequests();
 
     this.requestPropertyForm = this.formBuilder.group({
-      id: new FormControl(this.updateRequestProperties?.requestPropertyId ?? null),
+      requestPropertyId: new FormControl(this.updateRequestProperties?.requestPropertyId ?? null),
       requestId: new FormControl(this.updateRequestProperties?.requestId ?? null, [Validators.required]),
       key: new FormControl(this.updateRequestProperties?.key ?? '', [Validators.required]),
       value: new FormControl(this.updateRequestProperties?.value ?? null, [Validators.required]),
@@ -130,6 +131,12 @@ export class PropertyFormComponent implements OnInit {
   getAllEvents(){
     this.eventService.getAll().subscribe((events) => {
       this.events = events;
+    })
+  }
+
+  getAllRequests(){
+    this.requestService.getAll().subscribe((requests) => {
+      this.requests = requests;
     })
   }
 

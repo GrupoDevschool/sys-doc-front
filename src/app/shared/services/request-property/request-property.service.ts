@@ -16,7 +16,7 @@ export class RequestPropertyService {
   }
 
   getAllByRequestId(requestPropertyId: number): Observable<RequestProperty[]> {
-    return this.api.get(URL + '?requestPropertyId' + requestPropertyId);
+    return this.api.get(URL + '?requestPropertyId=' + requestPropertyId);
   }
 
   getById(id: number): Observable<RequestProperty> {

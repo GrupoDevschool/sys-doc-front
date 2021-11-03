@@ -35,7 +35,7 @@ export class EventRequestPropertyComponent implements OnInit {
   eventTypes!: EventType[];
   requests!: Request[];
 
-  displayedColumns: string[] = ['id', 'requestId', 'key' ,'value', 'order', 'actions'];
+  displayedColumns: string[] = ['requestPropertyId', 'requestId', 'key' ,'value', 'order', 'actions'];
 
   selection = new SelectionModel<string>(true, []);
 
@@ -137,7 +137,7 @@ export class EventRequestPropertyComponent implements OnInit {
   }
 
   edit(requestProperty: RequestProperty) {
-    this.router.navigate(['dashboard/event-request-property/add'], { state: requestProperty });
+    this.router.navigate(['dashboard/request-property/add'], { state: requestProperty });
   }
 
 }
