@@ -23,37 +23,75 @@
 
       .father {
         width: 100%;
-        height: 150px;
+        height: 200px;
 
-        margin-bottom: 50px;
+        margin-bottom: 20px;
 
-        owl-carousel-o {
+        display: flex;
+        column-gap: 10px;
+
+        .child-img {
+          width: 150px;
+          height: 180px;
+          cursor: pointer;
+          flex-grow: 0;
+
           img {
-            height: 150px;
+            width: 100%;
+            height: 100%;
           }
         }
+        // owl-carousel-o {
+        //   img {
+        //     height: 150px;
+        //   }
+        // }
       }
 
       .me {
         width: 100%;
-        height: 150px;
+        height: 200px;
 
-        margin-bottom: 50px;
+        margin-bottom: 20px;
 
-        owl-carousel-o {
+        display: flex;
+        column-gap: 10px;
+
+        .child-img {
+          width: 150px;
+          height: 180px;
+          cursor: pointer;
+          flex-grow: 0;
+
           img {
-            height: 150px;
+            width: 100%;
+            height: 100%;
           }
         }
+        // owl-carousel-o {
+        //   img {
+        //     height: 150px;
+        //   }
+        // }
       }
 
       .childs {
         width: 100%;
-        height: 150px;
+        height: 200px;
+        overflow-x: scroll;
 
-        owl-carousel-o {
+        display: flex;
+        column-gap: 10px;
+
+        .child-img {
+          width: 150px;
+          height: 180px;
+          cursor: pointer;
+          flex-grow: 0;
+
           img {
-            height: 150px;
+            width: 100%;
+            height: 100%;
           }
         }
       }
