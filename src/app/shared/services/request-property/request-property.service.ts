@@ -29,7 +29,7 @@ export class RequestPropertyService {
 
   update(requestProperty: RequestProperty): Observable<RequestProperty> {
     return this.api.put(
-      URL + '/' + requestProperty.requestPropertyId,
+      URL + '/' + requestProperty.id,
       requestProperty
     );
   }

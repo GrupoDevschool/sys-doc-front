@@ -63,7 +63,7 @@ export class PropertyFormComponent implements OnInit {
     this.getAllRequests();
 
     this.requestPropertyForm = this.formBuilder.group({
-      requestPropertyId: new FormControl(this.updateRequestProperties?.requestPropertyId ?? null),
+      id: new FormControl(this.updateRequestProperties?.id ?? null),
       requestId: new FormControl(this.updateRequestProperties?.requestId ?? null, [Validators.required]),
       key: new FormControl(this.updateRequestProperties?.key ?? '', [Validators.required]),
       value: new FormControl(this.updateRequestProperties?.value ?? null, [Validators.required]),
@@ -77,9 +77,9 @@ export class PropertyFormComponent implements OnInit {
 
       this.loading = true;
 
-      if (formFields.requestPropertyId) {
+      if (formFields.id) {
         const updateRequestProperties: any = {
-          requestPropertyId: formFields.requestPropertyId,
+          id: formFields.id,
           requestId: formFields.requestId,
           key: formFields.key,
           order: formFields.order,

@@ -130,8 +130,8 @@ export class EventRequestPropertyComponent implements OnInit {
     ).add(() => this.loading = false);
   }
 
-  delete(requestPropertyId: number) {
-    this.requestPropertyService.delete(requestPropertyId).subscribe(() => {
+  delete(id: number) {
+    this.requestPropertyService.delete(id).subscribe(() => {
       this.reloadData();
     });
   }

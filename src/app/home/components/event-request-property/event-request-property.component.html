@@ -96,7 +96,7 @@
       <!-- Id column -->
       <ng-container matColumnDef="requestPropertyId">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
-        <td mat-cell *matCellDef="let requestProperty">{{ requestProperty.requestPropertyId }}</td>
+        <td mat-cell *matCellDef="let requestProperty">{{ requestProperty.id }}</td>
       </ng-container>
 
       <!-- requestId column -->
@@ -136,7 +136,7 @@
           <button
             mat-raised-button
             color="warn"
-            (click)="delete(requestProperty.requestPropertyId)"
+            (click)="delete(requestProperty.id)"
             class="delete"
           >
             <mat-icon>close</mat-icon>
