@@ -70,7 +70,7 @@ export class RequestFormComponent implements OnInit {
       status: new FormControl(this.updateRequest?.status? true : false, [Validators.required]),
       uri_homolog: new FormControl(this.updateRequest?.uri_homolog ?? '', [Validators.required]),
       uri_prod: new FormControl(this.updateRequest?.uri_prod ?? '', [Validators.required]),
-      requestFatherId: new FormControl(this.updateRequest?.requestFatherId ?? null, [Validators.required]),
+      requestFatherId: new FormControl(this.updateRequest?.requestFatherId ?? null),
       order: new FormControl(this.updateRequest?.order ?? null, [Validators.required]),
     });
 
@@ -109,10 +109,10 @@ export class RequestFormComponent implements OnInit {
         this.requestService.update(updateRequest).subscribe(
           data => {
             this.showSuccess("Requisição atualizada com sucesso!");
-            this.router.navigate(['dashboard/request']);
+            this.router.navigate(['dashboard/event-request']);
           },
           error => {
-            this.showError(error.message);
+            this.showError(error.error.message);
           }
         ).add(() => {
           this.loading = false;
@@ -135,11 +135,11 @@ export class RequestFormComponent implements OnInit {
 
         this.requestService.create(newRequest).subscribe(
           data => {
-            this.showSuccess("Evento criado com sucesso!");
-            this.router.navigate(["dashboard/event"]);
+            this.showSuccess("Requisição criada com sucesso!");
+            this.router.navigate(["dashboard/event-request"]);
           },
           error => {
-            this.showError(error.message);
+            this.showError(error.error.message);
           }
         ).add(() => {
           this.loading = false;
@@ -153,7 +153,7 @@ export class RequestFormComponent implements OnInit {
   }
 
   showSuccess(message: string){
-    this.toastr.success(message, "Evento Salvo")
+    this.toastr.success(message, "Requisição Salva")
   }
 
   filterVersions(projectId: number) {

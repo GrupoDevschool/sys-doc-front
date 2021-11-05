@@ -81,12 +81,12 @@ export class ScreenComponent  implements OnInit {
 
   getScreenByVersionId(id: number){
     this.loading = true;
-    console.log(this.loading);
     this.screens = [];
     this.setDataSource();
 
     this.screensService.getByVersionId(id).subscribe((screens) => {
       this.screens = screens;
+      console.log(screens);
       this.setDataSource();
     }).add(() => {this.loading = false});
   }

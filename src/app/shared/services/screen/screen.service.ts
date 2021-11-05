@@ -4,7 +4,7 @@ import { createScreen, Screen } from '../../model/Screen';
 import { ApiService } from './../../../core/api/api.service';
 
 const URL = "/screen";
-const URL_UPLOAD = "/files"
+const URL_UPLOAD = "/image"
 @Injectable({
   providedIn: 'root'
 })

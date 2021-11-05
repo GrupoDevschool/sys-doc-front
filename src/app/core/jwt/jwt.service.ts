@@ -16,24 +16,24 @@ export class JwtService {
     return this.jwtToken !== '';
   }
 
+  // called on login
   setToken(token: string | null) {
     if (token) {
       this.jwtToken = token;
       this.decodeToken();
+      this.decodedToken.iat ? new Date(Number(this.decodedToken.iat) * 1000) : '';
       this.loginDate = new Date().toISOString();
       this.setInStorage('sysdocjwt', token);
-      this.setInStorage('sysdocdate', this.loginDate);
     }
   }
 
+  // called on guard route to get the token
   getToken() {
     if (!this.hasToken()) {
       const token = this.getInStorage('sysdocjwt');
-      const date = this.getInStorage('sysdocdate');
-      this.loginDate = date ? date : '';
       this.jwtToken = token ? token : '';
       this.decodeToken();
-
+      this.decodedToken.iat ? new Date(Number(this.decodedToken.iat) * 1000) : '';
     }
   }
 
@@ -52,11 +52,11 @@ export class JwtService {
   }
 
   getUserId(): Number | null {
-    return this.decodedToken ? Number(this.decodedToken.id) : null;
+    return this.decodedToken ? Number(this.decodedToken.sub) : null;
   }
 
   getUserName(): string | null {
-    return this.decodedToken ? this.decodedToken.name : null;
+    return this.decodedToken ? this.decodedToken.nome : null;
   }
 
   getEmail(): string | null {
@@ -71,9 +71,11 @@ export class JwtService {
     return this.loginDate;
   }
 
+  // called on guard to check if token is expired
   isTokenExpired(): boolean {
     const time = this.getExpiryTime();
-    const expiryTime = time ? new Date(time) : null;
+    // convert miliseconds to seconds
+    const expiryTime = time ? new Date(Number(time)*1000) : null;
 
     if (expiryTime) {
       return new Date() > expiryTime;

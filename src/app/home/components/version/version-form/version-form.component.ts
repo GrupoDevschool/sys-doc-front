@@ -80,10 +80,10 @@ export class VersionFormComponent implements OnInit {
         this.versionService.update(updateVersion).subscribe(
           data => {
             this.showSucess("Versão atualizada com sucesso!");
-            this.router.navigate(['dashboard/project']);
+            this.router.navigate(['dashboard/version']);
           },
           error => {
-            this.showError(error.message);
+            this.showError(error.error.message);
           }
         ).add(() => {
           this.loading = false;
@@ -110,7 +110,7 @@ export class VersionFormComponent implements OnInit {
             this.router.navigate(['dashboard/version']);
           },
           error => {
-            this.showError(error.message);
+            this.showError(error.error.message);
           }
         ).add(() => {
           this.loading = false;

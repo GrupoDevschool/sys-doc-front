@@ -73,7 +73,7 @@ export class ApiService {
   private getHttpOptions() {
     const authToken = this.loginService.getToken();
     if (authToken !== '') {
-      this.httpOptions = this.httpOptions.set('Authorization', authToken);
+      this.httpOptions = this.httpOptions.set('Authorization', 'Bearer ' + authToken);
     }
   }
 

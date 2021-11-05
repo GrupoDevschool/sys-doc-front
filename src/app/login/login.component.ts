@@ -35,14 +35,14 @@ export class LoginComponent {
           this.router.navigate(['/']);
         },
         error => {
-          this.showError(error.message);
+          this.showError();
         }
       ).add(() => {
         this.loading = false;
       });
   }
 
-  showError(message: string){
-    this.toastr.error(message, "Usuário inválido")
+  showError(){
+    this.toastr.error("Login inválido")
   }
 }

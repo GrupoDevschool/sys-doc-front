@@ -28,6 +28,7 @@ export class ScreenFormComponent implements OnInit {
   screenForm!: FormGroup;
   matcher = new ErrorStateMatcher;
   loading: boolean = false;
+  url!: string;
   updateScreen: Screen | undefined;
 
   constructor(
@@ -52,7 +53,9 @@ export class ScreenFormComponent implements OnInit {
         }
       );
 
-        this.filterScreens(this.updateScreen.versionId);
+      this.url = this.updateScreen.image;
+
+      this.filterScreens(this.updateScreen.versionId);
     }
 
     this.screenForm = this.formBuilder.group({
@@ -80,6 +83,7 @@ export class ScreenFormComponent implements OnInit {
           id: formFields.id,
           name: formFields.name,
           active: formFields.active,
+          image: this.url,
           order: formFields.order,
           urlog: formFields.urlog,
           versionId: formFields.versionId,
@@ -98,7 +102,7 @@ export class ScreenFormComponent implements OnInit {
               this.router.navigate(['dashboard/screen']);
             },
             error => {
-              this.showError(error.message);
+              this.showError(error.error.message);
             }
           ).add(() => {
           this.loading = false;
@@ -110,7 +114,7 @@ export class ScreenFormComponent implements OnInit {
               this.router.navigate(['dashboard/screen']);
             },
             error => {
-              this.showError(error.message);
+              this.showError(error.error.message);
             }
           ).add(() => {
             this.loading = false;
@@ -141,7 +145,7 @@ export class ScreenFormComponent implements OnInit {
             this.router.navigate(['dashboard/screen']);
           },
           error => {
-            this.showError(error.message);
+            this.showError(error.error.message);
           }
         ).add(() => {
         this.loading = false;
@@ -153,7 +157,7 @@ export class ScreenFormComponent implements OnInit {
             this.router.navigate(['dashboard/Screen']);
           },
           error => {
-            this.showError(error.message);
+            this.showError(error.error.message);
           }
         ).add(() => {
           this.loading = false;
@@ -171,8 +175,14 @@ export class ScreenFormComponent implements OnInit {
   }
 
   async uploadImage(file: any): Promise<string> {
-    const url = await this.screenService.uploadImage(file).toPromise();
-    return url;
+    try {
+      const url = await this.screenService.uploadImage(file).toPromise();
+      return url;
+    } catch (error) {
+      this.loading = false;
+      throw error;
+    }
+
   }
 
   filterVersions(projectId: number) {

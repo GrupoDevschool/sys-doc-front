@@ -1,6 +1,7 @@
 {
-  "login": {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkpvaG4gRG9lIiwiZW1haWwiOiJqaG9uQGV4YW1wbGUuY29tIiwiZXhwIjoiMDUvMDEvMjAyMiJ9.nQMT15cqX0i4IjKtxj-lLveWWJqsRCz7vJjMgSCIgjQ"
+  "auth": {
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzaXNkb2MiLCJzdWIiOiIxIiwibm9tZSI6Ik5vbWUgRXhhbXBsbyIsImVtYWlsIjoiZXhhbXBsZUBnbWFpbC5jb20iLCJpYXQiOjE2MzYwNjMzMDYsImV4cCI6MTYzNjkyNzMwNn0.lvnADXOhxA3M8aAduo-nAQBdjO5K_HPDixq6l6-vUYA",
+    "type": "Bearer"
   },
   "project": [
     {

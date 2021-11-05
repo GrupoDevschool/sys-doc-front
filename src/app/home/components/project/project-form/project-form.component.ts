@@ -54,7 +54,7 @@ export class ProjectFormComponent implements OnInit {
             this.router.navigate(['dashboard/project']);
           },
           error => {
-            this.showError(error.message);
+            this.showError(error.error.message);
           }
         ).add(() => {
           this.loading = false;
@@ -72,7 +72,7 @@ export class ProjectFormComponent implements OnInit {
             this.router.navigate(['dashboard/project']);
           },
           error => {
-            this.showError(error.message);
+            this.showError(error.error.message);
           }
         ).add(() => {
           this.loading = false;

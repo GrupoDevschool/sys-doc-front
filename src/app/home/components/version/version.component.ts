@@ -55,10 +55,8 @@ export class VersionComponent implements OnInit {
 
   delete(id: number){
     this.versionService.delete(id).subscribe(() => {
-      this.versions = this.versions.filter((element) => element.id != id)
-      }
-    )
-    this.reloadData();
+      this.reloadData();
+    })
   }
 
   edit(version: Version){

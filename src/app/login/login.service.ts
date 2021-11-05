@@ -12,8 +12,8 @@ interface LoginData {
 }
 
 interface LoginResponse {
-  headers?: any;
   token: string;
+  type: string;
 }
 
 const URL_API: string = environment.URL;
@@ -38,13 +38,8 @@ export class LoginService {
   login(loginData: LoginData): Observable<LoginResponse> {
     loginData.password = this.encriptPassword(loginData.password);
 
-    return this.http.get<any>(URL_API + '/login');
-    /*return this.http.post<any>(URL_API + '/login', loginData).pipe(
-      tap((res) => {
-        const authToken = res.headers.get('x-access-token') ?? '';
-        this.setToken(authToken)
-      })
-    )*/
+    return this.http.get<any>(URL_API + '/auth');
+    // return this.http.post<any>(URL_API + '/auth', loginData);
   }
 
   setToken(token: string) {

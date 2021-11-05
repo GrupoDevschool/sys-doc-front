@@ -3,7 +3,7 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
-  Validators,
+  Validators
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
@@ -68,7 +68,7 @@ export class EventTypeFormComponent implements OnInit {
               this.router.navigate(['dashboard/event-type']);
             },
             (error) => {
-              this.showError(error.message);
+              this.showError(error.error.message);
             }
           )
           .add(() => {
@@ -88,7 +88,7 @@ export class EventTypeFormComponent implements OnInit {
               this.router.navigate(['dashboard/event-type']);
             },
             (error) => {
-              this.showError(error.message);
+              this.showError(error.error.message);
             }
           )
           .add(() => {

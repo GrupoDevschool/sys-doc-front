@@ -3,6 +3,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from '@angular/material/card';
+import { MatNativeDateModule } from "@angular/material/core";
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -21,6 +22,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+
 
 export const MODULES = [
   MatButtonModule,
@@ -44,7 +46,8 @@ export const MODULES = [
   MatRadioModule,
   MatSelectModule,
   MatSlideToggleModule,
-  MatTabsModule
+  MatTabsModule,
+  MatNativeDateModule
 ]
 
 

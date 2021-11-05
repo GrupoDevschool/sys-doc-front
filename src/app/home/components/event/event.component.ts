@@ -168,11 +168,8 @@ export class EventComponent implements OnInit {
 
   delete(id: number){
     this.eventsService.delete(id).subscribe(() => {
-      this.events = this.events.filter((element) => element.id != id)
-      }
-    )
-
-    this.reloadData();
+      this.reloadData();
+    });
   }
 
   edit(event: Event){

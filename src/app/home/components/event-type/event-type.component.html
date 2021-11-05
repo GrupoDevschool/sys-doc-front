@@ -39,9 +39,8 @@
         <td
           mat-cell
           *matCellDef="let eventType"
-          [style.color]="eventType.status ? 'green' : 'red'"
         >
-          {{ eventType.status }}
+        <app-status-tag>{{eventType.status ? 'ativo' : 'inativo'}}</app-status-tag>
         </td>
       </ng-container>
 

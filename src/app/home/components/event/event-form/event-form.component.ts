@@ -87,7 +87,7 @@ export class EventFormComponent implements OnInit {
             this.router.navigate(['dashboard/event']);
           },
           error => {
-            this.showError(error.message);
+            this.showError(error.error.message);
           }
         ).add(() => {
           this.loading = false;
@@ -108,7 +108,7 @@ export class EventFormComponent implements OnInit {
             this.router.navigate(["dashboard/event"]);
           },
           error => {
-            this.showError(error.message);
+            this.showError(error.error.message);
           }
         ).add(() => {
           this.loading = false;

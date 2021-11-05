@@ -14,18 +14,18 @@
 
       <div>
           <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
-            <mat-label>Id do projeto</mat-label>
+            <mat-label>Projeto</mat-label>
             <mat-select #filterProject
                     name="projeto"
                     placeholder="Escolha um projeto"
                     formControlName="projectId"
                     >
-              <mat-option *ngFor="let project of    projects" [value]="project.id">
+              <mat-option *ngFor="let project of projects" [value]="project.id">
             {{project.name}}
               </mat-option>
             </mat-select>
             <mat-error *ngIf="versionForm.get('projectId')?.hasError('required')">
-              Id do projeto é um campo obrigatório
+              Projeto é um campo obrigatório
             </mat-error>
           </mat-form-field>
 
@@ -60,10 +60,13 @@
           <mat-label>Data</mat-label>
           <input
           matInput
+          [matDatepicker]="picker"
           placeholder="Ex: 09/10/2021"
           formControlName="date"
           [errorStateMatcher]="matcher"
           />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
           <mat-error *ngIf="versionForm.get('date')?.hasError('required')">
             Data é um campo obrigatório
           </mat-error>

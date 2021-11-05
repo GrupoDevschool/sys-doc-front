@@ -59,10 +59,8 @@ export class ProjectComponent implements OnInit, AfterViewInit {
 
   delete(id: number){
     this.projectsService.delete(id).subscribe(() => {
-      this.projects = this.projects.filter((element) => element.id != id)
-      }
-    )
-    this.reloadData();
+      this.reloadData();
+    })
   }
 
   edit(project: Project){
