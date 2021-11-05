@@ -1,1 +1,143 @@
-<p>property-form works!</p>
+<div class="container">
+  <mat-card class="mat-card">
+      <mat-card-title>Cadastrar nova Propriedade de Requisição de Evento</mat-card-title>
+      <button mat-raised-button color="accent" routerLink="..">voltar</button>
+  </mat-card>
+
+  <mat-card class="mat-card2 ui-g">
+    <form [formGroup]="requestPropertyForm">
+      <input
+      type="number"
+      formControlName="id"
+      hidden
+      />
+
+      <div>
+        <!-- Projeto -->
+        <mat-form-field class="" appearance="outline">
+          <mat-label>Projeto</mat-label>
+          <mat-select
+            name="project"
+            placeholder="Ex: Minha Oi"
+            (selectionChange)="filterVersions($event.value)"
+            [(ngModel)]="projectId"
+          >
+            <mat-option *ngFor="let project of projects" [value]="project.id">{{project.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Versão -->
+        <mat-form-field class="" appearance="outline">
+          <mat-label>Versão</mat-label>
+          <mat-select
+            [errorStateMatcher]="matcher"
+            [disabled]="!projectId"
+            (selectionChange)="filterScreens($event.value)"
+          >
+            <mat-option *ngFor="let version of versions" [value]="version.id">{{version.number}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Tela -->
+        <mat-form-field class="" appearance="outline">
+          <mat-label>Tela</mat-label>
+          <mat-select
+            [errorStateMatcher]="matcher"
+            [disabled]="!versionId"
+            (selectionChange)="filterEvents($event.value)"
+          >
+            <mat-option *ngFor="let screen of screens" [value]="screen.id">{{screen.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Evento -->
+        <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
+          <mat-label>Evento</mat-label>
+          <mat-select
+                  [disabled]="!screenId"
+                  placeholder="Escolha um evento"
+                  (selectionChange)="filterRequests($event.value)"
+                  >
+            <mat-option *ngFor="let event of events" [value]="event.id">
+              {{"parametros: "}} {{event.parameter}}
+            </mat-option>
+          </mat-select>
+      </mat-form-field>
+
+      <!-- Request -->
+        <mat-form-field class="" appearance="outline">
+          <mat-label>Requisição</mat-label>
+          <mat-select
+            name="requestId"
+            formControlName="requestId"
+            [errorStateMatcher]="matcher"
+            (selectionChange)="filterRequestProperties($event.value)"
+          >
+            <mat-option *ngFor="let request of requests" [value]="request.id">{{request.description}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="requestPropertyForm.get('requestId')?.hasError('required')">
+            Requisição é um campo obrigatório
+          </mat-error>
+        </mat-form-field>
+
+      <!-- Key -->
+      <mat-form-field class="inputs" appearance="outline">
+        <mat-label>Chave</mat-label>
+        <input
+        matInput
+        placeholder="Ex: jwt"
+        formControlName="key"
+        [errorStateMatcher]="matcher"
+        />
+        <mat-error *ngIf="requestPropertyForm.get('key')?.hasError('required')">
+          Chave é um campo obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Value -->
+      <mat-form-field class="inputs" appearance="outline">
+        <mat-label>Valor</mat-label>
+        <input
+        matInput
+        placeholder="Ex: 2"
+        formControlName="value"
+        [errorStateMatcher]="matcher"
+        />
+        <mat-error *ngIf="requestPropertyForm.get('value')?.hasError('required')">
+          Valor é um campo obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Order -->
+      <mat-form-field class="inputs" appearance="outline">
+        <mat-label>Ordem</mat-label>
+        <input
+        matInput
+        placeholder="Ex: 1"
+        formControlName="order"
+        [errorStateMatcher]="matcher"
+        />
+        <mat-error *ngIf="requestPropertyForm.get('order')?.hasError('required')">
+          Ordem é um campo obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      </div>
+      <div class="action">
+          <app-spinner-button
+            type="submit"
+            (action)="submit()"
+            color="primary"
+            borderRadius="4px"
+            [fullWidth]="true"
+            [loading]="loading"
+            [disabled]="!requestPropertyForm.valid"
+          >
+            Salvar
+          </app-spinner-button>
+        </div>
+    </form>
+
+
+  </mat-card>
+</div>

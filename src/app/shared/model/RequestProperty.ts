@@ -1,5 +1,5 @@
 export interface RequestProperty {
-  requestPropertyId?: number;
+  id?: number;
   requestId: number;
   key: string;
   value: number;

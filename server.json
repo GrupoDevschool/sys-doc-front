@@ -402,39 +402,39 @@
   ],
   "requestProperty": [
     {
-      "requestPropertyId": 1,
+      "id": 1,
       "requestId": 1,
       "key": "cache",
       "value": 1,
       "order": "Sei la"
     },
     {
-      "requestPropertyId": 2,
+      "id": 2,
       "requestId": 1,
       "key": "email",
       "value": 2,
       "order": "sei la"
     },
     {
-      "requestPropertyId": 3,
+      "id": 3,
       "requestId": 3,
       "key": "jwt",
       "value": 1,
       "order": "sei la"
     },
     {
-      "requestPropertyId": 4,
+      "id": 4,
       "requestId": 3,
       "key": "redis",
       "value": 2,
       "order": "sei la"
     },
     {
-      "requestPropertyId": 5,
+      "id": 5,
       "requestId": 3,
       "key": "log",
-      "value": 3,
-      "order": "sei la"
+      "order": "sei la",
+      "value": 3
     }
   ]
 }
