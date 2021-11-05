@@ -99,19 +99,19 @@
         <td mat-cell *matCellDef="let requestProperty">{{ requestProperty.requestPropertyId }}</td>
       </ng-container>
 
-      <!-- eventId column -->
+      <!-- requestId column -->
       <ng-container matColumnDef="requestId">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Id da Requisição</th>
         <td mat-cell *matCellDef="let requestProperty">{{ requestProperty.requestId }}</td>
       </ng-container>
 
-       <!-- description column -->
+       <!-- key column -->
        <ng-container matColumnDef="key">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Chave</th>
         <td mat-cell *matCellDef="let requestProperty">{{ requestProperty.key }}</td>
       </ng-container>
 
-      <!-- uri_prod column -->
+      <!-- value column -->
       <ng-container matColumnDef="value">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
           Valor
@@ -119,7 +119,7 @@
         <td mat-cell *matCellDef="let requestProperty">{{ requestProperty.value }}</td>
       </ng-container>
 
-      <!-- uri_homolog column -->
+      <!-- order column -->
       <ng-container matColumnDef="order">
         <th mat-header-cell  *matHeaderCellDef mat-sort-header>
           Order

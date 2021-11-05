@@ -26,7 +26,7 @@ import { Router } from '@angular/router';
 })
 export class EventRequestPropertyComponent implements OnInit {
 
-  dataSource!: MatTableDataSource<RequestProperty>;
+  dataSource!: MatTableDataSource<any>;
 
   projects!: Project[];
   versions!: Version[];
@@ -130,8 +130,8 @@ export class EventRequestPropertyComponent implements OnInit {
     ).add(() => this.loading = false);
   }
 
-  delete(id: number) {
-    this.requestPropertyService.delete(id).subscribe(() => {
+  delete(requestPropertyId: number) {
+    this.requestPropertyService.delete(requestPropertyId).subscribe(() => {
       this.reloadData();
     });
   }

@@ -48,7 +48,6 @@ export class PropertyFormComponent implements OnInit {
     private versionService: VersionService,
     private screenService: ScreenService,
     private eventService: EventService,
-    private eventTypeService: EventTypeService,
     private requestService: RequestService,
     private requestPropertyService: RequestPropertyService,
     private router: Router,
@@ -106,7 +105,7 @@ export class PropertyFormComponent implements OnInit {
           value: formFields.value,
           order: formFields.order,
         }
-
+        console.log(newRequestProperty)
         this.requestPropertyService.create(newRequestProperty).subscribe(
           data => {
             this.showSuccess("Propriedade de Requisição criada com sucesso!");
