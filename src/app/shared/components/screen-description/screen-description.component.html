@@ -1,0 +1,20 @@
+<div class="screen">
+  <div class="screen-description">
+    <p><strong>Titulo:</strong> {{ screenSelecionada?.name }}</p>
+    <p><strong>Status:</strong> {{ screenSelecionada?.active }}</p>
+  </div>
+  <div class="events">
+    <div class="event-item" *ngFor="let event of events">
+      <p>{{ event.eventTypeId }}</p>
+      <p>{{ event.parameter }}</p>
+      <app-request-list [eventId]="event.id"></app-request-list>
+      <div class="grid-container">
+        <div class="item1">Header</div>
+        <div class="item2">Menu</div>
+        <div class="item3">Main</div>
+        <div class="item4">Right</div>
+        <div class="item5">Footer</div>
+      </div>
+    </div>
+  </div>
+</div>

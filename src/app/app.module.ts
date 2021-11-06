@@ -13,8 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
 import { MaterialCommonModule, MODULES } from './shared/module/material.module';
 import { SharedModule } from './shared/module/shared.module';
-import { ScreenCarouselComponent } from './shared/components/screen-carousel/screen-carousel.component';
-import { CarouselModule } from 'ngx-owl-carousel-o';
+
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
