@@ -50,23 +50,18 @@ export class ApiService {
   }
 
   // Post with file upload
-  upload(path: string, file: any, params?: any[]): Observable<{}> {
+  upload(path: string, file: any): Observable<{}> {
     const formData = new FormData();
 
-    formData.append('file', file);
-
-    if (params) {
-      params.forEach(param => {
-        if (!param.contentType) {
-          formData.append(param.name, param.value);
-        } else {
-          formData.append(param.name, new Blob([param.value], { type: param.contentType }));
-        }
-      });
-    }
+    formData.append('image', file, file.name);
 
     this.getHttpOptions();
-    return this.http.post<any>(this.getURL(path), formData, {headers: this.httpOptions});
+
+    const authToken = this.loginService.getToken();
+
+    return this.http.post<any>(this.getURL(path), formData, {headers: {
+      'Authorization': 'Bearer ' + authToken,
+    }});
   }
 
   // Function to set token in header

@@ -121,6 +121,8 @@
           <mat-label>Imagem</mat-label>
           <ngx-mat-file-input
           formControlName="image"
+          accept="image/*"
+          (change)="fileChange($event)"
           [errorStateMatcher]="matcher"
           ></ngx-mat-file-input>
           <mat-icon matSuffix>folder</mat-icon>

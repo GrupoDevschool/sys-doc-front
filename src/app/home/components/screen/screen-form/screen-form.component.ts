@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
@@ -22,7 +22,6 @@ export class ScreenFormComponent implements OnInit {
   versionId!: number | undefined;
   screens!: Screen[];
 
-  @ViewChild("fileUpload", {static: false}) fileUpload!: ElementRef;
   file!: File;
 
   screenForm!: FormGroup;
@@ -92,8 +91,7 @@ export class ScreenFormComponent implements OnInit {
         if (formFields.fatherScreenId) {updatedScreen.screenFatherId = formFields.fatherScreenId}
 
         if (typeof formFields.image !== 'string') {
-          const formInput = formFields.image as any;
-          const url = await this.uploadImage(formInput._files[0]);
+          const url = await this.uploadImage(this.file);
 
           updatedScreen.image = url;
 
@@ -135,12 +133,11 @@ export class ScreenFormComponent implements OnInit {
       if (formFields.fatherScreenId) {newScreen.screenFatherId = formFields.fatherScreenId}
 
       if (typeof formFields.image !== 'string') {
-        const formInput = formFields.image as any;
-        const url = await this.uploadImage(formInput._files[0]);
+        const url = await this.uploadImage(this.file);
 
         newScreen.image = url;
 
-        this.screenService.update(newScreen).subscribe(data => {
+        this.screenService.create(newScreen).subscribe(data => {
             this.showSucess("Tela atualizada com sucesso!");
             this.router.navigate(['dashboard/screen']);
           },
@@ -174,10 +171,10 @@ export class ScreenFormComponent implements OnInit {
     this.toastr.success(message, "Tela Salva")
   }
 
-  async uploadImage(file: any): Promise<string> {
+  async uploadImage(file: any): Promise<any> {
     try {
-      const url = await this.screenService.uploadImage(file).toPromise();
-      return url;
+      const response = await this.screenService.uploadImage(file).toPromise();
+      return response.url;
     } catch (error) {
       this.loading = false;
       throw error;
@@ -201,4 +198,7 @@ export class ScreenFormComponent implements OnInit {
     });
   }
 
+  fileChange(event: any) {
+    this.file = event.target.files[0];
+  }
 }
