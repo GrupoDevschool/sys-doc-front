@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~12.1.2",
     "@angular/router": "~12.1.2",
     "@types/jwt-decode": "^3.1.0",
+    "json-server": "^0.17.0",
     "jwt-decode": "^3.1.2",
     "ngx-material-file-input": "^2.1.1",
     "ngx-owl-carousel-o": "^6.0.0",

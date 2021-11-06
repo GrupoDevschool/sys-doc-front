@@ -7,6 +7,7 @@ import {
 } from '@angular/material/core';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { ScreenDescriptionComponent } from '../shared/components/screen-description/screen-description.component';
 import { SharedModule } from '../shared/module/shared.module';
 import { MaterialCommonModule } from './../shared/module/material.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -51,6 +52,7 @@ import { MenuComponent } from './menu/menu.component';
     ScreenFormComponent,
     VersionFormComponent,
     ItemComponent,
+    ScreenDescriptionComponent
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
