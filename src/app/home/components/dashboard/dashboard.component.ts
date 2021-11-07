@@ -62,11 +62,11 @@ export class DashboardComponent implements OnInit {
       this.screens = screens;
 
       this.atualEIrmaos = this.screens.filter(
-        (screen) => screen.fatherScreenId === undefined
+        (screen) => screen.fatherScreenId === null
       );
 
       this.screenSelecionada = this.screens.find(
-        (screen) => screen.fatherScreenId === undefined
+        (screen) => screen.fatherScreenId === null
       ) as Screen;
 
       if (this.screenSelecionada?.id) {
@@ -118,7 +118,7 @@ export class DashboardComponent implements OnInit {
           .getByVersionId(this.versionId)
           .subscribe((screens) => {
             this.atualEIrmaos = screens.filter(
-              (screen) => screen.fatherScreenId === undefined
+              (screen) => screen.fatherScreenId === null
             );
           });
       }

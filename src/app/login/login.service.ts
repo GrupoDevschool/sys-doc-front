@@ -38,8 +38,7 @@ export class LoginService {
   login(loginData: LoginData): Observable<LoginResponse> {
     loginData.password = this.encriptPassword(loginData.password);
 
-    return this.http.get<any>(URL_API + '/auth');
-    // return this.http.post<any>(URL_API + '/auth', loginData);
+    return this.http.post<any>(URL_API + '/auth', loginData);
   }
 
   setToken(token: string) {
