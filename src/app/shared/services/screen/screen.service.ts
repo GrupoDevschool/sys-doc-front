@@ -3,14 +3,13 @@ import { Observable } from 'rxjs';
 import { createScreen, Screen } from '../../model/Screen';
 import { ApiService } from './../../../core/api/api.service';
 
-const URL = "/screen";
-const URL_UPLOAD = "/image"
+const URL = '/screen';
+const URL_UPLOAD = '/image';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ScreenService {
-
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService) {}
 
   getAll(): Observable<Screen[]> {
     return this.api.getAll(URL);
@@ -25,11 +24,11 @@ export class ScreenService {
   }
 
   getByScreenFatherId(id: number): Observable<Screen[]> {
-    return this.api.get(URL + '?fatherScreenId=' + id);
+    return this.api.get(URL + '?screenFatherId=' + id);
   }
 
   getSisters(id: number): Observable<Screen[]> {
-    return this.api.get(URL + '/sisters/' + id);
+    return this.api.get(URL + '/sister/' + id);
   }
 
   create(screen: createScreen): Observable<createScreen> {
