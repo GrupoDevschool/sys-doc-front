@@ -1,11 +1,19 @@
-.screen {
+.card-bla {
   width: 100%;
+  padding: 40px 0;
 
-  .screen-description {
-    width: 80%;
-    padding: 20px;
-    background-color: #fff;
+  display: flex;
+
+  .img {
+    width: 30%;
+    padding: 0px 40px;
   }
+}
+
+.screen-description {
+  width: 100%;
+  padding: 20px;
+  background-color: #fff;
 }
 
 .item1 {

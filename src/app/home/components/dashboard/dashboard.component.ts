@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from 'src/app/shared/model/Project';
-import { Screen } from 'src/app/shared/model/Screen';
-import { Version } from 'src/app/shared/model/Version';
-import { Event } from 'src/app/shared/model/Event';
+import { OwlOptions } from 'ngx-owl-carousel-o';
+import { Project, Screen, Version } from 'src/app/shared/model';
 import { EventService } from 'src/app/shared/services/event/event.service';
 import { ProjectService } from 'src/app/shared/services/project/project.service';
 import { ScreenService } from 'src/app/shared/services/screen/screen.service';
 import { VersionService } from 'src/app/shared/services/version/version.service';
-import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-dashboard',
@@ -36,7 +33,6 @@ export class DashboardComponent implements OnInit {
 
   screens!: Screen[];
   screenSelecionada!: Screen;
-  events!: Event[];
 
   paiEIrmaos!: Screen[];
   atualEIrmaos!: Screen[];
@@ -73,14 +69,6 @@ export class DashboardComponent implements OnInit {
         (screen) => screen.fatherScreenId === undefined
       ) as Screen;
 
-      if (this.screenSelecionada.id) {
-        this.eventService
-          .getByScreenId(this.screenSelecionada.id)
-          .subscribe((events) => {
-            this.events = events;
-          });
-      }
-
       if (this.screenSelecionada?.id) {
         this.screenService
           .getByScreenFatherId(this.screenSelecionada.id)
@@ -105,31 +93,25 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  handleScreenChange(id: number | undefined) {
-    // setar a tela atual
-
-    // pegar tela pai e após pegar a tela pai setar pai e irmaos baseado no id da tela avo
-
-    // pegar atual e irmaos baseado no id da tela pai
-
-    // pegar filhos baseados no id da tela atual
-
-    this.screenService.getById(id as number).subscribe((screen) => {
-      this.screenSelecionada = screen;
-
-      if (this.screenSelecionada.id) {
-        this.eventService
-          .getByScreenId(this.screenSelecionada.id)
-          .subscribe((events) => {
-            this.events = events;
+  handleScreenChange(screen: Screen) {
+    // set pai e irmãos
+      if (screen.fatherScreenId) {
+        this.screenService
+          .getSisters(screen.fatherScreenId)
+          .subscribe((screens) => {
+            this.paiEIrmaos = screens;
           });
+      } else {
+        this.paiEIrmaos = [];
       }
 
-      if (this.screenSelecionada.fatherScreenId) {
+      // set atual e irmãos
+      if (screen.fatherScreenId) {
         this.screenService
-          .getByScreenFatherId(this.screenSelecionada.fatherScreenId)
+          .getByScreenFatherId(screen.fatherScreenId)
           .subscribe((screens) => {
             this.atualEIrmaos = screens;
+            this.screenSelecionada = screen;
           });
       } else {
         this.screenService
@@ -141,38 +123,11 @@ export class DashboardComponent implements OnInit {
           });
       }
 
-      if (this.screenSelecionada.id) {
-        this.screenService
-          .getByScreenFatherId(this.screenSelecionada.id)
-          .subscribe((screens) => {
-            this.filhos = screens;
-          });
-      }
-
-      if (this.screenSelecionada?.fatherScreenId) {
-        this.screenService
-          .getById(this.screenSelecionada.fatherScreenId)
-          .subscribe((screen) => {
-            if (screen.fatherScreenId) {
-              this.screenService
-                .getByScreenFatherId(screen.fatherScreenId)
-                .subscribe((screens) => {
-                  this.paiEIrmaos = screens;
-                });
-            } else {
-              this.screenService
-                .getByVersionId(this.versionId)
-                .subscribe((screens) => {
-                  this.paiEIrmaos = screens.filter(
-                    (screen) => screen.fatherScreenId === undefined
-                  );
-                  console.log(this.paiEIrmaos);
-                });
-            }
-          });
-      } else {
-        this.paiEIrmaos = [];
-      }
-    });
+      // set filhos
+      this.screenService
+        .getByScreenFatherId(screen.id)
+        .subscribe((screens) => {
+          this.filhos = screens;
+        });
   }
 }

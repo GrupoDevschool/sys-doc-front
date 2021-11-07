@@ -66,7 +66,7 @@ export class PropertyFormComponent implements OnInit {
       id: new FormControl(this.updateRequestProperties?.id ?? null),
       requestId: new FormControl(this.updateRequestProperties?.requestId ?? null, [Validators.required]),
       key: new FormControl(this.updateRequestProperties?.key ?? '', [Validators.required]),
-      value: new FormControl(this.updateRequestProperties?.value ?? null, [Validators.required]),
+      value: new FormControl(this.updateRequestProperties?.value ?? '', [Validators.required]),
       order: new FormControl(this.updateRequestProperties?.order ?? '', [Validators.required]),
     });
   }
