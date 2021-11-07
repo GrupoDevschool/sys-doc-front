@@ -28,6 +28,10 @@ export class ScreenService {
     return this.api.get(URL + '?fatherScreenId=' + id);
   }
 
+  getSisters(id: number): Observable<Screen[]> {
+    return this.api.get(URL + '/sisters/' + id);
+  }
+
   create(screen: createScreen): Observable<createScreen> {
     return this.api.post(URL, screen);
   }

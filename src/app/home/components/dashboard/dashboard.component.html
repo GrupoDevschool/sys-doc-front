@@ -39,9 +39,12 @@
 </div>
 
 <main class="dashboard-main">
+  <!-- Tree -->
   <div class="screens-container">
     <div class="tree">
-      <div class="father">
+
+      <!-- Hierarquia Superior -->
+      <div class="father" *ngIf="paiEIrmaos?.length">
         <!-- <owl-carousel-o class="full" [options]="customOptions">
           <ng-container *ngFor="let screen of paiEIrmaos">
             <ng-template class="child-img" carouselSlide>
@@ -56,12 +59,14 @@
           <div class="child-img">
             <img
               [src]="screen?.image"
-              (click)="handleScreenChange(screen?.id)"
+              (click)="handleScreenChange(screen)"
             />
           </div>
         </div>
       </div>
-      <div class="me">
+
+      <!-- Hierarquia intermediaria -->
+      <div class="me" *ngIf="atualEIrmaos?.length">
         <!-- <owl-carousel-o class="full" [options]="customOptions">
           <ng-container *ngFor="let screen of atualEIrmaos">
             <ng-template carouselSlide>
@@ -72,16 +77,18 @@
             </ng-template>
           </ng-container>
         </owl-carousel-o> -->
-        <div *ngFor="let screen of atualEIrmaos">
+        <div *ngFor="let screen of atualEIrmaos" >
           <div class="child-img">
             <img
               [src]="screen?.image"
-              (click)="handleScreenChange(screen?.id)"
+              (click)="handleScreenChange(screen)"
             />
           </div>
         </div>
       </div>
-      <div class="childs">
+
+      <!-- Hierarquia inferior -->
+      <div class="childs" *ngIf="filhos?.length">
         <!-- <owl-carousel-o class="full" [options]="customOptions">
           <ng-container *ngFor="let screen of filhos">
             <ng-template [width]="0" carouselSlide>
@@ -96,39 +103,23 @@
           <div class="child-img">
             <img
               [src]="screen?.image"
-              (click)="handleScreenChange(screen?.id)"
+              (click)="handleScreenChange(screen)"
             />
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Screen Details -->
   <div class="screen-details">
-    <mat-card class="card-bla" *ngIf="screenSelecionada; else noSelected">
-      <div class="img">
-        <img [src]="screenSelecionada?.image" alt="screen-image" />
-      </div>
+
       <app-screen-description
-        [events]="events"
+        *ngIf="screenSelecionada; else noSelected"
         [screenSelecionada]="screenSelecionada"
         style="width: 100%"
       >
       </app-screen-description>
-
-      <!-- <div class="screen">
-        <div class="screen-description">
-          <p><strong>Titulo:</strong> {{ screenSelecionada?.name }}</p>
-          <p><strong>Status:</strong> {{ screenSelecionada?.active }}</p>
-        </div>
-        <div class="events">
-          <div class="event-item" *ngFor="let event of events">
-            <p>{{ event.eventTypeId }}</p>
-            <p>{{ event.parameter }}</p>
-            <app-request-list [eventId]="event.id"></app-request-list>
-          </div>
-        </div>
-      </div> -->
-    </mat-card>
   </div>
 </main>
 

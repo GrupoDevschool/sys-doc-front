@@ -1,5 +1,5 @@
 export interface Screen {
-  id?: number;
+  id: number;
 	active: boolean;
 	fatherScreenId?: number;
 	name: string;

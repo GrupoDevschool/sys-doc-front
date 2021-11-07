@@ -1,23 +1,18 @@
-import { RequestProperty } from './../../../shared/model/RequestProperty';
-import { RequestPropertyService } from './../../../shared/services/request-property/request-property.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { EventType } from 'src/app/shared/model/EventType';
-import { Project } from 'src/app/shared/model/Project';
-import { Version } from 'src/app/shared/model/Version';
-import { Screen } from 'src/app/shared/model/Screen';
-import { Event } from 'src/app/shared/model/Event';
-import { Request } from 'src/app/shared/model/Request';
+import { Router } from '@angular/router';
+import { Event, EventType, Project, Request, Screen, Version } from 'src/app/shared/model/index';
 import { EventTypeService } from 'src/app/shared/services/event-type/event-type.service';
 import { EventService } from 'src/app/shared/services/event/event.service';
 import { ProjectService } from 'src/app/shared/services/project/project.service';
 import { RequestService } from 'src/app/shared/services/request/request.service';
 import { ScreenService } from 'src/app/shared/services/screen/screen.service';
 import { VersionService } from 'src/app/shared/services/version/version.service';
-import { Router } from '@angular/router';
+import { RequestProperty } from './../../../shared/model/RequestProperty';
+import { RequestPropertyService } from './../../../shared/services/request-property/request-property.service';
 
 @Component({
   selector: 'app-event-request-property',
