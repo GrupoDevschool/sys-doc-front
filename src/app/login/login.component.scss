@@ -89,10 +89,12 @@
 
 .logo {
   max-width: 60%;
+  z-index: 2;
 }
 
 .vector {
   max-width: 60%;
+  z-index: 1;
 }
 
 .mat-card-image {
