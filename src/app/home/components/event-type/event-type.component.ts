@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { EventType } from 'src/app/shared/model/EventType';
 import { EventTypeService } from 'src/app/shared/services/event-type/event-type.service';
 
@@ -24,6 +25,7 @@ export class EventTypeComponent implements OnInit {
 
   constructor(
     private eventTypeService: EventTypeService,
+    private toastr: ToastrService,
     private router: Router
   ) {}
 
@@ -34,9 +36,12 @@ export class EventTypeComponent implements OnInit {
   reloadData() {
     this.loading = true;
     this.eventTypeService.getAll().subscribe((eventTypes) => {
-      this.dataSource = new MatTableDataSource(eventTypes);
+      this.dataSource = new MatTableDataSource(eventTypes.sort((a,b) => a.name.localeCompare(b.name)));
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+    },
+    error => {
+      this.showError("Houve um erro ao carregar as informações");
     }).add(() => this.loading = false);
   }
 
@@ -51,10 +56,21 @@ export class EventTypeComponent implements OnInit {
   delete(id: number) {
     this.eventTypeService.delete(id).subscribe(() => {
       this.reloadData();
+    },
+    error => {
+      this.showError("Houve um erro ao deletar o tipo de evento");
     });
   }
 
   edit(eventType: EventType) {
     this.router.navigate(['dashboard/event-type/add'], { state: eventType });
+  }
+
+  showError(message: string) {
+    this.toastr.error(message)
+  }
+
+  showSucess() {
+    this.toastr.success("Tipo de Evento deletado com sucesso")
   }
 }

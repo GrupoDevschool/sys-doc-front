@@ -24,8 +24,8 @@
     <table mat-table [dataSource]="dataSource" matSort>
 
       <ng-container matColumnDef="projectId">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id do projeto </th>
-        <td mat-cell *matCellDef="let version"> {{version.projectId}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Projeto </th>
+        <td mat-cell *matCellDef="let version"> {{getProjectName(version.projectId)}} </td>
       </ng-container>
 
       <ng-container matColumnDef="id">

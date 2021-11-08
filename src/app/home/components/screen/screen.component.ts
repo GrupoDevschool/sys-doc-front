@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { Project } from 'src/app/shared/model/Project';
 import { Screen } from 'src/app/shared/model/Screen';
@@ -42,6 +43,7 @@ export class ScreenComponent  implements OnInit {
     private projectsService: ProjectService,
     private versionsService: VersionService,
     private screensService: ScreenService,
+    private toastr: ToastrService,
     private router: Router ) {
   }
 
@@ -56,7 +58,10 @@ export class ScreenComponent  implements OnInit {
     this.screensService.getAll().subscribe((screens) => {
       this.screens = screens;
       this.setDataSource();
-    }).add(() => this.loading = false);
+    },
+    error => {
+      this.showError("Houve um erro ao carregar as informações");
+    } ).add(() => this.loading = false);
   }
 
   setDataSource() {
@@ -67,7 +72,10 @@ export class ScreenComponent  implements OnInit {
 
   getProjects() {
     this.projectsService.getAll().subscribe((projects) => {
-      this.projects = projects;
+      this.projects = projects.sort((a,b) => a.name.localeCompare(b.name));
+    },
+    error => {
+      this.showError("Houve um erro ao carregar as informações");
     });
   }
 
@@ -76,6 +84,9 @@ export class ScreenComponent  implements OnInit {
 
     this.versionsService.getByProjectId(id).subscribe((versions) => {
       this.versions = versions;
+    },
+    error => {
+      this.showError("Houve um erro ao carregar as informações");
     });
   }
 
@@ -86,8 +97,10 @@ export class ScreenComponent  implements OnInit {
 
     this.screensService.getByVersionId(id).subscribe((screens) => {
       this.screens = screens;
-      console.log(screens);
       this.setDataSource();
+    },
+    error => {
+      this.showError("Houve um erro ao carregar as informações");
     }).add(() => {this.loading = false});
   }
 
@@ -106,6 +119,10 @@ export class ScreenComponent  implements OnInit {
   delete(id: number){
     this.screensService.delete(id).subscribe(() => {
       this.screens = this.screens.filter((element) => element.id != id)
+      this.showSucess();
+      },
+      error => {
+        this.showError("Houve um erro ao deletar as a tela");
       }
     )
 
@@ -114,5 +131,13 @@ export class ScreenComponent  implements OnInit {
 
   edit(screen: Screen){
     this.router.navigate(['dashboard/screen/add'], { state: screen });
+  }
+
+  showError(message: string) {
+    this.toastr.error(message)
+  }
+
+  showSucess() {
+    this.toastr.success("Tela deletada com sucesso")
   }
 }

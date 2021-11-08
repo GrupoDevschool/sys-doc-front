@@ -1,4 +1,10 @@
 .request-properties {
   list-style: none;
   padding: 0;
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
 }

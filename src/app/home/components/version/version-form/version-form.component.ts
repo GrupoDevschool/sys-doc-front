@@ -129,7 +129,7 @@ export class VersionFormComponent implements OnInit {
 
   getProjects() {
     this.projectService.getAll().subscribe((projects) => {
-      this.projects = projects;
+      this.projects = projects.sort((a,b) => a.name.localeCompare(b.name));
     });
   }
 

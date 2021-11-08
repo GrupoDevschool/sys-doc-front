@@ -37,6 +37,12 @@
       border-bottom: 1px solid rgba( 252, 131, 87, 0.5 );
 
       ul {
+        word-wrap: break-word !important;
+        white-space: unset !important;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        word-break: break-word;
+        hyphens: auto;
         list-style: none;
         padding: 0;
       }
@@ -50,7 +56,7 @@
 }
 
 .header {
-  background-color: rgba( 252, 131, 87, 0.1 );
+  background-color: rgba( 252, 131, 87, 0.5 );
   font-size: 1rem;
   font-weight: 700;
   border-bottom: 1px solid rgba( 252, 131, 87, 0.5 );

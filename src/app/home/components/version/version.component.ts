@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Project } from 'src/app/shared/model/Project';
 import { Version } from './../../../shared/model/Version';
 import { ProjectService } from './../../../shared/services/project/project.service';
@@ -33,7 +34,11 @@ export class VersionComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private versionService: VersionService, private projectService: ProjectService, private router: Router ) { }
+  constructor(
+    private versionService: VersionService,
+    private projectService: ProjectService,
+    private toastr: ToastrService,
+    private router: Router ) { }
 
   ngAfterViewInit() {
     this.reloadData()
@@ -50,12 +55,19 @@ export class VersionComponent implements OnInit {
     this.versionService.getAll().subscribe((versions) => {
       this.versions = versions;
       this.setDataSource();
-    }).add(() => this.loading = false);
+    },
+    error => {
+      this.showError("Houve um erro ao carregar as informações");
+    }
+    ).add(() => this.loading = false);
   }
 
   delete(id: number){
     this.versionService.delete(id).subscribe(() => {
       this.reloadData();
+    },
+    error => {
+      this.showError("Não foi possivel deletar a versão");
     })
   }
 
@@ -65,8 +77,12 @@ export class VersionComponent implements OnInit {
 
   getProjects() {
     this.projectService.getAll().subscribe((projects) => {
-      this.projects = projects;
-    });
+      this.projects = projects.sort((a,b) => a.name.localeCompare(b.name));
+    },
+    error => {
+      this.showError("Houve um erro ao carregar as informações");
+    }
+    );
   }
 
   filterVersionProjectId(value: any){
@@ -81,6 +97,9 @@ export class VersionComponent implements OnInit {
     this.versionService.getByProjectId(id).subscribe((versions) => {
       this.versions = versions;
       this.setDataSource();
+    },
+    error => {
+      this.showError("Houve um erro ao carregar as informações");
     }).add(() => this.loading = false);
   }
 
@@ -93,5 +112,13 @@ export class VersionComponent implements OnInit {
   getProjectName(value: number): string {
     const project = this.projects.find((element) => element.id == value);
     return project ? project.name : '';
+  }
+
+  showError(message: string) {
+    this.toastr.error(message)
+  }
+
+  showSucess() {
+    this.toastr.success("Versão deletada com sucesso")
   }
 }

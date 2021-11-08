@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Request } from 'src/app/shared/model/Request';
 import { RequestService } from '../../services/request/request.service';
 
@@ -16,8 +17,12 @@ export class RequestListComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.eventId) {
-      console.log(this.eventId);
-      this.requests$ = this.requestService.getAllbyEventId(this.eventId);
+      this.requests$ = this.requestService.getAllbyEventId(this.eventId).pipe(
+        map(requests =>
+          requests.filter(request => request.status)
+          .sort((a, b) => a.order - b.order)
+        )
+      );
     }
   }
 }

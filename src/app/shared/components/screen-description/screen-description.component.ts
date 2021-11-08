@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { Event, EventType, Screen } from 'src/app/shared/model';
 import { EventTypeService } from 'src/app/shared/services/event-type/event-type.service';
 import { EventService } from 'src/app/shared/services/event/event.service';
@@ -27,7 +27,11 @@ export class ScreenDescriptionComponent implements OnChanges {
     this.events$ = this.eventTypeService.getAll().pipe(
       switchMap(eventTypes => {
         this.eventTypes = eventTypes;
-        return this.eventService.getByScreenId(this.screenSelecionada.id);
+        return this.eventService.getByScreenId(this.screenSelecionada.id).pipe(
+          map(events =>
+           events.filter(event => event.active).sort((a, b) => a.order - b.order)
+          )
+        );
       })
     );
   }

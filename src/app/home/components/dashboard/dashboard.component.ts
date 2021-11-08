@@ -47,49 +47,61 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.projectService.getAll().subscribe((projects) => {
-      this.projects = projects;
+      this.projects = projects.filter((project) => project.active).sort(
+        (a, b) => a.name.localeCompare(b.name)
+      );
     });
   }
 
   handleProjectChange() {
     this.versionService.getByProjectId(this.projectId).subscribe((versions) => {
-      this.versionsSelect = versions;
+      this.versionsSelect = versions.filter((version) => version.active).sort(
+        (a, b) => {
+          if (a.number.localeCompare(b.number) === 0) {
+            return a.order - b.order;
+          } else {
+            return a.number.localeCompare(b.number);
+          }
+        }
+      );
     });
   }
 
   handleVersionChange() {
     this.screenService.getByVersionId(this.versionId).subscribe((screens) => {
-      this.screens = screens;
+      this.screens = screens.sort((a, b) => a.order - b.order);
 
+      // set atual e irmãos
       this.atualEIrmaos = this.screens.filter(
         (screen) => screen.fatherScreenId === null
       );
 
+      // set atual
       this.screenSelecionada = this.screens.find(
         (screen) => screen.fatherScreenId === null
       ) as Screen;
 
-      if (this.screenSelecionada?.id) {
+
+      // set Filhos
+      if (this.screenSelecionada.id) {
         this.screenService
           .getByScreenFatherId(this.screenSelecionada.id)
           .subscribe((screens) => {
-            this.filhos = screens;
+            this.filhos = screens.sort((a, b) => a.order - b.order);
           });
       }
 
-      if (this.screenSelecionada?.fatherScreenId) {
+      // set Pai
+      if (this.screenSelecionada.fatherScreenId) {
         this.screenService
-          .getById(this.screenSelecionada.fatherScreenId)
-          .subscribe((screen) => {
-            if (screen.fatherScreenId) {
-              this.screenService
-                .getByScreenFatherId(screen.fatherScreenId)
-                .subscribe((screens) => {
-                  this.paiEIrmaos = screens;
-                });
-            }
+          .getSisters(this.screenSelecionada.fatherScreenId)
+          .subscribe((screens) => {
+            this.paiEIrmaos = screens.sort((a, b) => a.order - b.order);
           });
+      } else {
+        this.paiEIrmaos = [];
       }
+
     });
   }
 
@@ -99,7 +111,7 @@ export class DashboardComponent implements OnInit {
         this.screenService
           .getSisters(screen.fatherScreenId)
           .subscribe((screens) => {
-            this.paiEIrmaos = screens;
+            this.paiEIrmaos = screens.sort((a, b) => a.order - b.order);
           });
       } else {
         this.paiEIrmaos = [];
@@ -110,7 +122,7 @@ export class DashboardComponent implements OnInit {
         this.screenService
           .getByScreenFatherId(screen.fatherScreenId)
           .subscribe((screens) => {
-            this.atualEIrmaos = screens;
+            this.atualEIrmaos = screens.sort((a, b) => a.order - b.order);
             this.screenSelecionada = screen;
           });
       } else {
@@ -119,7 +131,7 @@ export class DashboardComponent implements OnInit {
           .subscribe((screens) => {
             this.atualEIrmaos = screens.filter(
               (screen) => screen.fatherScreenId === null
-            );
+            ).sort((a, b) => a.order - b.order);
           });
       }
 
@@ -127,7 +139,7 @@ export class DashboardComponent implements OnInit {
       this.screenService
         .getByScreenFatherId(screen.id)
         .subscribe((screens) => {
-          this.filhos = screens;
+          this.filhos = screens.sort((a, b) => a.order - b.order);
         });
   }
 }

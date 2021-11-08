@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Project } from 'src/app/shared/model/Project';
 import { Screen } from 'src/app/shared/model/Screen';
 import { Version } from 'src/app/shared/model/Version';
@@ -52,6 +53,7 @@ export class EventComponent implements OnInit {
     private screensService: ScreenService,
     private eventsService: EventService,
     private eventTypesService: EventTypeService,
+    private toastr: ToastrService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -67,23 +69,35 @@ export class EventComponent implements OnInit {
 
     this.screensService.getAll().subscribe((screens) => {
       this.screens = screens;
+    },
+    error => {
+      this.showError("Houve um erro ao carregar as informações");
     });
 
     this.eventsService.getAll().subscribe((events) => {
       this.events = events;
       this.setDataSource();
+    },
+    error => {
+      this.showError("Houve um erro ao carregar as informações");
     }).add(() => this.loading = false);
   }
 
   getProjects() {
     this.projectsService.getAll().subscribe((projects) => {
       this.projects = projects;
+    },
+    error => {
+      this.showError("Houve um erro ao carregar as informações");
     });
   }
 
   getEventTypes(){
     this.eventTypesService.getAll().subscribe((eventTypes) => {
       this.eventsType = eventTypes;
+    },
+    error => {
+      this.showError("Houve um erro ao carregar as informações");
     })
   }
 
@@ -92,6 +106,9 @@ export class EventComponent implements OnInit {
 
     this.versionsService.getByProjectId(id).subscribe((versions) => {
       this.versions = versions;
+    },
+    error => {
+      this.showError("Houve um erro ao carregar as informações");
     });
   }
 
@@ -99,6 +116,9 @@ export class EventComponent implements OnInit {
     this.loading = true;
     this.screensService.getByVersionId(id).subscribe((screens) => {
       this.screens = screens;
+    },
+    error => {
+      this.showError("Houve um erro ao carregar as informações");
     }).add(() => {this.loading = false});
   }
 
@@ -115,6 +135,9 @@ export class EventComponent implements OnInit {
         this.events = events;
         this.screendId = id;
         this.setDataSource();
+      },
+      error => {
+        this.showError("Houve um erro ao carregar as informações");
       }).add(() =>  this.loading = false);
     }
   }
@@ -132,6 +155,9 @@ export class EventComponent implements OnInit {
         this.events = event;
         this.eventTypeId = id;
         this.setDataSource();
+      },
+      error => {
+        this.showError("Houve um erro ao carregar as informações");
       }).add(() => this.loading = false);
     }
   }
@@ -144,6 +170,9 @@ export class EventComponent implements OnInit {
     this.eventsService.getByEventTypeIdAndScreenId(eventTypeId, screenId).subscribe((events) => {
       this.events = events;
       this.setDataSource();
+    },
+    error => {
+      this.showError("Houve um erro ao carregar as informações");
     }).add(() => {this.loading = false});
   }
 
@@ -169,11 +198,23 @@ export class EventComponent implements OnInit {
   delete(id: number){
     this.eventsService.delete(id).subscribe(() => {
       this.reloadData();
+      this.showSucess();
+    },
+    error => {
+      this.showError("Houve um erro ao deletar o Evento");
     });
   }
 
   edit(event: Event){
     this.router.navigate(['dashboard/event/add'], { state: event });
+  }
+
+  showError(message: string) {
+    this.toastr.error(message)
+  }
+
+  showSucess() {
+    this.toastr.success("Versão deletada com sucesso")
   }
 
 }

@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Project } from './../../../shared/model/Project';
 import { ProjectService } from './../../../shared/services/project/project.service';
 
@@ -27,7 +28,10 @@ export class ProjectComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private projectsService: ProjectService, private router: Router ) {
+  constructor(
+    private projectsService: ProjectService,
+    private toastr: ToastrService,
+    private router: Router ) {
 
   }
 
@@ -44,6 +48,9 @@ export class ProjectComponent implements OnInit, AfterViewInit {
       this.dataSource = new MatTableDataSource(projects)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+    },
+    error => {
+      this.showError("Houve um erro ao carregar as informações");
     }).add(() => this.loading = false);
 
   }
@@ -59,12 +66,24 @@ export class ProjectComponent implements OnInit, AfterViewInit {
 
   delete(id: number){
     this.projectsService.delete(id).subscribe(() => {
+      this.showSucess();
       this.reloadData();
+    },
+    error => {
+      this.showError("Não foi possivel deletar o projeto");
     })
   }
 
   edit(project: Project){
     this.router.navigate(['dashboard/project/add'], { state: project });
+  }
+
+  showError(message: string) {
+    this.toastr.error(message)
+  }
+
+  showSucess() {
+    this.toastr.success("Projeto deletado com sucesso")
   }
 }
 
