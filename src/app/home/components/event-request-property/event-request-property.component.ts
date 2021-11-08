@@ -4,7 +4,14 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Event, EventType, Project, Request, Screen, Version } from 'src/app/shared/model/index';
+import {
+  Event,
+  EventType,
+  Project,
+  Request,
+  Screen,
+  Version,
+} from 'src/app/shared/model/index';
 import { EventTypeService } from 'src/app/shared/services/event-type/event-type.service';
 import { EventService } from 'src/app/shared/services/event/event.service';
 import { ProjectService } from 'src/app/shared/services/project/project.service';
@@ -17,10 +24,9 @@ import { RequestPropertyService } from './../../../shared/services/request-prope
 @Component({
   selector: 'app-event-request-property',
   templateUrl: './event-request-property.component.html',
-  styleUrls: ['./event-request-property.component.scss']
+  styleUrls: ['./event-request-property.component.scss'],
 })
 export class EventRequestPropertyComponent implements OnInit {
-
   dataSource!: MatTableDataSource<any>;
 
   projects!: Project[];
@@ -30,7 +36,14 @@ export class EventRequestPropertyComponent implements OnInit {
   eventTypes!: EventType[];
   requests!: Request[];
 
-  displayedColumns: string[] = ['requestPropertyId', 'requestId', 'key' ,'value', 'order', 'actions'];
+  displayedColumns: string[] = [
+    'requestPropertyId',
+    'requestId',
+    'key',
+    'value',
+    'order',
+    'actions',
+  ];
 
   selection = new SelectionModel<string>(true, []);
 
@@ -48,52 +61,46 @@ export class EventRequestPropertyComponent implements OnInit {
     private requestService: RequestService,
     private requestPropertyService: RequestPropertyService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-
     this.reloadData();
     this.getAllProjects();
     this.getAllEventTypes();
-
   }
 
   getAllProjects() {
-    this.projectService.getAll().subscribe(
-      (data: Project[]) => {
-        this.projects = data;
-      }
-    );
+    this.projectService.getAll().subscribe((data: Project[]) => {
+      this.projects = data;
+    });
   }
 
-  getAllEventTypes(){
-    this.eventTypeService.getAll().subscribe(
-      eventTypes => {
+  getAllEventTypes() {
+    this.eventTypeService.getAll().subscribe((eventTypes) => {
       this.eventTypes = eventTypes;
-      }
-    );
+    });
   }
 
   getVersionsByProjectId(projectId: number) {
-    this.versionService.getByProjectId(projectId).subscribe(versions => {
+    this.versionService.getByProjectId(projectId).subscribe((versions) => {
       this.versions = versions;
     });
   }
 
   getScreenByVersionId(versionId: number) {
-    this.screenService.getByVersionId(versionId).subscribe(screens => {
+    this.screenService.getByVersionId(versionId).subscribe((screens) => {
       this.screens = screens;
     });
   }
 
   getEventByScreenId(screenId: number) {
-    this.eventService.getByScreenId(screenId).subscribe(events => {
+    this.eventService.getByScreenId(screenId).subscribe((events) => {
       this.events = events;
     });
   }
 
   getRequestByEventId(eventId: number) {
-    this.requestService.getAllbyEventId(eventId).subscribe(requests => {
+    this.requestService.getAllbyEventId(eventId).subscribe((requests) => {
       this.requests = requests;
     });
   }
@@ -101,28 +108,35 @@ export class EventRequestPropertyComponent implements OnInit {
   getRequestPropertyByRequestId(requestId: number) {
     this.loading = true;
 
-    this.requestPropertyService.getAllByRequestId(requestId).subscribe(requestProperties => {
-      this.dataSource = new MatTableDataSource(requestProperties);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    }).add(() => this.loading = false);
+    this.requestPropertyService
+      .getAllByRequestId(requestId)
+      .subscribe((requestProperties) => {
+        this.dataSource = new MatTableDataSource(requestProperties);
+        console.log(requestProperties);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      })
+      .add(() => (this.loading = false));
   }
 
   getEventTypeName(eventTypeId: number) {
-    return this.eventTypes.find(eventType => eventType.id === eventTypeId)?.name ?? '';
+    return (
+      this.eventTypes.find((eventType) => eventType.id === eventTypeId)?.name ??
+      ''
+    );
   }
-
 
   reloadData() {
     this.loading = true;
-    this.requestPropertyService.getAll().subscribe(
-      requestProperties => {
+    this.requestPropertyService
+      .getAll()
+      .subscribe((requestProperties) => {
         this.dataSource = new MatTableDataSource(requestProperties);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.loading = false;
-      }
-    ).add(() => this.loading = false);
+      })
+      .add(() => (this.loading = false));
   }
 
   delete(id: number) {
@@ -132,7 +146,8 @@ export class EventRequestPropertyComponent implements OnInit {
   }
 
   edit(requestProperty: RequestProperty) {
-    this.router.navigate(['dashboard/request-property/add'], { state: requestProperty });
+    this.router.navigate(['dashboard/request-property/add'], {
+      state: requestProperty,
+    });
   }
-
 }
