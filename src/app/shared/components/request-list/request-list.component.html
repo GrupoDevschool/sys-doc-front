@@ -1,7 +1,25 @@
-<div *ngFor="let request of requests">
-  <p>Request: {{ request.id }}</p>
-  <p>url homolog</p>
-  <app-property-request-list
-    [requestId]="request.id"
-  ></app-property-request-list>
+<div class="requests" *ngIf="requests$ | async as requests">
+  <div class="request" *ngFor="let request of requests">
+    <div class="request-details">
+      <div class="header">
+        Requisição
+      </div>
+      <div class="content">
+        <ul>
+          <li>Descrição: {{ request.description }}</li>
+          <li>Camada: {{ request.layer }}</li>
+          <li>URI Homolog: {{ request.uri_homolog }}</li>
+          <li>URI Produção: {{ request.uri_prod }}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="request-properties">
+      <div class="header">
+        Propriedades
+      </div>
+      <div class="content">
+        <app-property-request-list [requestId]="request.id"></app-property-request-list>
+      </div>
+    </div>
+  </div>
 </div>

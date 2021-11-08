@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { RequestService } from '../../services/request/request.service';
+import { Observable } from 'rxjs';
 import { Request } from 'src/app/shared/model/Request';
+import { RequestService } from '../../services/request/request.service';
 
 @Component({
   selector: 'app-request-list',
@@ -9,15 +10,14 @@ import { Request } from 'src/app/shared/model/Request';
 })
 export class RequestListComponent implements OnInit {
   @Input() eventId?: number;
-  requests?: Request[];
+  requests$?: Observable<Request[]>;
 
   constructor(private requestService: RequestService) {}
 
   ngOnInit(): void {
     if (this.eventId) {
-      this.requestService.getAllbyEventId(this.eventId).subscribe((request) => {
-        this.requests = request;
-      });
+      console.log(this.eventId);
+      this.requests$ = this.requestService.getAllbyEventId(this.eventId);
     }
   }
 }

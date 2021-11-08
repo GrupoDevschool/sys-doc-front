@@ -1,8 +1,8 @@
 <mat-card class="card-bla" >
   <!-- Image -->
   <div>
-    <div class="img">
-      <img [src]="screenSelecionada?.image" alt="screen-image" />
+    <div>
+      <img class="screen-image" [src]="screenSelecionada?.image" alt="screen-image" />
     </div>
   </div>
 
@@ -17,25 +17,15 @@
       <p><strong>URLOG:</strong> {{ screenSelecionada?.urlog }}</p>
     </div>
 
-    <div class="events" *ngIf="events$ | async as events">
-      <div class="event" *ngFor="let event of events">
+    <mat-accordion [multi]="true" *ngIf="events$ | async as events">
+      <mat-expansion-panel class="event" *ngFor="let event of events">
+        <mat-expansion-panel-header class="event-header">
+          <mat-panel-title>Evento: ({{getEventTypeName(event.eventTypeId)}})</mat-panel-title>
+          <mat-panel-description>Parametro: {{ event.parameter }}</mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-request-list [eventId]="event.id"></app-request-list>
+      </mat-expansion-panel>
+    </mat-accordion>
 
-
-        <div class="event-item">
-          <app-request-list [eventId]="event.id"></app-request-list>
-          <div class="grid-container">
-            <div class="item1">
-              <p><strong>{{getEventTypeName(event.eventTypeId)}}</strong></p>
-              <p><strong>{{ event.parameter }}</strong></p>
-            </div>
-            <div class="item2">Menu</div>
-            <div class="item3">Main</div>
-            <div class="item4">Right</div>
-            <div class="item5">Footer</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
   </div>
 </mat-card>

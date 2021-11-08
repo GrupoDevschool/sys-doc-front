@@ -1,4 +1,7 @@
-<p>Propriedades</p>
-<div *ngFor="let property of requestPropertys">
-  {{ property.key }}: {{ property.value }}
-</div>
+<ng-container *ngIf="requestProperties$ | async as requestProperties">
+  <ul class="request-properties">
+    <ng-container *ngFor="let property of requestProperties">
+      <li>{{ property.key }}: {{ property.value }}</li>
+    </ng-container>
+  </ul>
+</ng-container>

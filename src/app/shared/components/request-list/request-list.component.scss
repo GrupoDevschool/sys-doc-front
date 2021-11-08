@@ -1,0 +1,47 @@
+.requests {
+  display: flex;
+  flex-direction: column;
+}
+
+.request {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba( 252, 131, 87, 0.5 );
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:nth-child(even) {
+    background-color: rgba( 252, 131, 87, 0.3 );
+  }
+
+
+  .request-details {
+    display: flex;
+    width: 70%;
+    flex-direction: column;
+
+    border-right: 1px solid rgba( 252, 131, 87, 0.5 );
+
+    .content {
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+    }
+
+  }
+
+  .request-properties {
+    display: flex;
+    width: 30%;
+    flex-direction: column;
+
+  }
+
+}
+
+.header {
+  border-bottom: 1px solid rgba( 252, 131, 87, 0.5 );
+}

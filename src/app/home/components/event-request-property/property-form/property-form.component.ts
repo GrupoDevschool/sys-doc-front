@@ -3,13 +3,12 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Project } from 'src/app/shared/model/Project';
 import { Event } from 'src/app/shared/model/Event';
-import { Screen } from 'src/app/shared/model/Screen';
+import { Project } from 'src/app/shared/model/Project';
 import { Request } from 'src/app/shared/model/Request';
 import { RequestProperty } from 'src/app/shared/model/RequestProperty';
+import { Screen } from 'src/app/shared/model/Screen';
 import { Version } from 'src/app/shared/model/Version';
-import { EventTypeService } from 'src/app/shared/services/event-type/event-type.service';
 import { EventService } from 'src/app/shared/services/event/event.service';
 import { ProjectService } from 'src/app/shared/services/project/project.service';
 import { RequestPropertyService } from 'src/app/shared/services/request-property/request-property.service';
@@ -105,7 +104,6 @@ export class PropertyFormComponent implements OnInit {
           value: formFields.value,
           order: formFields.order,
         }
-        console.log(newRequestProperty)
         this.requestPropertyService.create(newRequestProperty).subscribe(
           data => {
             this.showSuccess("Propriedade de Requisição criada com sucesso!");
