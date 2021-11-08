@@ -20,7 +20,7 @@ import { EventService } from './../../../shared/services/event/event.service';
 @Component({
   selector: 'app-event-request',
   templateUrl: './event-request.component.html',
-  styleUrls: ['./event-request.component.scss']
+  styleUrls: ['./event-request.component.scss'],
 })
 export class EventRequestComponent implements OnInit {
   dataSource!: MatTableDataSource<Request>;
@@ -31,7 +31,17 @@ export class EventRequestComponent implements OnInit {
   events!: Event[];
   eventTypes!: EventType[];
 
-  displayedColumns: string[] = ['id', 'eventId', 'description' ,'uri_homolog', 'uri_prod', 'layer', 'status', 'order','actions'];
+  displayedColumns: string[] = [
+    'id',
+    'eventId',
+    'description',
+    'uri_homolog',
+    'uri_prod',
+    'layer',
+    'status',
+    'order',
+    'actions',
+  ];
 
   selection = new SelectionModel<string>(true, []);
 
@@ -48,39 +58,34 @@ export class EventRequestComponent implements OnInit {
     private eventService: EventService,
     private requestService: RequestService,
     private router: Router
-    ) {
-
-    }
+  ) {}
 
   ngOnInit(): void {
     this.reloadData();
 
-    this.projectService.getAll().subscribe(
-      (data: Project[]) => {
-        this.projects = data;
-      }
-    );
+    this.projectService.getAll().subscribe((data: Project[]) => {
+      this.projects = data;
+    });
 
-    this.eventTypeService.getAll().subscribe(eventTypes => {
-        this.eventTypes = eventTypes;
-      }
-    );
+    this.eventTypeService.getAll().subscribe((eventTypes) => {
+      this.eventTypes = eventTypes;
+    });
   }
 
   getVersionsByProjectId(projectId: number) {
-    this.versionService.getByProjectId(projectId).subscribe(versions => {
+    this.versionService.getByProjectId(projectId).subscribe((versions) => {
       this.versions = versions;
     });
   }
 
   getScreenByVersionId(versionId: number) {
-    this.screenService.getByVersionId(versionId).subscribe(screens => {
+    this.screenService.getByVersionId(versionId).subscribe((screens) => {
       this.screens = screens;
     });
   }
 
   getEventByScreenId(screenId: number) {
-    this.eventService.getByScreenId(screenId).subscribe(events => {
+    this.eventService.getByScreenId(screenId).subscribe((events) => {
       this.events = events;
     });
   }
@@ -88,31 +93,38 @@ export class EventRequestComponent implements OnInit {
   getRequestByEventId(eventId: number) {
     this.loading = true;
 
-    this.requestService.getAllbyEventId(eventId).subscribe(requests => {
-      this.dataSource = new MatTableDataSource(requests);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    }).add(() => this.loading = false);
+    this.requestService
+      .getAllbyEventId(eventId)
+      .subscribe((requests) => {
+        this.dataSource = new MatTableDataSource(requests);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      })
+      .add(() => (this.loading = false));
   }
 
   getEventTypeName(eventTypeId: number) {
-    return this.eventTypes.find(eventType => eventType.id === eventTypeId)?.name ?? '';
+    return (
+      this.eventTypes.find((eventType) => eventType.id === eventTypeId)?.name ??
+      ''
+    );
   }
 
   reloadData() {
     this.loading = true;
-    this.requestService.getAll().subscribe(
-      requests => {
+    this.requestService
+      .getAll()
+      .subscribe((requests) => {
         this.dataSource = new MatTableDataSource(requests);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.loading = false;
-      }
-    ).add(() => this.loading = false);
+      })
+      .add(() => (this.loading = false));
   }
 
   delete(id: number) {
-    this.eventService.delete(id).subscribe(() => {
+    this.requestService.delete(id).subscribe(() => {
       this.reloadData();
     });
   }
@@ -120,5 +132,4 @@ export class EventRequestComponent implements OnInit {
   edit(request: Request) {
     this.router.navigate(['dashboard/event-request/add'], { state: request });
   }
-
 }
