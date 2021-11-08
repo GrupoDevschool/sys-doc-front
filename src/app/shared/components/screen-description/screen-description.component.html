@@ -18,7 +18,7 @@
     </div>
 
     <mat-accordion [multi]="true" *ngIf="events$ | async as events">
-      <mat-expansion-panel class="event" *ngFor="let event of events">
+      <mat-expansion-panel class="event mat-elevation-z4" *ngFor="let event of events">
         <mat-expansion-panel-header class="event-header">
           <mat-panel-title>Evento: ({{getEventTypeName(event.eventTypeId)}})</mat-panel-title>
           <mat-panel-description>Parametro: {{ event.parameter }}</mat-panel-description>

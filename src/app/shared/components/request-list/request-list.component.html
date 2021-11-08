@@ -1,24 +1,26 @@
 <div class="requests" *ngIf="requests$ | async as requests">
-  <div class="request" *ngFor="let request of requests">
-    <div class="request-details">
-      <div class="header">
+  <div class="request">
+    <div class="request-header" *ngIf="!!requests.length">
+      <div class="request-title header expansion-row">
         Requisição
       </div>
-      <div class="content">
-        <ul>
-          <li>Descrição: {{ request.description }}</li>
-          <li>Camada: {{ request.layer }}</li>
-          <li>URI Homolog: {{ request.uri_homolog }}</li>
-          <li>URI Produção: {{ request.uri_prod }}</li>
-        </ul>
-      </div>
-    </div>
-    <div class="request-properties">
-      <div class="header">
+      <div class="property-title header expansion-row">
         Propriedades
       </div>
-      <div class="content">
-        <app-property-request-list [requestId]="request.id"></app-property-request-list>
+    </div>
+    <div class="details" *ngFor="let request of requests">
+      <div class="request-content">
+        <div class="request-details expansion-row">
+          <ul>
+            <li><strong>Descrição:</strong> {{ request.description }}</li>
+            <li><strong>Camada:</strong> {{ request.layer }}</li>
+            <li><strong>URI Homolog:</strong> {{ request.uri_homolog }}</li>
+            <li><strong>URI Produção:</strong> {{ request.uri_prod }}</li>
+          </ul>
+        </div>
+        <div class="property-details expansion-row">
+          <app-property-request-list [requestId]="request.id"></app-property-request-list>
+        </div>
       </div>
     </div>
   </div>

@@ -5,43 +5,57 @@
 
 .request {
   display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba( 252, 131, 87, 0.5 );
+  flex-direction: column;
 
-  &:last-child {
-    border-bottom: none;
+  .details {
+    &:nth-child(odd) {
+      background-color: rgba( 252, 131, 87, 0.1 );
+    }
   }
 
-  &:nth-child(even) {
-    background-color: rgba( 252, 131, 87, 0.3 );
-  }
-
-
-  .request-details {
+  .request-header {
     display: flex;
-    width: 70%;
-    flex-direction: column;
+    justify-content: space-between;
 
-    border-right: 1px solid rgba( 252, 131, 87, 0.5 );
+    .request-title {
+      width: 70%;
+      border-right: 1px solid rgba( 252, 131, 87, 0.5 );
+    }
 
-    .content {
+    .property-title {
+      width: 30%;
+    }
+  }
+
+  .request-content {
+    display: flex;
+    justify-content: space-between;
+
+    .request-details {
+      width: 70%;
+      border-right: 1px solid rgba( 252, 131, 87, 0.5 );
+      border-bottom: 1px solid rgba( 252, 131, 87, 0.5 );
+
       ul {
         list-style: none;
         padding: 0;
       }
     }
 
+    .property-details {
+      width: 30%;
+      border-bottom: 1px solid rgba( 252, 131, 87, 0.5 );
+    }
   }
-
-  .request-properties {
-    display: flex;
-    width: 30%;
-    flex-direction: column;
-
-  }
-
 }
 
 .header {
+  background-color: rgba( 252, 131, 87, 0.1 );
+  font-size: 1rem;
+  font-weight: 700;
   border-bottom: 1px solid rgba( 252, 131, 87, 0.5 );
+}
+
+.expansion-row {
+  padding: 0 5px;
 }
