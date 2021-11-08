@@ -57,7 +57,7 @@ export class VersionComponent implements OnInit {
       this.setDataSource();
     },
     error => {
-      this.showError("Houve um erro ao carregar as informações");
+      this.showError("Houve um erro ao carregar Versões");
     }
     ).add(() => this.loading = false);
   }
@@ -67,7 +67,11 @@ export class VersionComponent implements OnInit {
       this.reloadData();
     },
     error => {
-      this.showError("Não foi possivel deletar a versão");
+      if (error.status == 400) {
+        this.showError("Não é possivel deletar uma versão com telas cadastradas");
+      } else {
+        this.showError("Não foi possivel deletar a versão");
+      }
     })
   }
 
@@ -80,7 +84,7 @@ export class VersionComponent implements OnInit {
       this.projects = projects.sort((a,b) => a.name.localeCompare(b.name));
     },
     error => {
-      this.showError("Houve um erro ao carregar as informações");
+      this.showError("Houve um erro ao carregar Projetos");
     }
     );
   }
@@ -99,7 +103,7 @@ export class VersionComponent implements OnInit {
       this.setDataSource();
     },
     error => {
-      this.showError("Houve um erro ao carregar as informações");
+      this.showError("Houve um erro ao carregar Versões");
     }).add(() => this.loading = false);
   }
 

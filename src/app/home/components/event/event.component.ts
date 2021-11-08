@@ -71,7 +71,7 @@ export class EventComponent implements OnInit {
       this.screens = screens;
     },
     error => {
-      this.showError("Houve um erro ao carregar as informações");
+      this.showError("Houve um erro ao carregar Telas");
     });
 
     this.eventsService.getAll().subscribe((events) => {
@@ -79,7 +79,7 @@ export class EventComponent implements OnInit {
       this.setDataSource();
     },
     error => {
-      this.showError("Houve um erro ao carregar as informações");
+      this.showError("Houve um erro ao carregar eventos");
     }).add(() => this.loading = false);
   }
 
@@ -88,7 +88,7 @@ export class EventComponent implements OnInit {
       this.projects = projects;
     },
     error => {
-      this.showError("Houve um erro ao carregar as informações");
+      this.showError("Houve um erro ao carregar Projetos");
     });
   }
 
@@ -97,7 +97,7 @@ export class EventComponent implements OnInit {
       this.eventsType = eventTypes;
     },
     error => {
-      this.showError("Houve um erro ao carregar as informações");
+      this.showError("Houve um erro ao carregar Tipos de Evento");
     })
   }
 
@@ -108,7 +108,7 @@ export class EventComponent implements OnInit {
       this.versions = versions;
     },
     error => {
-      this.showError("Houve um erro ao carregar as informações");
+      this.showError("Houve um erro ao carregar versões");
     });
   }
 
@@ -118,7 +118,7 @@ export class EventComponent implements OnInit {
       this.screens = screens;
     },
     error => {
-      this.showError("Houve um erro ao carregar as informações");
+      this.showError("Houve um erro ao carregar Telas");
     }).add(() => {this.loading = false});
   }
 
@@ -137,7 +137,7 @@ export class EventComponent implements OnInit {
         this.setDataSource();
       },
       error => {
-        this.showError("Houve um erro ao carregar as informações");
+        this.showError("Houve um erro ao carregar Eventos");
       }).add(() =>  this.loading = false);
     }
   }
@@ -157,7 +157,7 @@ export class EventComponent implements OnInit {
         this.setDataSource();
       },
       error => {
-        this.showError("Houve um erro ao carregar as informações");
+        this.showError("Houve um erro ao carregar Eventos");
       }).add(() => this.loading = false);
     }
   }
@@ -172,7 +172,7 @@ export class EventComponent implements OnInit {
       this.setDataSource();
     },
     error => {
-      this.showError("Houve um erro ao carregar as informações");
+      this.showError("Houve um erro ao carregar Eventos");
     }).add(() => {this.loading = false});
   }
 
@@ -201,7 +201,11 @@ export class EventComponent implements OnInit {
       this.showSucess();
     },
     error => {
-      this.showError("Houve um erro ao deletar o Evento");
+      if (error.status == 400) {
+        this.showError("Não é possivel deletar um Evento com Requisições cadastradas");
+      } else {
+        this.showError("Não foi possivel deletar o Evento");
+      }
     });
   }
 
@@ -214,7 +218,7 @@ export class EventComponent implements OnInit {
   }
 
   showSucess() {
-    this.toastr.success("Versão deletada com sucesso")
+    this.toastr.success("Evento deletado com sucesso")
   }
 
 }

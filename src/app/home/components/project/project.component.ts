@@ -50,7 +50,7 @@ export class ProjectComponent implements OnInit, AfterViewInit {
       this.dataSource.sort = this.sort;
     },
     error => {
-      this.showError("Houve um erro ao carregar as informações");
+      this.showError("Houve um erro ao carregar Projetos");
     }).add(() => this.loading = false);
 
   }
@@ -70,7 +70,11 @@ export class ProjectComponent implements OnInit, AfterViewInit {
       this.reloadData();
     },
     error => {
-      this.showError("Não foi possivel deletar o projeto");
+      if (error.status == 400) {
+        this.showError("Não é possivel deletar um projeto com versões cadastradas");
+      } else {
+        this.showError("Não foi possivel deletar o projeto");
+      }
     })
   }
 

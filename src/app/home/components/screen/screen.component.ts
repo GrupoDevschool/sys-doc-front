@@ -60,7 +60,7 @@ export class ScreenComponent  implements OnInit {
       this.setDataSource();
     },
     error => {
-      this.showError("Houve um erro ao carregar as informações");
+      this.showError("Houve um erro ao carregar Telas");
     } ).add(() => this.loading = false);
   }
 
@@ -75,7 +75,7 @@ export class ScreenComponent  implements OnInit {
       this.projects = projects.sort((a,b) => a.name.localeCompare(b.name));
     },
     error => {
-      this.showError("Houve um erro ao carregar as informações");
+      this.showError("Houve um erro ao carregar Projetos");
     });
   }
 
@@ -86,7 +86,7 @@ export class ScreenComponent  implements OnInit {
       this.versions = versions;
     },
     error => {
-      this.showError("Houve um erro ao carregar as informações");
+      this.showError("Houve um erro ao carregar Versões");
     });
   }
 
@@ -100,7 +100,7 @@ export class ScreenComponent  implements OnInit {
       this.setDataSource();
     },
     error => {
-      this.showError("Houve um erro ao carregar as informações");
+      this.showError("Houve um erro ao carregar Telas");
     }).add(() => {this.loading = false});
   }
 
@@ -122,7 +122,11 @@ export class ScreenComponent  implements OnInit {
       this.showSucess();
       },
       error => {
-        this.showError("Houve um erro ao deletar as a tela");
+        if (error.status == 400) {
+          this.showError("Não é possivel deletar uma Tela com Eventos cadastrados");
+        } else {
+          this.showError("Não foi possivel deletar a Tela");
+        }
       }
     )
 

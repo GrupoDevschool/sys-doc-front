@@ -41,7 +41,7 @@ export class EventTypeComponent implements OnInit {
       this.dataSource.sort = this.sort;
     },
     error => {
-      this.showError("Houve um erro ao carregar as informações");
+      this.showError("Houve um erro ao carregar Tipos de Evento");
     }).add(() => this.loading = false);
   }
 
@@ -56,9 +56,14 @@ export class EventTypeComponent implements OnInit {
   delete(id: number) {
     this.eventTypeService.delete(id).subscribe(() => {
       this.reloadData();
+      this.showSucess();
     },
     error => {
-      this.showError("Houve um erro ao deletar o tipo de evento");
+      if (error.status == 400) {
+        this.showError("Não é possivel deletar um Tipo de Evento com Eventos cadastrados");
+      } else {
+        this.showError("Não foi possivel deletar o Tipo de Evento");
+      }
     });
   }
 

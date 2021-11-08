@@ -4,13 +4,14 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import {
   Event,
   EventType,
   Project,
   Request,
   Screen,
-  Version,
+  Version
 } from 'src/app/shared/model/index';
 import { EventTypeService } from 'src/app/shared/services/event-type/event-type.service';
 import { EventService } from 'src/app/shared/services/event/event.service';
@@ -60,6 +61,7 @@ export class EventRequestPropertyComponent implements OnInit {
     private eventService: EventService,
     private requestService: RequestService,
     private requestPropertyService: RequestPropertyService,
+    private toastr: ToastrService,
     private router: Router
   ) {}
 
@@ -72,36 +74,54 @@ export class EventRequestPropertyComponent implements OnInit {
   getAllProjects() {
     this.projectService.getAll().subscribe((data: Project[]) => {
       this.projects = data;
+    },
+    error => {
+      this.showError("Houve um erro ao carregar Projetos");
     });
   }
 
   getAllEventTypes() {
     this.eventTypeService.getAll().subscribe((eventTypes) => {
       this.eventTypes = eventTypes;
+    },
+    error => {
+      this.showError("Houve um erro ao carregar Tipos de Evento");
     });
   }
 
   getVersionsByProjectId(projectId: number) {
     this.versionService.getByProjectId(projectId).subscribe((versions) => {
       this.versions = versions;
+    },
+    error => {
+      this.showError("Houve um erro ao carregar Versões");
     });
   }
 
   getScreenByVersionId(versionId: number) {
     this.screenService.getByVersionId(versionId).subscribe((screens) => {
       this.screens = screens;
+    },
+    error => {
+      this.showError("Houve um erro ao carregar Telas");
     });
   }
 
   getEventByScreenId(screenId: number) {
     this.eventService.getByScreenId(screenId).subscribe((events) => {
       this.events = events;
+    },
+    error => {
+      this.showError("Houve um erro ao carregar Eventos");
     });
   }
 
   getRequestByEventId(eventId: number) {
     this.requestService.getAllbyEventId(eventId).subscribe((requests) => {
       this.requests = requests;
+    },
+    error => {
+      this.showError("Houve um erro ao carregar Requisições");
     });
   }
 
@@ -115,6 +135,9 @@ export class EventRequestPropertyComponent implements OnInit {
         console.log(requestProperties);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+      },
+      error => {
+        this.showError("Houve um erro ao carregar Requisições");
       })
       .add(() => (this.loading = false));
   }
@@ -135,6 +158,9 @@ export class EventRequestPropertyComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.loading = false;
+      },
+      error => {
+        this.showError("Houve um erro ao carregar Propriedades de Requisição");
       })
       .add(() => (this.loading = false));
   }
@@ -142,6 +168,10 @@ export class EventRequestPropertyComponent implements OnInit {
   delete(id: number) {
     this.requestPropertyService.delete(id).subscribe(() => {
       this.reloadData();
+      this.showSucess();
+    },
+    error => {
+      this.showError("Não foi possivel deletar a Propriedade de Requisição");
     });
   }
 
@@ -149,5 +179,13 @@ export class EventRequestPropertyComponent implements OnInit {
     this.router.navigate(['dashboard/request-property/add'], {
       state: requestProperty,
     });
+  }
+
+  showError(message: string) {
+    this.toastr.error(message)
+  }
+
+  showSucess() {
+    this.toastr.success("Propriedade de requisição deletado com sucesso");
   }
 }
