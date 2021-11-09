@@ -132,6 +132,7 @@ export class DashboardComponent implements OnInit {
             this.atualEIrmaos = screens.filter(
               (screen) => screen.fatherScreenId === null
             ).sort((a, b) => a.order - b.order);
+            this.screenSelecionada = screen;
           });
       }
 
