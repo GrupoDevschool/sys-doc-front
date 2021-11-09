@@ -67,20 +67,9 @@ export class EventComponent implements OnInit {
 
     this.getEventTypes();
 
-    this.screensService.getAll().subscribe((screens) => {
-      this.screens = screens;
-    },
-    error => {
-      this.showError("Houve um erro ao carregar Telas");
-    });
+    this.getScreens();
 
-    this.eventsService.getAll().subscribe((events) => {
-      this.events = events;
-      this.setDataSource();
-    },
-    error => {
-      this.showError("Houve um erro ao carregar eventos");
-    }).add(() => this.loading = false);
+    this.getEvents();
   }
 
   getProjects() {
@@ -101,7 +90,28 @@ export class EventComponent implements OnInit {
     })
   }
 
+  getScreens() {
+    this.screensService.getAll().subscribe((screens) => {
+      this.screens = screens;
+    },
+    error => {
+      this.showError("Houve um erro ao carregar Telas");
+    });
+  }
+
+  getEvents() {
+    this.eventsService.getAll().subscribe((events) => {
+      this.events = events;
+      this.setDataSource();
+    },
+    error => {
+      this.showError("Houve um erro ao carregar eventos");
+    }).add(() => this.loading = false);
+  }
+
   getVersionsByProjectId(id: number) {
+    this.getScreens();
+
     this.versions = [];
 
     this.versionsService.getByProjectId(id).subscribe((versions) => {
@@ -113,13 +123,12 @@ export class EventComponent implements OnInit {
   }
 
   getScreenByVersionId(id: number){
-    this.loading = true;
     this.screensService.getByVersionId(id).subscribe((screens) => {
       this.screens = screens;
     },
     error => {
       this.showError("Houve um erro ao carregar Telas");
-    }).add(() => {this.loading = false});
+    });
   }
 
   getEventByScreenId(id: number){

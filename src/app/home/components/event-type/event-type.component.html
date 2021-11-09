@@ -6,15 +6,20 @@
     </button>
   </mat-card>
 
-  <div class="filtro" [style.display]="selection.isEmpty() ? '' : 'none'">
-    <mat-form-field floatPlaceholder="never">
-      <input
-        matInput
-        #filter
-        placeholder="Filtrar tipos de evento"
-        (keyup)="applyFilter(filter.value)"
-      />
-    </mat-form-field>
+  <div class="example-form" class="filters">
+    <div class="filtro" [style.display]="selection.isEmpty() ? '' : 'none'">
+      <mat-form-field floatPlaceholder="never" appearance="outline">
+        <input
+          matInput
+          #filter
+          placeholder="Filtrar tipos de evento"
+          (keyup)="applyFilter(filter.value)"
+        />
+        <button *ngIf="filter.value" matSuffix mat-icon-button aria-label="Clear" (click)="filter.value=''; applyFilter(filter.value)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
   </div>
 
   <div class="mat-elevation-z8">

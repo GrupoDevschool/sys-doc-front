@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
   versionsSelect!: Version[];
 
   screens!: Screen[];
-  screenSelecionada!: Screen;
+  screenSelecionada!: Screen | null;
 
   paiEIrmaos!: Screen[];
   atualEIrmaos!: Screen[];
@@ -54,6 +54,14 @@ export class DashboardComponent implements OnInit {
   }
 
   handleProjectChange() {
+    this.versionsSelect = [];
+    this.atualEIrmaos = [];
+    this.paiEIrmaos = [];
+    this.filhos = [];
+    this.screens = [];
+    this.screenSelecionada = null;
+    this.versionId = 0;
+
     this.versionService.getByProjectId(this.projectId).subscribe((versions) => {
       this.versionsSelect = versions.filter((version) => version.active).sort(
         (a, b) => {

@@ -15,6 +15,8 @@ import { ProjectService } from './../../../shared/services/project/project.servi
 })
 export class ProjectComponent implements OnInit, AfterViewInit {
 
+  filtroProjeto = '';
+
   projects!: Project[];
 
   displayedColumns: string[] = ['id', 'name', 'active', 'gerenciamento'];

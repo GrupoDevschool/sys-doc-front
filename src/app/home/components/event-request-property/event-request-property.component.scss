@@ -58,10 +58,12 @@ table {
 
 .filters {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .filtro {
+  min-width: 25%;
   margin-top: 10px;
-  width: 100%;
-  padding: 0 2%;
+  padding: 0 10px;
+  flex: 1;
 }

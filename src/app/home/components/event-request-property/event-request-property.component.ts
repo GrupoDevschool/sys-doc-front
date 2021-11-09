@@ -90,56 +90,88 @@ export class EventRequestPropertyComponent implements OnInit {
   }
 
   getVersionsByProjectId(projectId: number) {
-    this.versionService.getByProjectId(projectId).subscribe((versions) => {
-      this.versions = versions;
-    },
-    error => {
-      this.showError("Houve um erro ao carregar Versões");
-    });
+    this.versions = [];
+    this.screens = [];
+    this.events = [];
+    this.requests = [];
+
+    if (projectId) {
+      this.versionService.getByProjectId(projectId).subscribe((versions) => {
+        this.versions = versions;
+      },
+      error => {
+        this.showError("Houve um erro ao carregar Versões");
+      });
+    } else {
+      this.reloadData();
+    }
   }
 
   getScreenByVersionId(versionId: number) {
-    this.screenService.getByVersionId(versionId).subscribe((screens) => {
-      this.screens = screens;
-    },
-    error => {
-      this.showError("Houve um erro ao carregar Telas");
-    });
+    this.screens = [];
+    this.events = [];
+    this.requests = [];
+
+    if (versionId) {
+      this.screenService.getByVersionId(versionId).subscribe((screens) => {
+        this.screens = screens;
+      },
+      error => {
+        this.showError("Houve um erro ao carregar Telas");
+      });
+    } else {
+      this.reloadData();
+    }
   }
 
   getEventByScreenId(screenId: number) {
-    this.eventService.getByScreenId(screenId).subscribe((events) => {
-      this.events = events;
-    },
-    error => {
-      this.showError("Houve um erro ao carregar Eventos");
-    });
+    this.events = [];
+    this.requests = [];
+
+    if (screenId) {
+      this.eventService.getByScreenId(screenId).subscribe((events) => {
+        this.events = events;
+      },
+      error => {
+        this.showError("Houve um erro ao carregar Eventos");
+      });
+    } else {
+      this.reloadData();
+    }
   }
 
   getRequestByEventId(eventId: number) {
-    this.requestService.getAllbyEventId(eventId).subscribe((requests) => {
-      this.requests = requests;
-    },
-    error => {
-      this.showError("Houve um erro ao carregar Requisições");
-    });
-  }
+    this.requests = [];
 
-  getRequestPropertyByRequestId(requestId: number) {
-    this.loading = true;
-
-    this.requestPropertyService
-      .getAllByRequestId(requestId)
-      .subscribe((requestProperties) => {
-        this.dataSource = new MatTableDataSource(requestProperties);
-        console.log(requestProperties);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+    if (eventId) {
+      this.requestService.getAllbyEventId(eventId).subscribe((requests) => {
+        this.requests = requests;
       },
       error => {
         this.showError("Houve um erro ao carregar Requisições");
-      })
-      .add(() => (this.loading = false));
+      });
+    } else {
+      this.reloadData();
+    }
+  }
+
+  getRequestPropertyByRequestId(requestId: number) {
+    if (requestId) {
+      this.loading = true;
+      this.requestPropertyService
+        .getAllByRequestId(requestId)
+        .subscribe((requestProperties) => {
+          this.dataSource = new MatTableDataSource(requestProperties);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        },
+        error => {
+          this.showError("Houve um erro ao carregar Requisições");
+        })
+        .add(() => (this.loading = false));
+    } else {
+      this.reloadData();
+    }
   }
 
   getEventTypeName(eventTypeId: number) {

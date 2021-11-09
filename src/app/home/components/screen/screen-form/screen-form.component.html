@@ -5,21 +5,8 @@
   </mat-card>
 
   <mat-card class="mat-card2 ui-g">
-    <!-- Projeto -->
-    <mat-form-field class="" appearance="outline">
-      <mat-label>Projeto</mat-label>
-      <mat-select
-        name="project"
-        placeholder="Ex: Minha Oi"
-        (selectionChange)="filterVersions($event.value)"
-        [(ngModel)]="projectId"
-      >
-        <mat-option *ngFor="let project of projects" [value]="project.id">{{project.name}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
     <!-- Form -->
-    <form [formGroup]="screenForm" class="form">
+    <form [formGroup]="screenForm">
       <!-- hidden id -->
       <input
       type="number"
@@ -33,6 +20,21 @@
       formControlName="versionClonedId"
       hidden
       />
+
+      <div>
+
+        <!-- Projeto -->
+        <mat-form-field class="" appearance="outline">
+          <mat-label>Projeto</mat-label>
+          <mat-select
+            name="project"
+            placeholder="Ex: Minha Oi"
+            (selectionChange)="filterVersions($event.value)"
+            [(ngModel)]="projectId"
+          >
+            <mat-option *ngFor="let project of projects" [value]="project.id">{{project.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
 
         <!-- Versão -->
         <mat-form-field class="" appearance="outline">
@@ -48,8 +50,6 @@
           <mat-error *ngIf="screenForm.controls['versionId'].hasError('required')">Versão é um campo obrigatório</mat-error>
         </mat-form-field>
 
-        <div class="wrapper">
-        <div class="row">
         <!-- Nome -->
         <mat-form-field class="inputs" appearance="outline">
           <mat-label>Nome da Tela</mat-label>
@@ -66,12 +66,12 @@
 
         <!-- Active -->
         <mat-form-field class="" appearance="outline">
-          <mat-label>Active</mat-label>
+          <mat-label>Ativo</mat-label>
           <mat-select formControlName="active" [errorStateMatcher]="matcher">
             <mat-option [value]="true">Ativo</mat-option>
             <mat-option [value]="false">Inativo</mat-option>
           </mat-select>
-          <mat-error *ngIf="screenForm.controls['active'].hasError('required')">Active é um campo obrigatório</mat-error>
+          <mat-error *ngIf="screenForm.controls['active'].hasError('required')">Ativo é um campo obrigatório</mat-error>
         </mat-form-field>
 
         <!-- Order -->
@@ -88,8 +88,7 @@
             Ordem é um campo obrigatório
           </mat-error>
         </mat-form-field>
-      </div>
-      <div class="row">
+
         <!-- Urlog -->
         <mat-form-field class="" appearance="outline">
           <mat-label>Urlog</mat-label>
@@ -114,8 +113,7 @@
             <mat-option *ngFor="let screen of screens" [value]="screen.id">{{screen.name}}</mat-option>
           </mat-select>
         </mat-form-field>
-      </div>
-      <div class="row">
+
         <!-- image selection -->
         <mat-form-field class="" appearance="outline">
           <mat-label>Imagem</mat-label>
@@ -127,10 +125,7 @@
           ></ngx-mat-file-input>
           <mat-icon matSuffix>folder</mat-icon>
         </mat-form-field>
-
-        <!-- image preview -->
       </div>
-    </div>
 
       <div class="action">
         <app-spinner-button

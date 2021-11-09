@@ -39,22 +39,6 @@
         </mat-form-field>
 
         <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
-            <mat-label>Tipo de Evento</mat-label>
-            <mat-select #filterEventType
-                    name="eventType"
-                    placeholder="Escolha um tipo de evento"
-                    formControlName="eventTypeId"
-                    >
-              <mat-option *ngFor="let eventType of eventTypes" [value]="eventType.id">
-                {{eventType.name}}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="eventForm.get('eventTypeId')?.hasError('required')">
-              tipo de evento é um campo obrigatório
-            </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
             <mat-label>Tela</mat-label>
             <mat-select #filterScreen
                     name="screen"
@@ -69,6 +53,22 @@
               Tela é um campo obrigatório
             </mat-error>
         </mat-form-field>
+
+        <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
+          <mat-label>Tipo de Evento</mat-label>
+          <mat-select #filterEventType
+                  name="eventType"
+                  placeholder="Escolha um tipo de evento"
+                  formControlName="eventTypeId"
+                  >
+            <mat-option *ngFor="let eventType of eventTypes" [value]="eventType.id">
+              {{eventType.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="eventForm.get('eventTypeId')?.hasError('required')">
+            tipo de evento é um campo obrigatório
+          </mat-error>
+      </mat-form-field>
 
 
 
@@ -99,12 +99,12 @@
         </mat-form-field>
 
         <mat-form-field class="ui-g-12 ui-md-4 ui-lg-2 ui-fluid" appearance="outline">
-          <mat-label>Status</mat-label>
+          <mat-label>Ativo</mat-label>
           <mat-select formControlName="active" [errorStateMatcher]="matcher">
             <mat-option [value]="true">Ativo</mat-option>
             <mat-option [value]="false">Inativo</mat-option>
           </mat-select>
-          <mat-error *ngIf="eventForm.controls['active'].hasError('required')">Active é um campo obrigatório</mat-error>
+          <mat-error *ngIf="eventForm.controls['active'].hasError('required')">Ativo é um campo obrigatório</mat-error>
         </mat-form-field>
 
 

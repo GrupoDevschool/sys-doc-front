@@ -58,8 +58,6 @@ export class EventTypeFormComponent implements OnInit {
           status: formFields.status,
         };
 
-        console.log(updatedProject);
-
         this.eventTypeService
           .update(updatedProject)
           .subscribe(

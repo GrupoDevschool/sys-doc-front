@@ -68,7 +68,7 @@ export class JwtService {
   }
 
   getLoginDate(): string {
-    return this.loginDate;
+    return this.decodedToken ? new Date(Number(this.decodedToken.iat) * 1000).toISOString() : 'null';
   }
 
   // called on guard to check if token is expired

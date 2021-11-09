@@ -81,35 +81,56 @@ export class EventRequestComponent implements OnInit {
   }
 
   getVersionsByProjectId(projectId: number) {
-    this.versionService.getByProjectId(projectId).subscribe((versions) => {
-      this.versions = versions;
-    },
-    error => {
-      this.showError("Houve um erro ao carregar versões");
-    });
+    this.versions = [];
+    this.screens = [];
+    this.events = [];
+
+    if (projectId) {
+      this.versionService.getByProjectId(projectId).subscribe((versions) => {
+        this.versions = versions;
+      },
+      error => {
+        this.showError("Houve um erro ao carregar versões");
+      });
+    } else {
+      this.reloadData();
+    }
   }
 
   getScreenByVersionId(versionId: number) {
-    this.screenService.getByVersionId(versionId).subscribe((screens) => {
-      this.screens = screens;
-    },
-    error => {
-      this.showError("Houve um erro ao carregar Telas");
-    });
+    this.screens = [];
+    this.events = [];
+
+    if (versionId) {
+      this.screenService.getByVersionId(versionId).subscribe((screens) => {
+        this.screens = screens;
+      },
+      error => {
+        this.showError("Houve um erro ao carregar Telas");
+      });
+    } else {
+      this.reloadData();
+    }
   }
 
   getEventByScreenId(screenId: number) {
-    this.eventService.getByScreenId(screenId).subscribe((events) => {
-      this.events = events;
-    },
-    error => {
-      this.showError("Houve um erro ao carregar Eventos");
-    });
+    this.events = [];
+
+    if (screenId) {
+      this.eventService.getByScreenId(screenId).subscribe((events) => {
+        this.events = events;
+      },
+      error => {
+        this.showError("Houve um erro ao carregar Eventos");
+      });
+    } else {
+      this.reloadData();
+    }
   }
 
   getRequestByEventId(eventId: number) {
+    if (eventId) {
     this.loading = true;
-
     this.requestService
       .getAllbyEventId(eventId)
       .subscribe((requests) => {
@@ -121,6 +142,9 @@ export class EventRequestComponent implements OnInit {
         this.showError("Houve um erro ao carregar Requisições");
       })
       .add(() => (this.loading = false));
+    } else {
+      this.reloadData();
+    }
   }
 
   getEventTypeName(eventTypeId: number) {

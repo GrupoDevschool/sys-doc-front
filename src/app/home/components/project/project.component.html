@@ -7,7 +7,10 @@
   <div class="example-form" class="filters">
     <div class="filtro" [style.display]="selection.isEmpty() ? '' : 'none'">
       <mat-form-field floatPlaceholder="never" appearance="outline">
-        <input matInput #filter placeholder="Filtrar projetos" (keyup)="applyFilter(filter.value)">
+        <input matInput #filter placeholder="Filtrar por nome de projeto" (keyup)="applyFilter(filter.value)">
+        <button *ngIf="filter.value" matSuffix mat-icon-button aria-label="Clear" (click)="filter.value=''; applyFilter(filter.value)">
+          <mat-icon>close</mat-icon>
+        </button>
       </mat-form-field>
     </div>
   </div>

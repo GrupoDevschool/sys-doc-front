@@ -5,7 +5,7 @@
   </mat-card>
 
   <!-- Filtros -->
-  <form class="example-form" class="filters">
+  <form class="example-form" class="filters ui-g">
 
     <!-- Filtro de Projeto -->
     <div class="filtro" [style.display]="selection.isEmpty() ? '' : 'none'">
@@ -44,7 +44,7 @@
       <mat-form-field floatPlaceholder="never" appearance="outline">
         <mat-label>Filtrar por Telas</mat-label>
         <mat-select name="version"
-                    #filterVersion
+                    #filterScreen
                     placeholder="Escolha uma versão"
                     (selectionChange)="getEventByScreenId($event.value)"
                     [disabled]="!screens?.length">
@@ -63,6 +63,7 @@
                     #filterEventType
                     placeholder="Escolha um tipo de evento"
                     (selectionChange)="getEventByEventTypeId($event.value)"
+                    [disabled]="filterVersion.value && !filterScreen.value"
                     >
           <mat-option *ngFor="let eventType of eventsType" [value]="eventType.id">
             {{eventType.name}}
@@ -85,7 +86,7 @@
 
       <!-- Active Column -->
       <ng-container matColumnDef="active">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Ativo </th>
         <td mat-cell *matCellDef="let event"><app-status-tag>{{event.active ? 'Ativo' : 'Inativo'}}</app-status-tag></td>
       </ng-container>
 
